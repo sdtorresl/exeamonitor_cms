@@ -1,7 +1,6 @@
 # Exea Monitor CMS System
 
 A custom CMS for Exea Monitor.
-Author: @sdtorresl
 
 ## Prerequisites
 
@@ -43,4 +42,18 @@ bin/cake migrations migrate
 
 After that, the database should be ready for your application.
 
+## Versioning
 
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the tags on this repository.
+
+## Authors
+
+[Sergio Torres](sdtorresl@innovaciones.co)
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Support
+
+Have issues? Write to our [support mail](mailto:soporte@innovaciones.co)
