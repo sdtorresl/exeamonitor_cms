@@ -10,19 +10,11 @@ In this [repository](https://github.com/sdtorresl/vagrant-cakephp/) you can depl
 
 ## Installation
 
-1. with [composer](https://getcomposer.org/doc/00-intro.md) execute the installation of all dependencies:
+with [composer](https://getcomposer.org/doc/00-intro.md) execute the installation of all dependencies:
 
-   ```bash
-    composer install
-    ```
-
-2. Install dependencies:
-
-    If Composer is installed globally, run:
-
-   ```bash
-    composer install
-    ```
+```bash
+composer install
+```
 
 ## Configuration
 
