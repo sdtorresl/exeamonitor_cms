@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  */
 ?>
-<div class="login">
+<div class="users login">
     <div class="card-panel">
         <figure class="logo-container">
             <?= $this->Html->image('logo-ems.png', ['alt' => 'Logo EMS', 'id' => 'logo']); ?>
@@ -11,12 +11,12 @@
 
         <?= $this->Flash->render('auth') ?>
         
-        <div class="users form">
+        <div class="form">
             <?= $this->Form->create() ?>
             <div class="form form-control">
                 <?= $this->Form->control('username', ['placeholder' => __('Please input your username')]) ?>
                 <?= $this->Form->control('password', ['placeholder' => __('Please input your password')]) ?>
-                <div id="login-btn" class="col">
+                <div id="login-btn">
                     <?= $this->Form->button(__('Login'), ['class' => 'btn']); ?>
                 </div>
 
