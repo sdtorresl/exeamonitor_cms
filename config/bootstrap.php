@@ -201,3 +201,8 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+/**
+ * Set custom theme for Bake
+ */
+Configure::write('Bake.theme', 'ExeaTheme');
