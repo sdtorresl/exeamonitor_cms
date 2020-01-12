@@ -1,0 +1,106 @@
+$primary-green: #319EA3;
+$primary-green-hover: #374f5a;
+$primary-dark: #333;
+$secondary-dark: #979797;
+
+body {
+    background: url('../img/bg.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+a {
+    color: $primary-green;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        color:$primary-green-hover;
+        transform: scale(1.5);
+    }
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+.btn, .btn-large, .btn-small {
+    background-color: $primary-green;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: $primary-green-hover;
+    }
+}
+
+input:not([type]):focus:not([readonly]),
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="url"]:not(.browser-default):focus:not([readonly]),
+input[type="time"]:not(.browser-default):focus:not([readonly]),
+input[type="date"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+input[type="tel"]:not(.browser-default):focus:not([readonly]),
+input[type="number"]:not(.browser-default):focus:not([readonly]),
+input[type="search"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom-color: $primary-green;
+    box-shadow: 0 1px 0 0 $primary-green;
+
+}
+
+.form {
+    margin-top: 10%;
+
+    input::placeholder {
+        color: $secondary-dark;
+        font-size: 0.9rem;
+    }
+    label {
+        color: $primary-dark;
+        font-size: 1em;
+    }
+}
+
+.card-panel {
+    border-radius: 15px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    .card-panel {
+        padding: 1.5rem 3rem 0.5rem 3rem;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        #logo {
+            width: 250px;
+        }
+    }
+
+    #login-btn {
+        margin-top: 2em;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    #password-remember {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: $secondary-dark;
+    }
+}

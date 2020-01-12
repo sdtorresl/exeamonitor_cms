@@ -27,6 +27,8 @@ $cakeDescription = 'Exea Monitoring System';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('/node_modules/materialize-css/dist/css/materialize.min.css') ?>
+    <?= $this->Html->css('main.min.css') ?>
+
     <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
 
     <?= $this->fetch('meta') ?>
@@ -34,6 +36,6 @@ $cakeDescription = 'Exea Monitoring System';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    
+    <?= $this->fetch('content') ?>
 </body>
 </html>
