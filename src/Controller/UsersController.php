@@ -103,4 +103,14 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Login method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function login()
+    {
+        $this->viewBuilder()->layout('login');
+    }
 }

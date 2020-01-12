@@ -26,8 +26,8 @@ $cakeDescription = 'EMS - Exea Monitoring System';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('../node_modules/materialize-css/dist/css/materialize.min.css') ?>
-    <?= $this->Html->script('../node_modules/materialize-css/dist/js/materialize.min.js') ?>
+    <?= $this->Html->css('/node_modules/materialize-css/dist/css/materialize.min.css') ?>
+    <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
