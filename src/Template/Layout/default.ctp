@@ -29,6 +29,7 @@ $cakeDescription = 'EMS - Exea Monitoring System';
 
     <?= $this->Html->css('/node_modules/materialize-css/dist/css/materialize.min.css') ?>
     <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
+    <?= $this->Html->css('main.min.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -42,32 +43,52 @@ $cakeDescription = 'EMS - Exea Monitoring System';
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </nav>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed">
+    <ul id="sidemenu" class="sidenav sidenav-fixed">
         <li>
-            <div class="user-view">
-                <div class="background">
-                    <img src="images/office.jpg">
+            <div class="customer-info">
+                <figure class="customer-logo">
+                    <img src="img/customer-logo.png" alt="" id="logo">
+                </figure>
+                <div class="customer-name">
+                    El Corral
                 </div>
-                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-                <a href="#name"><span class="white-text name">John Doe</span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
             </div>
         </li>
-        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a href="#!">Second Link</a></li>
         <li>
-            <div class="divider"></div>
+            <div class="user-info">
+                <div class="user-name">Sergio Daniel Torres</div>
+                <div class="user-role">Administrator</div>
+            </div>
         </li>
-        <li><a class="subheader">Subheader</a></li>
-        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+        <li><a href="#!">Usuarios</a></li>
+        <li><a href="#!">Puntos de vente</a></li>
+        <li><a href="#!">Reportes</a></li>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header">Dropdown<i class="far fa-camera"></i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#!">First</a></li>
+                            <li><a href="#!">Second</a></li>
+                            <li><a href="#!">Third</a></li>
+                            <li><a href="#!">Fourth</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
     </ul>
-
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
         });
+
+        var collapsibleElem = document.querySelector('.collapsible');
+        var collapsibleInstance = M.Collapsible.init(collapsibleElem);
+
     </script>
 </body>
 
