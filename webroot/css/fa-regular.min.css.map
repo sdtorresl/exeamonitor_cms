@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAAA;;;GAGG,AAGH,UAAU,CACR,WAAW,CAAE,oBAAoB,CACjC,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,GAAG,CAChB,GAAG,CAAE,iCAA0C,CAC/C,GAAG,CAAE,wCAAiD,CAAC,2BAA2B,CAClF,mCAA4C,CAAC,eAAe,CAC5D,kCAA2C,CAAC,cAAc,CAC1D,iCAA0C,CAAC,kBAAkB,CAC7D,6CAAsD,CAAC,aAAa,CAGtE,AAAA,IAAI,AAAC,CACH,WAAW,CAAE,oBAAoB,CACjC,WAAW,CAAE,GAAG,CACjB",
+    "sources": [
+        "../scss/fontawesome/fa-regular.scss",
+        "../scss/fontawesome/_variables.scss"
+    ],
+    "names": [],
+    "file": "fa-regular.min.css"
+}

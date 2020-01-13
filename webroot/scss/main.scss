@@ -1,15 +1,12 @@
+@import '../font/fontawesome/scss/fontawesome.scss';
+@import '../font/fontawesome/scss/fa-regular.scss';
+
 $primary-green: #319EA3;
 $primary-green-hover: #374f5a;
 $primary-dark: #333;
 $secondary-dark: #979797;
+$primary-red: #D6456A;
 
-body {
-    background: url('../img/bg.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
 
 a {
     color: $primary-green;
@@ -17,7 +14,6 @@ a {
 
     &:hover {
         color:$primary-green-hover;
-        transform: scale(1.5);
     }
 }
 
@@ -70,11 +66,84 @@ textarea.materialize-textarea:focus:not([readonly]) {
     border-radius: 15px;
 }
 
+nav {
+    background: white;
+}
+
+#sidemenu {
+    background: url('../img/menu-bg.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+
+    a {
+        color: white;
+        border-radius: 4px;
+
+        &:hover {
+            background: $primary-red;
+            color: white;
+        }
+    }
+
+    li {
+        margin: 0.25rem 2rem;
+    }
+
+    .customer-info {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: start;
+        align-items: center;
+        align-content: stretch;
+        padding: 2rem 0;
+        border-bottom: 1px solid white;
+
+        .customer-logo {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+        }
+
+        .customer-name {
+            text-transform: uppercase;
+            margin-left: 1.5rem;
+        }
+    }
+
+    .user-info {
+        margin-top: 1rem;
+
+        .user-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.4rem;
+        }
+        .user-role {
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
+    }
+}
+
 .login {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background: url('../img/bg.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 
     .card-panel {
         padding: 1.5rem 3rem 0.5rem 3rem;
