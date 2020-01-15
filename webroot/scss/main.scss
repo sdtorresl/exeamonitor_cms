@@ -1,5 +1,6 @@
-@import '../font/fontawesome/scss/fontawesome.scss';
-@import '../font/fontawesome/scss/fa-regular.scss';
+@import './fontawesome/fontawesome.scss';
+@import './fontawesome/fa-light.scss';
+@import './fontawesome/fa-regular.scss';
 
 $primary-green: #319EA3;
 $primary-green-hover: #374f5a;
@@ -7,6 +8,26 @@ $primary-dark: #333;
 $secondary-dark: #979797;
 $primary-red: #D6456A;
 
+
+body {
+    background: #EEE;
+}
+
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+main {
+    .container {
+        width: 90%;
+    }
+}
 
 a {
     color: $primary-green;
@@ -68,21 +89,45 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 nav {
     background: white;
+    color: $primary-dark;
+
+    i {
+        color: $primary-dark;
+    }
+
+    ul {
+        a {
+            color: $primary-dark;
+        }
+    }
 }
 
-#sidemenu {
+#slide-out {
     background: url('../img/menu-bg.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     color: white;
+    height: 100%;
+
+    i, .fal, .far, .fas {
+        color: white;
+        margin-right: 1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        text-align: center;
+        font-size: 1rem!important;
+    }
 
     a {
         color: white;
         border-radius: 4px;
+        padding: 0 1rem;
+        line-height: 52px;
 
         &:hover {
+            padding-left: 1.5rem;
             background: $primary-red;
             color: white;
         }
@@ -90,8 +135,29 @@ nav {
 
     li {
         margin: 0.25rem 2rem;
-    }
 
+        ul {
+            background: none;
+
+            .collapsible-body {
+                background: rgba($color: $primary-red, $alpha: 0.2);
+                border-radius: 4px;
+
+                a {
+                    transition: 0.2s ease-in-out;
+
+                    &:hover {
+                        border-radius: 0;
+                    }
+                }
+            }
+
+            li {
+                margin: 0;
+            }
+        }
+    }
+    
     .customer-info {
         display: flex;
         flex-direction: row;

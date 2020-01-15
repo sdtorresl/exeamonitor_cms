@@ -37,13 +37,18 @@ $cakeDescription = 'EMS - Exea Monitoring System';
 </head>
 
 <body>
-
-
     <nav>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fal fa-bars"></i></a>
+
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right">
+                <li><a href="collapsible.html"><?= __('Logout') ?></a></li>
+            </ul>
+        </div>
     </nav>
 
-    <ul id="sidemenu" class="sidenav sidenav-fixed">
+    <ul id="slide-out" class="sidenav sidenav-fixed">
         <li>
             <div class="customer-info">
                 <figure class="customer-logo">
@@ -60,13 +65,16 @@ $cakeDescription = 'EMS - Exea Monitoring System';
                 <div class="user-role">Administrator</div>
             </div>
         </li>
-        <li><a href="#!">Usuarios</a></li>
-        <li><a href="#!">Puntos de vente</a></li>
-        <li><a href="#!">Reportes</a></li>
+        <li><a href="#!"><i class="fal fa-user"></i>Usuarios</a></li>
+        <li><a href="#!"><i class="fal fa-store"></i>Puntos de venta</a></li>
+        <li><a href="#!"><i class="fal fa-file-alt"></i>Reportes</a></li>
         <li>
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header">Dropdown<i class="far fa-camera"></i></a>
+                    <a class="collapsible-header">
+                        <i class="fal fa-briefcase"></i>
+                        Clientes
+                    </a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="#!">First</a></li>
@@ -80,15 +88,23 @@ $cakeDescription = 'EMS - Exea Monitoring System';
         </li>
     </ul>
 
+    <main>
+        <div class="container">
+            <?= $this->fetch('content'); ?>
+        </div>
+    </main>
+
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
+            var options = {
+                preventScrolling: false
+            }
+            var instances = M.Sidenav.init(elems, options);
         });
 
         var collapsibleElem = document.querySelector('.collapsible');
         var collapsibleInstance = M.Collapsible.init(collapsibleElem);
-
     </script>
 </body>
 
