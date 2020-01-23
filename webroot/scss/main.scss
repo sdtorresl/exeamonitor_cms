@@ -37,12 +37,23 @@ figure {
     padding: 0;
 }
 
-.btn, .btn-large, .btn-small {
+a.btn, .btn, .btn-large, .btn-small {
     background-color: $primary-green;
     border-radius: 4px;
+    transition: 0.25s ease-in-out;
 
     &:hover {
         background-color: $primary-green-hover;
+    }
+
+    &.cancel {
+        background-color: $primary-red;
+        margin-right: 1rem;
+
+        &:hover {
+            background-color: rgba($color: $primary-red, $alpha: 0.8);
+            color: white;
+        }
     }
 }
 
@@ -75,8 +86,27 @@ textarea.materialize-textarea:focus:not([readonly]) {
         color: $primary-dark;
         font-size: 1em;
     }
+
+    .form-submit {
+        margin-top: 2rem;
+    }
 }
 
+.d-flex {
+    display: flex;
+
+    &.jc-end {
+        justify-content: end;
+    }
+
+    &.jc-start {
+        justify-content: start;
+    }
+
+    &.space-around {
+        justify-content: space-around;
+    }
+}
 .card-panel {
     border-radius: 15px;
 }
