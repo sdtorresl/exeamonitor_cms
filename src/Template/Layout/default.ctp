@@ -95,6 +95,8 @@ $cakeDescription = 'EMS - Exea Monitoring System';
     </main>
 
     <script type="text/javascript">
+        M.AutoInit();
+        
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
             var options = {

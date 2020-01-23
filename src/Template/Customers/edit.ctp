@@ -4,26 +4,21 @@
  * @var \App\Model\Entity\Customer $customer
  */
 ?>
+<section class="customers index card">
+    <div class="card-header">
+        <div class="card-icon">
+            <i class="fal fa-users"></i>
+        </div>
 
-<!-- Page Header-->
-<header class="page-header">
-    <div class="container-fluid">
-        <h2 class="no-margin-bottom"><?= __('$Customers') ?></h2>
+        <h2 class="title"><?= __('Edit Customers') ?></h2>
     </div>
-</header>
-
-<section class="forms">
-    <div class="container-fluid">
+    
+    <div class="card-content">
         <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center">
-                        <h3 class="h4"><?= __('$Customer') ?></h3>
-                    </div>
-
-                    <div class="card-body">
-                        <?= $this->Form->create('$customer') ?>
-                        <?php
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                
+<?= $this->Form->create('$customer') ?>
+<?php
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('contact_person');
@@ -39,12 +34,12 @@
             echo $this->Form->control('backup_url');
             echo $this->Form->control('primary_color');
             echo $this->Form->control('secondary_color');
-                        ?>
-
-                        <?= $this->Form->button(__('Submit')) ?>
-                        <?= $this->Form->end() ?>
-                    </div>
-                </div>
+?>
+<div class="form-submit d-flex jc-end">
+    <?= $this->Html->link(__('Cancel'), ['controller' => 'customers', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn']) ?>
+</div>
+<?= $this->Form->end() ?>
             </div>
         </div>
     </div>

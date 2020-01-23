@@ -18,18 +18,18 @@
         <table class="centered responsive-table">
             <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('first_name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('last_name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('enabled') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('last_access') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('username') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('password') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('first_name') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('last_name') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('email') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('role') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('enabled') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('last_access') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                        <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>

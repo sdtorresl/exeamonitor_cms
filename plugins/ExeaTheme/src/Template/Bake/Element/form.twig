@@ -15,7 +15,7 @@
 #}
 {% set fields = Bake.filterFields(fields, schema, modelObject) %}
 
-<?= $this->Form->create('${{ singularVar }}') ?>
+<?= $this->Form->create('${{ singularVar }}', ['class' => 'form']) ?>
 <?php
 {% for field in fields if field not in primaryKey %}
     {%- if keyFields[field] %}
