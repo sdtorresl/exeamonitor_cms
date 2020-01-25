@@ -52,7 +52,7 @@ $cakeDescription = 'EMS - Exea Monitoring System';
         <li>
             <div class="customer-info">
                 <figure class="customer-logo">
-                    <img src="img/customer-logo.png" alt="" id="logo">
+                    <?= $this->Html->image('customer-logo.png') ?>
                 </figure>
                 <div class="customer-name">
                     El Corral
@@ -96,7 +96,7 @@ $cakeDescription = 'EMS - Exea Monitoring System';
 
     <script type="text/javascript">
         M.AutoInit();
-        
+
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
             var options = {
