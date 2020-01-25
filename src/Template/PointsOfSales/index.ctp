@@ -19,8 +19,6 @@
             <thead>
                 <tr>
                         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('password') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('contact') ?></th>
@@ -29,6 +27,7 @@
                         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('customer_id') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                         <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -36,8 +35,6 @@
                 <?php foreach ($pointsOfSales as $pointsOfSale): ?>
                 <tr>
                                                     <td><?= $this->Number->format($pointsOfSale->id) ?></td>
-                                                            <td><?= h($pointsOfSale->username) ?></td>
-                                                            <td><?= h($pointsOfSale->password) ?></td>
                                                             <td><?= h($pointsOfSale->name) ?></td>
                                                             <td><?= $this->Number->format($pointsOfSale->phone) ?></td>
                                                             <td><?= h($pointsOfSale->contact) ?></td>
@@ -46,7 +43,8 @@
                                                             <td><?= h($pointsOfSale->created) ?></td>
                                                             <td><?= h($pointsOfSale->modified) ?></td>
                                                 <td><?= $pointsOfSale->has('customer') ? $this->Html->link($pointsOfSale->customer->name, ['controller' => 'Customers', 'action' => 'view', $pointsOfSale->customer->id]) : '' ?></td>
-                                        <td class="actions">
+                                                                <td><?= $this->Number->format($pointsOfSale->user_id) ?></td>
+                                    <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $pointsOfSale->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $pointsOfSale->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $pointsOfSale->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pointsOfSale->id)]) ?>

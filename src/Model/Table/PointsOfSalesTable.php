@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * PointsOfSales Model
  *
  * @property \App\Model\Table\CustomersTable&\Cake\ORM\Association\BelongsTo $Customers
+ * @property &\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\PointsOfSale get($primaryKey, $options = [])
  * @method \App\Model\Entity\PointsOfSale newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class PointsOfSalesTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
@@ -57,19 +61,6 @@ class PointsOfSalesTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->scalar('username')
-            ->maxLength('username', 255)
-            ->requirePresence('username', 'create')
-            ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
-            ->scalar('password')
-            ->maxLength('password', 255)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
 
         $validator
             ->scalar('name')
@@ -110,7 +101,7 @@ class PointsOfSalesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;

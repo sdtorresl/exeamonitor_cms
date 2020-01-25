@@ -7,8 +7,6 @@ use Cake\ORM\Entity;
  * PointsOfSale Entity
  *
  * @property int $id
- * @property string $username
- * @property string $password
  * @property string $name
  * @property int $phone
  * @property string $contact
@@ -17,6 +15,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property int $customer_id
+ * @property int|null $user_id
  *
  * @property \App\Model\Entity\Customer $customer
  */
@@ -32,8 +31,6 @@ class PointsOfSale extends Entity
      * @var array
      */
     protected $_accessible = [
-        'username' => true,
-        'password' => true,
         'name' => true,
         'phone' => true,
         'contact' => true,
@@ -42,15 +39,7 @@ class PointsOfSale extends Entity
         'created' => true,
         'modified' => true,
         'customer_id' => true,
+        'user_id' => true,
         'customer' => true,
-    ];
-
-    /**
-     * Fields that are excluded from JSON versions of the entity.
-     *
-     * @var array
-     */
-    protected $_hidden = [
-        'password',
     ];
 }

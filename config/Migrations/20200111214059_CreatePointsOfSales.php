@@ -22,16 +22,6 @@ class CreatePointsOfSales extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('username', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
-        $table->addColumn('password', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
         $table->addColumn('name', 'string', [
             'default' => null,
             'limit' => 255,
@@ -68,10 +58,14 @@ class CreatePointsOfSales extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('user_id', 'integer', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addIndex([
-            'username',
+            'user_id',
         ], [
-            'name' => 'UNIQUE_USERNAME',
+            'name' => 'UNIQUE_USER',
             'unique' => true,
         ]);
         $table->addPrimaryKey([
@@ -80,6 +74,15 @@ class CreatePointsOfSales extends AbstractMigration
         $table->addForeignKey(
             'customer_id',
             'customers',
+            'id',
+            [
+                'delete' => 'RESTRICT', 
+                'update' => 'CASCADE'
+            ]
+        );
+        $table->addForeignKey(
+            'user_id',
+            'users',
             'id',
             [
                 'delete' => 'RESTRICT', 

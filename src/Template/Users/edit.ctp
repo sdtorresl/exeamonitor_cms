@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col s12 m8 l6 offset-m2 offset-l3">
                 
-<?= $this->Form->create('$user') ?>
+<?= $this->Form->create('$user', ['class' => 'form']) ?>
 <?php
             echo $this->Form->control('username');
             echo $this->Form->control('password');

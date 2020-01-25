@@ -14,6 +14,7 @@
  */
 
 $cakeDescription = 'EMS - Exea Monitoring System';
+$menuCell = $this->cell('Menu');
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,56 +38,7 @@ $cakeDescription = 'EMS - Exea Monitoring System';
 </head>
 
 <body>
-    <nav>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fal fa-bars"></i></a>
-
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="right">
-                <li><a href="collapsible.html"><?= __('Logout') ?></a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <ul id="slide-out" class="sidenav sidenav-fixed">
-        <li>
-            <div class="customer-info">
-                <figure class="customer-logo">
-                    <?= $this->Html->image('customer-logo.png') ?>
-                </figure>
-                <div class="customer-name">
-                    El Corral
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="user-info">
-                <div class="user-name">Sergio Daniel Torres</div>
-                <div class="user-role">Administrator</div>
-            </div>
-        </li>
-        <li><a href="#!"><i class="fal fa-user"></i>Usuarios</a></li>
-        <li><a href="#!"><i class="fal fa-store"></i>Puntos de venta</a></li>
-        <li><a href="#!"><i class="fal fa-file-alt"></i>Reportes</a></li>
-        <li>
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header">
-                        <i class="fal fa-briefcase"></i>
-                        Clientes
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="#!">First</a></li>
-                            <li><a href="#!">Second</a></li>
-                            <li><a href="#!">Third</a></li>
-                            <li><a href="#!">Fourth</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <?= $menuCell ?>
 
     <main>
         <div class="container">
