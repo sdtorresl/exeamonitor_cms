@@ -13,12 +13,10 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'EMS - Exea Monitoring System';
-$menuCell = $this->cell('Menu');
+$cakeDescription = 'Exea Monitoring System';
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,37 +27,15 @@ $menuCell = $this->cell('Menu');
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('/node_modules/materialize-css/dist/css/materialize.min.css') ?>
-    <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
     <?= $this->Html->css('main.min.css') ?>
+
+    <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-
 <body>
-    <?= $menuCell ?>
-
-    <main>
-        <div class="container">
-            <?= $this->fetch('content'); ?>
-        </div>
-    </main>
-
-    <script type="text/javascript">
-        M.AutoInit();
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.sidenav');
-            var options = {
-                preventScrolling: false
-            }
-            var instances = M.Sidenav.init(elems, options);
-        });
-
-        var collapsibleElem = document.querySelector('.collapsible');
-        var collapsibleInstance = M.Collapsible.init(collapsibleElem);
-    </script>
+    <?= $this->fetch('content') ?>
 </body>
-
 </html>

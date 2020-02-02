@@ -1,0 +1,14 @@
+{
+  "name": "exeamonitor",
+  "version": "1.0.0",
+  "description": "CMS for Exea Monitor System (EMS)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Torres",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "materialize-css": "^1.0.0"
+  }
+}
