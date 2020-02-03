@@ -58,31 +58,12 @@ class CreatePointsOfSales extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('user_id', 'integer', [
-            'default' => null,
-            'null' => true,
-        ]);
-        $table->addIndex([
-            'user_id',
-        ], [
-            'name' => 'UNIQUE_USER',
-            'unique' => true,
-        ]);
         $table->addPrimaryKey([
             'id',
         ]);
         $table->addForeignKey(
             'customer_id',
             'customers',
-            'id',
-            [
-                'delete' => 'RESTRICT', 
-                'update' => 'CASCADE'
-            ]
-        );
-        $table->addForeignKey(
-            'user_id',
-            'users',
             'id',
             [
                 'delete' => 'RESTRICT', 

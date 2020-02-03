@@ -60,6 +60,10 @@ class CreateUsers extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('point_of_sale_id', 'integer', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
             'null' => false,
@@ -67,6 +71,12 @@ class CreateUsers extends AbstractMigration
         $table->addColumn('modified', 'datetime', [
             'default' => null,
             'null' => false,
+        ]);
+        $table->addIndex([
+            'point_of_sale_id',
+        ], [
+            'name' => 'UNIQUE_POS',
+            'unique' => true,
         ]);
         $table->addIndex([
             'username',
@@ -83,6 +93,15 @@ class CreateUsers extends AbstractMigration
         $table->addPrimaryKey([
             'id',
         ]);
+        $table->addForeignKey(
+            'point_of_sale_id',
+            'points_of_sales',
+            'id',
+            [
+                'delete' => 'RESTRICT', 
+                'update' => 'CASCADE'
+            ]
+        );
         $table->create();
     }
 }
