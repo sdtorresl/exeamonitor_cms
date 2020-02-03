@@ -20,9 +20,9 @@ composer install
 
 ### Initial configuration
 
-Create the `config/app.php` file and setup the `'Datasources'` and any other configuration relevant for your application.
+Create the `config/app_local.php` file and setup the `'Datasources'` and any other configuration relevant for your application.
 
-Template configuration is in `config/app.default.php`.
+Template configuration is in `config/app_local.example.php`.
 
 ### Migrations
 
