@@ -4,36 +4,39 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+
+<section class="users index card">
+    <div class="card-header">
+        <div class="card-icon">
+            <i class="fal fa-users"></i>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Edit User') ?></legend>
-                <?php
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('first_name');
-                    echo $this->Form->control('last_name');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('role');
-                    echo $this->Form->control('enabled');
-                    echo $this->Form->control('last_access');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+
+        <h2 class="title"><?= __('Edit Users') ?></h2>
+    </div>
+    
+    <div class="card-content">
+        <div class="row">
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                
+<?= $this->Form->create($user, ['class' => 'form']) ?>
+<?php
+    echo $this->Form->control('username');
+    echo $this->Form->control('password');
+    echo $this->Form->control('first_name');
+    echo $this->Form->control('last_name');
+    echo $this->Form->control('email');
+    echo $this->Form->control('role');
+    echo $this->Form->control('enabled');
+    echo $this->Form->control('last_access');
+    echo $this->Form->control('point_of_sale_id');
+?>
+<div class="form-submit d-flex jc-end">
+    <?= $this->Html->link(__('Cancel'), ['controller' => 'users', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn']) ?>
+</div>
+
+<?= $this->Form->end() ?>
+            </div>
         </div>
     </div>
-</div>
+</section>

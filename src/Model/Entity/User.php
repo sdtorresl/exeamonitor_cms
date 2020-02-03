@@ -17,11 +17,12 @@ use Cake\ORM\Entity;
  * @property string $role
  * @property bool $enabled
  * @property \Cake\I18n\FrozenTime $last_access
+ * @property int|null $point_of_sale_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\PointsOfSale $points_of_sale
  * @property \App\Model\Entity\PasswordsReset[] $passwords_resets
- * @property \App\Model\Entity\PointsOfSale[] $points_of_sales
  */
 class User extends Entity
 {
@@ -43,10 +44,11 @@ class User extends Entity
         'role' => true,
         'enabled' => true,
         'last_access' => true,
+        'point_of_sale_id' => true,
         'created' => true,
         'modified' => true,
+        'points_of_sale' => true,
         'passwords_resets' => true,
-        'points_of_sales' => true,
     ];
 
     /**

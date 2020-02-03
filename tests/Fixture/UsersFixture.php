@@ -26,12 +26,15 @@ class UsersFixture extends TestFixture
         'role' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'enabled' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null],
         'last_access' => ['type' => 'timestamp', 'length' => null, 'precision' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => ''],
+        'point_of_sale_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
         'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'UNIQUE_USERNAME' => ['type' => 'unique', 'columns' => ['username'], 'length' => []],
             'UNIQUE_EMAIL' => ['type' => 'unique', 'columns' => ['email'], 'length' => []],
+            'UNIQUE_POS' => ['type' => 'unique', 'columns' => ['point_of_sale_id'], 'length' => []],
+            'users_ibfk_1' => ['type' => 'foreign', 'columns' => ['point_of_sale_id'], 'references' => ['points_of_sales', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -56,9 +59,10 @@ class UsersFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'role' => 'Lorem ipsum dolor sit amet',
                 'enabled' => 1,
-                'last_access' => 1580673841,
-                'created' => '2020-02-02 20:04:01',
-                'modified' => '2020-02-02 20:04:01',
+                'last_access' => 1580702225,
+                'point_of_sale_id' => 1,
+                'created' => '2020-02-03 03:57:05',
+                'modified' => '2020-02-03 03:57:05',
             ],
         ];
         parent::init();

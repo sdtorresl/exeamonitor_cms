@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \App\Model\Table\PointsOfSalesTable&\Cake\ORM\Association\BelongsTo $PointsOfSales
  * @property \App\Model\Table\PasswordsResetsTable&\Cake\ORM\Association\HasMany $PasswordsResets
- * @property \App\Model\Table\PointsOfSalesTable&\Cake\ORM\Association\HasMany $PointsOfSales
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -43,10 +43,10 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('PasswordsResets', [
-            'foreignKey' => 'user_id',
+        $this->belongsTo('PointsOfSales', [
+            'foreignKey' => 'point_of_sale_id',
         ]);
-        $this->hasMany('PointsOfSales', [
+        $this->hasMany('PasswordsResets', [
             'foreignKey' => 'user_id',
         ]);
     }
@@ -122,6 +122,7 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['point_of_sale_id'], 'PointsOfSales'));
 
         return $rules;
     }
