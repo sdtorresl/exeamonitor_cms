@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\UsersController;
+use App\Controller\PointsOfSaleController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\UsersController Test Case
+ * App\Controller\PointsOfSaleController Test Case
  *
- * @uses \App\Controller\UsersController
+ * @uses \App\Controller\PointsOfSaleController
  */
-class UsersControllerTest extends TestCase
+class PointsOfSaleControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,9 +22,10 @@ class UsersControllerTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.Users',
-        'app.PointOfSales',
-        'app.PasswordsResets',
+        'app.PointsOfSale',
+        'app.Countries',
+        'app.Cities',
+        'app.Customers',
     ];
 
     /**

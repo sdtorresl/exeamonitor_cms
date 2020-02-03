@@ -21,7 +21,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\PointsOfSale $points_of_sale
+ * @property \App\Model\Entity\PointOfSale $point_of_sale
  * @property \App\Model\Entity\PasswordsReset[] $passwords_resets
  */
 class User extends Entity
@@ -47,7 +47,7 @@ class User extends Entity
         'point_of_sale_id' => true,
         'created' => true,
         'modified' => true,
-        'points_of_sale' => true,
+        'point_of_sale' => true,
         'passwords_resets' => true,
     ];
 

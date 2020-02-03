@@ -43,13 +43,13 @@
                         <th><?= __('Role') ?></th>
                         <td><?= h($user->role) ?></td>
                     </tr>
-                                                    <tr>
-                        <th><?= __('Points Of Sale') ?></th>
-                        <td><?= $user->has('points_of_sale') ? $this->Html->link($user->points_of_sale->name, ['controller' => 'PointsOfSales', 'action' => 'view', $user->points_of_sale->id]) : '' ?></td>
-                    </tr>
                                     <tr>
                         <th><?= __('Id') ?></th>
                         <td><?= $this->Number->format($user->id) ?></td>
+                    </tr>
+                        <tr>
+                        <th><?= __('Point Of Sale Id') ?></th>
+                        <td><?= $this->Number->format($user->point_of_sale_id) ?></td>
                     </tr>
                             <tr>
                         <th><?= __('Last Access') ?></th>

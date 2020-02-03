@@ -34,7 +34,7 @@ class UsersFixture extends TestFixture
             'UNIQUE_USERNAME' => ['type' => 'unique', 'columns' => ['username'], 'length' => []],
             'UNIQUE_EMAIL' => ['type' => 'unique', 'columns' => ['email'], 'length' => []],
             'UNIQUE_POS' => ['type' => 'unique', 'columns' => ['point_of_sale_id'], 'length' => []],
-            'users_ibfk_1' => ['type' => 'foreign', 'columns' => ['point_of_sale_id'], 'references' => ['points_of_sales', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
+            'users_ibfk_1' => ['type' => 'foreign', 'columns' => ['point_of_sale_id'], 'references' => ['points_of_sale', 'id'], 'update' => 'cascade', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -59,10 +59,10 @@ class UsersFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'role' => 'Lorem ipsum dolor sit amet',
                 'enabled' => 1,
-                'last_access' => 1580702225,
+                'last_access' => 1580705948,
                 'point_of_sale_id' => 1,
-                'created' => '2020-02-03 03:57:05',
-                'modified' => '2020-02-03 03:57:05',
+                'created' => '2020-02-03 04:59:08',
+                'modified' => '2020-02-03 04:59:08',
             ],
         ];
         parent::init();

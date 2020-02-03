@@ -36,18 +36,18 @@
             <tbody>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                                                                                <td><?= $this->Number->format($user->id) ?></td>
-                                                                                            <td><?= h($user->username) ?></td>
-                                                                                            <td><?= h($user->password) ?></td>
-                                                                                            <td><?= h($user->first_name) ?></td>
-                                                                                            <td><?= h($user->last_name) ?></td>
-                                                                                            <td><?= h($user->email) ?></td>
-                                                                                            <td><?= h($user->role) ?></td>
-                                                                                            <td><?= h($user->enabled) ?></td>
-                                                                                            <td><?= h($user->last_access) ?></td>
-                                                                            <td><?= $user->has('points_of_sale') ? $this->Html->link($user->points_of_sale->name, ['controller' => 'PointsOfSales', 'action' => 'view', $user->points_of_sale->id]) : '' ?></td>
-                                                                                                            <td><?= h($user->created) ?></td>
-                                                                                            <td><?= h($user->modified) ?></td>
+                                                <td><?= $this->Number->format($user->id) ?></td>
+                                                            <td><?= h($user->username) ?></td>
+                                                            <td><?= h($user->password) ?></td>
+                                                            <td><?= h($user->first_name) ?></td>
+                                                            <td><?= h($user->last_name) ?></td>
+                                                            <td><?= h($user->email) ?></td>
+                                                            <td><?= h($user->role) ?></td>
+                                                            <td><?= h($user->enabled) ?></td>
+                                                            <td><?= h($user->last_access) ?></td>
+                                                            <td><?= $this->Number->format($user->point_of_sale_id) ?></td>
+                                                            <td><?= h($user->created) ?></td>
+                                                            <td><?= h($user->modified) ?></td>
             
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
