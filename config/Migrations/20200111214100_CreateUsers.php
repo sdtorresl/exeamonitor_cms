@@ -95,7 +95,7 @@ class CreateUsers extends AbstractMigration
         ]);
         $table->addForeignKey(
             'point_of_sale_id',
-            'points_of_sales',
+            'points_of_sale',
             'id',
             [
                 'delete' => 'RESTRICT', 

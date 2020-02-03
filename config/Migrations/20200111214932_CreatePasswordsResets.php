@@ -45,8 +45,8 @@ class CreatePasswordsResets extends AbstractMigration
             'users',
             'id',
             [
-                'delete' => 'CASCADE', 
-                'update' => 'CASCADE'
+                'delete' => 'NO_ACTION', 
+                'update' => 'NO_ACTION'
             ]
         );
         $table->create();

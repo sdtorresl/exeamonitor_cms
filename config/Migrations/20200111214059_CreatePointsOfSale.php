@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreatePointsOfSales extends AbstractMigration
+class CreatePointsOfSale extends AbstractMigration
 {
 
     public $autoId = false;
@@ -15,7 +15,7 @@ class CreatePointsOfSales extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('points_of_sales');
+        $table = $this->table('points_of_sale');
         $table->addColumn('id', 'integer', [
             'autoIncrement' => true,
             'default' => null,
@@ -42,6 +42,14 @@ class CreatePointsOfSales extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+        $table->addColumn('country_id', 'integer', [
+            'limit' => 11,
+            'null' => false,
+        ]);
+        $table->addColumn('city_id', 'integer', [
+            'limit' => 11,
+            'null' => false,
+        ]);
         $table->addColumn('last_access', 'timestamp', [
             'default' => null,
             'null' => false,
@@ -66,8 +74,26 @@ class CreatePointsOfSales extends AbstractMigration
             'customers',
             'id',
             [
-                'delete' => 'RESTRICT', 
-                'update' => 'CASCADE'
+                'delete' => 'NO_ACTION', 
+                'update' => 'NO_ACTION'
+            ]
+        );
+        $table->addForeignKey(
+            'city_id',
+            'cities',
+            'id',
+            [
+                'delete' => 'NO_ACTION', 
+                'update' => 'NO_ACTION'
+            ]
+        );
+        $table->addForeignKey(
+            'country_id',
+            'countries',
+            'id',
+            [
+                'delete' => 'NO_ACTION', 
+                'update' => 'NO_ACTION'
             ]
         );
         $table->create();
