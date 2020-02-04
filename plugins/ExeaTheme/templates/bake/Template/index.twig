@@ -34,9 +34,9 @@
         <table class="centered responsive-table">
             <thead>
                 <tr>
-    {% for field in fields %}
+{% for field in fields %}
                     <th scope="col"><?= $this->Paginator->sort('{{ field }}') ?></th>
-    {% endfor %}
+{% endfor %}
                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -74,7 +74,7 @@
             </tbody>
         </table>
         
-        <div class="paginator">
+        <div class="paginator center-align">
             <ul class="pagination">
                 <?= $this->Paginator->first('<<') ?>
                 <?= $this->Paginator->prev('<') ?>
