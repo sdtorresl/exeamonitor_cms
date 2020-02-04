@@ -79,8 +79,8 @@
                 </a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><?= $this->Html->link(__('List'), ['controller' => 'points-of-sales']) ?></li>
-                        <li><?= $this->Html->link(__('Create'), ['controller' => 'points-of-sales', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List'), ['controller' => 'points-of-sale']) ?></li>
+                        <li><?= $this->Html->link(__('Create'), ['controller' => 'points-of-sale', 'action' => 'add']) ?></li>
                     </ul>
                 </div>
             </li>

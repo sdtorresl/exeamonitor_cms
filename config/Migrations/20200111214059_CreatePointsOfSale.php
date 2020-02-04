@@ -27,9 +27,9 @@ class CreatePointsOfSale extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('phone', 'integer', [
+        $table->addColumn('phone', 'string', [
             'default' => null,
-            'limit' => 11,
+            'limit' => 15,
             'null' => false,
         ]);
         $table->addColumn('contact', 'string', [

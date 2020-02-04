@@ -38,7 +38,7 @@ class CreateCustomers extends AbstractMigration
         ]);
         $table->addColumn('contact_phone', 'string', [
             'default' => null,
-            'limit' => 50,
+            'limit' => 15,
             'null' => true,
         ]);
         $table->addColumn('logo', 'string', [
