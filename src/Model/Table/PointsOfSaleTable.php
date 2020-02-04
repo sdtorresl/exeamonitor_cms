@@ -77,8 +77,8 @@ class PointsOfSaleTable extends Table
             ->notEmptyString('name');
 
         $validator
-            ->integer('phone')
-            ->maxLength('name', 10)
+            ->scalar('phone')
+            ->maxLength('phone', 15)
             ->requirePresence('phone', 'create')
             ->notEmptyString('phone');
 

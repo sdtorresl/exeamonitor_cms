@@ -21,7 +21,7 @@ class CustomersFixture extends TestFixture
         'name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'description' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'contact_person' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-        'contact_phone' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
+        'contact_phone' => ['type' => 'string', 'length' => 15, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'logo' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'logo_dir' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'logo_type' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
@@ -58,7 +58,7 @@ class CustomersFixture extends TestFixture
                 'name' => 'Lorem ipsum dolor sit amet',
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'contact_person' => 'Lorem ipsum dolor sit amet',
-                'contact_phone' => 'Lorem ipsum dolor sit amet',
+                'contact_phone' => 'Lorem ipsum d',
                 'logo' => 'Lorem ipsum dolor sit amet',
                 'logo_dir' => 'Lorem ipsum dolor sit amet',
                 'logo_type' => 'Lorem ipsum dolor sit amet',
@@ -70,8 +70,8 @@ class CustomersFixture extends TestFixture
                 'backup_url' => 'Lorem ipsum dolor sit amet',
                 'primary_color' => 1,
                 'secondary_color' => 1,
-                'created' => '2020-02-03 04:58:26',
-                'modified' => '2020-02-03 04:58:26',
+                'created' => '2020-02-04 03:39:07',
+                'modified' => '2020-02-04 03:39:07',
             ],
         ];
         parent::init();

@@ -24,6 +24,10 @@
                         <td><?= h($pointsOfSale->name) ?></td>
                     </tr>
                                         <tr>
+                        <th><?= __('Phone') ?></th>
+                        <td><?= h($pointsOfSale->phone) ?></td>
+                    </tr>
+                                        <tr>
                         <th><?= __('Contact') ?></th>
                         <td><?= h($pointsOfSale->contact) ?></td>
                     </tr>
@@ -46,10 +50,6 @@
                                     <tr>
                         <th><?= __('Id') ?></th>
                         <td><?= $this->Number->format($pointsOfSale->id) ?></td>
-                    </tr>
-                        <tr>
-                        <th><?= __('Phone') ?></th>
-                        <td><?= $this->Number->format($pointsOfSale->phone) ?></td>
                     </tr>
                             <tr>
                         <th><?= __('Last Access') ?></th>

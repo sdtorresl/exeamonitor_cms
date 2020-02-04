@@ -37,7 +37,7 @@
                 <tr>
                                                                                                                         <td><?= $this->Number->format($pointsOfSale->id) ?></td>
                                                                                                                                     <td><?= h($pointsOfSale->name) ?></td>
-                                                                                                                                    <td><?= $this->Number->format($pointsOfSale->phone) ?></td>
+                                                                                                                                    <td><?= h($pointsOfSale->phone) ?></td>
                                                                                                                                     <td><?= h($pointsOfSale->contact) ?></td>
                                                                                                                                     <td><?= h($pointsOfSale->address) ?></td>
                                                                             <td><?= $pointsOfSale->has('country') ? $this->Html->link($pointsOfSale->country->name, ['controller' => 'Countries', 'action' => 'view', $pointsOfSale->country->id]) : '' ?></td>

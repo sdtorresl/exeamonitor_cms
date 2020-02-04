@@ -77,7 +77,7 @@ class CustomersTable extends Table
 
         $validator
             ->scalar('contact_phone')
-            ->maxLength('contact_phone', 50)
+            ->maxLength('contact_phone', 15)
             ->allowEmptyString('contact_phone');
 
         $validator

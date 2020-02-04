@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property int $phone
+ * @property string $phone
  * @property string $contact
  * @property string $address
  * @property int $country_id
