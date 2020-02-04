@@ -1,6 +1,7 @@
 @import './fontawesome/fontawesome.scss';
 @import './fontawesome/fa-light.scss';
 @import './fontawesome/fa-regular.scss';
+@import './fontawesome/fa-solid.scss';
 
 $primary-green: #319EA3;
 $primary-green-hover: #374f5a;
@@ -57,14 +58,15 @@ a.btn, .btn, .btn-large, .btn-small {
     background-color: $primary-green;
     border-radius: 4px;
     transition: 0.25s ease-in-out;
+    margin-left: 1rem;
 
     &:hover {
         background-color: $primary-green-hover;
+        color: white;
     }
 
     &.cancel {
         background-color: $primary-red;
-        margin-right: 1rem;
 
         &:hover {
             background-color: rgba($color: $primary-red, $alpha: 0.8);
@@ -289,6 +291,32 @@ section.card {
                         background-color: rgba($color: $primary-red, $alpha: 0.1);
                     }
                 }
+            }
+
+            td.actions {
+                display: flex;
+                justify-content: space-between;
+
+                a {
+                    transition: 0.1s ease-in-out;
+
+                    &:hover {
+                        transform: scale(1.3);
+                    }
+
+                    &.delete {
+                        color: $primary-red;
+                    }
+                }
+
+            }
+
+            .enabled {
+                color: $primary-green;
+            }
+
+            .disabled {
+                color: $primary-red;
             }
         }
     }
