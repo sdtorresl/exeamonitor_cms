@@ -3,6 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+
+ $this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
+
 ?>
 
 <section class="users index card">

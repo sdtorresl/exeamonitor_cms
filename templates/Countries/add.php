@@ -3,6 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Country $country
  */
+
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
+
 ?>
 
 <section class="countries index card">

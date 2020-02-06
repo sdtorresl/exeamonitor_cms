@@ -18,6 +18,11 @@
  * @var \{{ namespace }}\View\AppView $this
  * @var \{{ entityClass }} ${{ singularVar }}
  */
+
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
+
 ?>
 
 <section class="{{ pluralVar }} index card">

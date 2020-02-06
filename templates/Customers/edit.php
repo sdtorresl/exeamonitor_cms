@@ -3,6 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
+
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
+
 ?>
 
 <section class="customers index card">
@@ -21,7 +26,7 @@
 <?= $this->Form->create($customer, ['class' => 'form']) ?>
 <?php
     echo $this->Form->control('name');
-    echo $this->Form->control('description');
+    echo $this->Form->control('description', ['class' => 'materialize-textarea', 'data-length' => '500']);
     echo $this->Form->control('contact_person');
     echo $this->Form->control('contact_phone');
     echo $this->Form->control('logo');
