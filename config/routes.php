@@ -100,7 +100,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->setExtensions(['json']);
     $routes->resources('Cities', [
         'map' => [
-            'getByCountry:/id' => [
+            'getByCountry' => [
                 'action' => 'getByCountry',
                 'method' => 'GET',
                 'path' => 'getByCountry/:id',
