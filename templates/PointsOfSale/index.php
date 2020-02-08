@@ -61,5 +61,9 @@
             </ul>
             <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
         </div>
+
+        <div class="form-submit d-flex jc-end">
+            <?= $this->Html->link(__('Create'), ['controller' => 'pointsOfSale', 'action' => 'add'], ['class' => ['btn']]) ?>
+        </div>
     </div>
 </section>

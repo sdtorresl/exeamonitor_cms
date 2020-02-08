@@ -12,6 +12,12 @@ namespace App\Controller;
  */
 class CitiesController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
+
     /**
      * Index method
      *
@@ -22,6 +28,17 @@ class CitiesController extends AppController
         $cities = $this->paginate($this->Cities);
 
         $this->set(compact('cities'));
+        $this->viewBuilder()->setOption('serialize', ['cities']);
+    }
+
+    public function getByCountry($id = null)
+    {
+        $query = $this->Cities->find()
+            ->where(['country_code LIKE' => $id]);
+        $cities = $query->all();
+
+        $this->set('cities', $cities);
+        $this->viewBuilder()->setOption('serialize', ['cities']);
     }
 
     /**
