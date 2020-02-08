@@ -34,7 +34,8 @@ class CitiesController extends AppController
     public function getByCountry($id = null)
     {
         $query = $this->Cities->find()
-            ->where(['country_code LIKE' => $id]);
+            ->where(['country_code LIKE' => $id])
+            ->order(['name' => 'ASC']);
         $cities = $query->all();
 
         $this->set('cities', $cities);

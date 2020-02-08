@@ -44,3 +44,59 @@ $this->loadHelper('Form', [
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function (event) {
+    let countriesSelect = document.getElementById('country-id');
+
+    countriesSelect.onchange = function () {
+        let country = countriesSelect.value;
+        console.log(country);
+        getCitiesBycountry(country);
+    };
+
+    function clearSelect(selectElement) {
+        for (let index = selectElement.options.length - 1; index >= 0 ; index--) {
+            selectElement.remove(index);
+        }
+
+        console.log(selectElement);
+        var instances = M.FormSelect.init(selectElement);
+    }
+
+    function updateSelect(selectElement, options) {
+
+        for (let index = 0; index < options.length; index++) {
+            let option = options[index];
+            let optionElement = document.createElement("option");
+            optionElement.text = option.text;
+            optionElement.value = option.value;
+            selectElement.add(optionElement);
+        }
+
+        var instances = M.FormSelect.init(selectElement);
+    }
+
+    function getCitiesBycountry(country) {
+        let citiesSelect = document.getElementById('city-id');
+        
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                cities = JSON.parse(this.response).cities;
+                const options = cities.map(function(city) {
+                    return {value: city.id, text: city.name};
+                })
+
+                const selectElement = document.getElementById('city-id');
+                clearSelect(selectElement);
+                updateSelect(selectElement, options)
+            }
+        };
+        xhttp.open("GET", "<?= $this->Url->build('/') . 'api/cities/getByCountry/' ?>" + country + ".json", true);
+        xhttp.send();
+    }
+});
+
+
+</script>

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
+
 /**
  * PointsOfSale Controller
  *
@@ -60,10 +62,16 @@ class PointsOfSaleController extends AppController
             }
             $this->Flash->error(__('The points of sale could not be saved. Please, try again.'));
         }
-        $countries = $this->PointsOfSale->Countries->find('list', ['limit' => 200]);
-        $cities = $this->PointsOfSale->Cities->find('list', ['limit' => 200]);
+
+        $countries = array();
+        $query = TableRegistry::getTableLocator()->get('Countries')->find();
+        foreach ($query as $id => $country) {
+            $countries[$country->code] = $country->name;
+        }
+
+        $cities = $this->PointsOfSale->Cities->find('list', ['limit' => 10]);
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'countryChoices'));
     }
 
     /**
