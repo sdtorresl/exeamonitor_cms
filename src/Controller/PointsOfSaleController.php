@@ -61,6 +61,7 @@ class PointsOfSaleController extends AppController
 
             $pointsOfSale = $this->PointsOfSale->patchEntity($pointsOfSale, $postData);
 
+            // As value is country code we need retrieve country ID
             $country_id = $countriesTable->findByCode($postData['country_id'])->first()['id'];
             $pointsOfSale->country_id = $country_id;
 
