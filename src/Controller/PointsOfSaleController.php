@@ -53,8 +53,17 @@ class PointsOfSaleController extends AppController
     public function add()
     {
         $pointsOfSale = $this->PointsOfSale->newEmptyEntity();
+        $countriesTable = TableRegistry::getTableLocator()->get('Countries');
+
         if ($this->request->is('post')) {
-            $pointsOfSale = $this->PointsOfSale->patchEntity($pointsOfSale, $this->request->getData());
+
+            $postData = $this->request->getData();
+
+            $pointsOfSale = $this->PointsOfSale->patchEntity($pointsOfSale, $postData);
+
+            $country_id = $countriesTable->findByCode($postData['country_id'])->first()['id'];
+            $pointsOfSale->country_id = $country_id;
+
             if ($this->PointsOfSale->save($pointsOfSale)) {
                 $this->Flash->success(__('The points of sale has been saved.'));
 
@@ -63,8 +72,9 @@ class PointsOfSaleController extends AppController
             $this->Flash->error(__('The points of sale could not be saved. Please, try again.'));
         }
 
+        
         $countries = array();
-        $query = TableRegistry::getTableLocator()->get('Countries')->find();
+        $query = $countriesTable->find();
         foreach ($query as $id => $country) {
             $countries[$country->code] = $country->name;
         }
