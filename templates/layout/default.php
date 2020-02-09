@@ -60,6 +60,8 @@ $menuCell = $this->cell('Menu');
         var collapsibleElem = document.querySelector('.collapsible');
         var collapsibleInstance = M.Collapsible.init(collapsibleElem);
     </script>
+
+    <?= $this->Flash->render('flash') ?>
 </body>
 
 </html>

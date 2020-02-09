@@ -15,7 +15,6 @@
     </div>
     
     <div class="card-content">
-        <?= $this->Flash->render('flash') ?>
         <table class="centered responsive-table">
             <thead>
                 <tr>
