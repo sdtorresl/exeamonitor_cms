@@ -97,6 +97,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
         xhttp.send();
     }
 });
-
-
 </script>
