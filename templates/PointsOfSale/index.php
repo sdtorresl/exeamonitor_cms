@@ -31,8 +31,8 @@
                 <?php foreach ($pointsOfSale as $pointsOfSale): ?>
                 <tr>
                     <td><?= h($pointsOfSale->name) ?></td>
-                    <td><?= $pointsOfSale->has('country') ? $this->Html->link($pointsOfSale->country->name, ['controller' => 'Countries', 'action' => 'view', $pointsOfSale->country->id]) : '' ?></td>
-                    <td><?= $pointsOfSale->has('city') ? $this->Html->link($pointsOfSale->city->name, ['controller' => 'Cities', 'action' => 'view', $pointsOfSale->city->id]) : '' ?></td>
+                    <td><?= $pointsOfSale->has('country') ? $pointsOfSale->country->name : '' ?></td>
+                    <td><?= $pointsOfSale->has('city') ? $pointsOfSale->city->name : '' ?></td>
                     <td><?= h($pointsOfSale->created) ?></td>
                     <td><?= h($pointsOfSale->modified) ?></td>
                     <td><?= $pointsOfSale->has('customer') ? $this->Html->link($pointsOfSale->customer->name, ['controller' => 'Customers', 'action' => 'view', $pointsOfSale->customer->id]) : '' ?></td>
