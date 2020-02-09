@@ -106,4 +106,20 @@ class CustomersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Customer id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function player($id = null)
+    {
+        $customer = $this->Customers->get($id, [
+            'contain' => ['PointsOfSale.Countries', 'PointsOfSale.Cities'],
+        ]);
+
+        $this->set('customer', $customer);
+    }
 }
