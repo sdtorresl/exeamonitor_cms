@@ -75,6 +75,15 @@ a.btn, .btn, .btn-large, .btn-small {
     }
 }
 
+.toast {
+    &.error {
+        background-color: rgba($color: $primary-red, $alpha: 0.8);
+    }
+    &.success {
+        background-color: rgba($color: $primary-green, $alpha: 0.8);
+    }
+}
+
 input:not([type]):focus:not([readonly]),
 input[type="text"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),

@@ -34,7 +34,7 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['PointsOfSale'],
+            'contain' => ['PointsOfSale', 'PointsOfSale.Countries', 'PointsOfSale.Cities'],
         ]);
 
         $this->set('customer', $customer);
@@ -95,9 +95,12 @@ class CustomersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $customer = $this->Customers->get($id);
-        if ($this->Customers->delete($customer)) {
+        try {
+            $this->Customers->delete($customer);
             $this->Flash->success(__('The customer has been deleted.'));
-        } else {
+        } catch (\PDOException $e) {
+            $this->Flash->error(__('The customer could not be deleted because it has associated data.'));
+        } catch (Exception $e) {
             $this->Flash->error(__('The customer could not be deleted. Please, try again.'));
         }
 
