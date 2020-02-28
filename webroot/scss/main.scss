@@ -120,6 +120,15 @@ textarea.materialize-textarea:focus:not([readonly]) {
         color: $primary-dark;
     }
 
+    .file-field {
+        .file-path-wrapper {
+            padding: 0;
+        }
+
+        .btn {
+            float: right;
+        }
+    }
     .form-submit {
         margin-top: 2rem;
     }

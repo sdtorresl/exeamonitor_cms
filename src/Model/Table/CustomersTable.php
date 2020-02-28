@@ -81,17 +81,14 @@ class CustomersTable extends Table
             ->allowEmptyString('contact_phone');
 
         $validator
-            ->scalar('logo')
             ->maxLength('logo', 255)
             ->allowEmptyString('logo');
 
         $validator
-            ->scalar('logo_dir')
             ->maxLength('logo_dir', 255)
             ->allowEmptyString('logo_dir');
 
         $validator
-            ->scalar('logo_type')
             ->maxLength('logo_type', 255)
             ->allowEmptyString('logo_type');
 
