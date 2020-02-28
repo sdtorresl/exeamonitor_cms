@@ -46,8 +46,7 @@ bin/cake migrations migrate
 Seed the application by following the next steps:
 
 ```bash
-bin/cake migrations seed -s CitiesSeed
-bin/cake migrations seed -s CountriesSeed
+bin/cake migrations seed --seed DatabaseSeed
 ```
 
 After that, the database should be ready for your application.
