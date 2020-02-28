@@ -6,6 +6,11 @@
 /tmp/*
 /vendor/*
 
+# Node Packages #
+#################
+/webroot/node_modules
+/webroot/package-lock.json
+
 # OS generated files #
 ######################
 .DS_Store
