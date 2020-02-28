@@ -8,12 +8,21 @@ A complete CakePHP environment is required for this proyect.
 
 In this [repository](https://github.com/sdtorresl/vagrant-cakephp/) you can deploy a clean environment with all dependencies ready for deploy CakePHP applications.
 
+npm is required to install node packages.
+
 ## Installation
 
 with [composer](https://getcomposer.org/doc/00-intro.md) execute the installation of all dependencies:
 
 ```bash
 composer install
+```
+
+Install node packages:
+
+```bash
+cd webroot
+npm install
 ```
 
 ## Configuration
