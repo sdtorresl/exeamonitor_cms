@@ -22,8 +22,8 @@ use Cake\ORM\Entity;
  * @property string $stream_name
  * @property string $stream_url
  * @property string|null $backup_url
- * @property int|null $primary_color
- * @property int|null $secondary_color
+ * @property string|null $primary_color
+ * @property string|null $secondary_color
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

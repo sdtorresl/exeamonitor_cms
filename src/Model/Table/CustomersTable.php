@@ -125,11 +125,15 @@ class CustomersTable extends Table
             ->allowEmptyString('backup_url');
 
         $validator
-            ->integer('primary_color')
+            ->scalar('primary_color')
+            ->maxLength('primary_color', 6)
+            ->minLength('primary_color', 6)
             ->allowEmptyString('primary_color');
 
         $validator
-            ->integer('secondary_color')
+            ->scalar('secondary_color')
+            ->maxLength('secondary_color', 6)
+            ->minLength('secondary_color', 6)
             ->allowEmptyString('secondary_color');
 
         return $validator;
