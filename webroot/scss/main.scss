@@ -54,6 +54,28 @@ figure {
     padding: 0;
 }
 
+.d-flex {
+    &.jc-flex-start {
+        justify-content: flex-start;
+    }
+
+    &.jc-flex-end {
+        justify-content: flex-end;
+    }
+
+    &.jc-center {
+        justify-content: center;
+    }
+
+    &.ai-center {
+        align-items: center;
+    }
+
+    &.direction-col {
+        flex-direction: column;
+    }
+}
+
 a.btn, .btn, .btn-large, .btn-small {
     background-color: $primary-green;
     border-radius: 4px;
@@ -99,7 +121,6 @@ input[type="search"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
     border-bottom-color: $primary-green;
     box-shadow: 0 1px 0 0 $primary-green;
-
 }
 
 .form {
@@ -383,6 +404,122 @@ section.card {
         margin-top: 1rem;
         font-size: 0.9rem;
         color: $secondary-dark;
+    }
+}
+
+#player {
+    section {
+        margin-top: 8rem;
+        padding: 1rem 2rem;
+
+        .row {
+            margin-bottom: 0;
+        }
+    }
+
+    #logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 100px;
+        }
+    }
+
+    .col {
+        height: 150px;
+        
+        &#logo-container {
+            justify-content: center;
+        }
+    }
+
+    .player-container {
+        display: inline;
+
+        #player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #track-info {
+            width: 85%;
+        }
+    }
+
+    .media-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #volume-controls {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        #volume-bar {
+            width: 80px;
+            height: 5px;
+            background-color: $primary-red;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        #volume-value {
+            display: inline-block;
+            height: 5px;
+            background: $primary-green;
+            position: absolute;
+        }
+    }
+
+    .play, .pause {
+        height: 50px;
+        width: 50px;
+        background: $primary-red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+
+        i {
+            font-size: 2rem;
+            color: white;
+        }
+    }
+
+    #time-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    progress {
+        background: $primary-green;
+        height: 7px;
+        padding: 0px;
+        width: 100%;
+        border: none;
+    
+        &::-moz-progress-bar {
+            background: $primary-red;
+            position: relative;
+        
+            &:after {
+                content: 'H';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 20px;
+                height: 20px;
+                background: yellow;
+            }
+        }
     }
 }
 
