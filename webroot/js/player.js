@@ -1,5 +1,4 @@
 var artist, title, previousArtist, previousTitle;
-const source = "https://streams.exeamedia.com/papa";
 const metadataURI = source + '?metadata.php&tag=getTags';
 
 /** Make an http request and return the

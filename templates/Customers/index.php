@@ -38,6 +38,7 @@
                     <td><?= h($customer->modified) ?></td>
             
                     <td class="actions">
+                        <?= $this->Html->link('<i class="fal fa-play"></i>', ['action' => 'player', $customer->id], ['escape' => false]) ?>
                         <?= $this->Html->link('<i class="fal fa-eye"></i>', ['action' => 'view', $customer->id], ['escape' => false]) ?>
                         <?= $this->Html->link('<i class="fal fa-edit"></i>', ['action' => 'edit', $customer->id], ['escape' => false]) ?>
                         <?= $this->Form->postLink('<i class="fal fa-trash"></i>', ['action' => 'delete', $customer->id], [

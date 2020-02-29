@@ -133,6 +133,7 @@
                 <div class="row">
                     <div class="form-submit d-flex jc-end">
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'class' => ['btn', 'cancel']]); ?>
+                        <?= $this->Html->link(__('View Player'), ['action' => 'player', $customer->id], ['class' => 'btn']) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id], ['class' => 'btn']) ?>
                     </div>
                 </div>

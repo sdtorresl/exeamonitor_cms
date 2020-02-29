@@ -7,7 +7,7 @@
 
             <div class="col s12 m6 l8 player-container">
                 <div>
-                    <h2 class="title"><?= $customer->name ?></h2>
+                    <h2 class="title"><?= $customer->stream_name ?></h2>
                     <p class="description"><p id="artist"></p></p>
                 </div>
                 <div id="player-controls">
@@ -29,12 +29,14 @@
             <div class="col s12 m3 l2">
                 <div class="media-wrapper">
                     <div id="download">
-                        <p>
-                            <?= __('Download') ?>
-                            <span>
-                                <i class="fas fa-download"></i>
-                            </span>
-                        </p>
+                        <?php if($customer->backup_url): ?>
+                        <?= __('Download') ?>
+                        <span>
+                            <a target="_blank" href="<?= $customer->backup_url ?>">
+                                <i id="download-icon" class="fas fa-download"></i>
+                            </a>
+                        </span>
+                        <?php endif; ?>
                     </div>
 
                     <div id="volume-controls">
@@ -55,5 +57,52 @@
         </div>
     </section>
 </div>
+
+<style>
+    nav {
+        position: relative;
+    }
+    
+    <?php if($customer->primary_color): ?>
+        #btn-play-pause, progress, #volume-bar {
+            background: #<?= $customer->primary_color ?>!important;
+        }
+        #volume-down > i, #volume-up > i, #download-icon {
+            color: #<?= $customer->primary_color ?>!important;
+        }
+    <?php endif; ?>
+        
+    <?php if($customer->background): ?>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Restaurante_El_Corral.jpg');
+            background-size: 100%;
+            position: relative;
+            height: 100vh;
+            z-index: -1;
+        }
+    <?php endif; ?>
+
+    <?php if($customer->secondary_color): ?>
+        body:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Add transparency when background image is set */
+            background: #<?= $customer->secondary_color ?><?= $customer->background ? 'BB' : '' ?>!important;
+            z-index: 0;
+        }
+        progress::-moz-progress-bar, #volume-value {
+            background: #<?= $customer->secondary_color ?>!important;
+        }
+    <?php endif; ?>
+</style>
+
+
+<script type="text/javascript">
+    const source = '<?= $customer->stream_url ?>';
+</script>
 
 <?= $this->Html->script('player'); ?>
