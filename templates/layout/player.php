@@ -39,8 +39,6 @@ $menuCell = $this->cell('Menu');
 
 <body>
     <nav>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fal fa-bars"></i></a>
-
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right">
@@ -48,8 +46,6 @@ $menuCell = $this->cell('Menu');
             </ul>
         </div>
     </nav>
-
-    <?= $menuCell ?>
 
     <main>
         <div class="container">

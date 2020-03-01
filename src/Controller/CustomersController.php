@@ -116,10 +116,17 @@ class CustomersController extends AppController
      */
     public function player($id = null)
     {
+        $preview = ((bool) $this->request->getQuery('preview')) ?? false;
+
         $customer = $this->Customers->get($id, [
             'contain' => ['PointsOfSale.Countries', 'PointsOfSale.Cities'],
         ]);
 
         $this->set('customer', $customer);
+        $this->set('preview', $preview);
+
+        if($preview === false) {
+            $this->viewBuilder()->setLayout('player');
+        }
     }
 }

@@ -1,14 +1,3 @@
-<nav>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fal fa-bars"></i></a>
-
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right">
-            <li><a href="collapsible.html"><?= __('Logout') ?></a></li>
-        </ul>
-    </div>
-</nav>
-
 <ul id="slide-out" class="sidenav sidenav-fixed">
     <li>
         <div class="customer-info">

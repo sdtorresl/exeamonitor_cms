@@ -62,6 +62,11 @@
     nav {
         position: relative;
     }
+    body {
+        position: relative;
+        min-height: 100vh;
+        z-index: -1;
+    }
     
     <?php if($customer->primary_color): ?>
         #btn-play-pause, progress, #volume-bar {
@@ -74,11 +79,17 @@
         
     <?php if($customer->background): ?>
         body {
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Restaurante_El_Corral.jpg');
+            background-image: url('<?= $customer->background ?>');
             background-size: 100%;
-            position: relative;
-            height: 100vh;
-            z-index: -1;
+        }
+    <?php endif; ?>
+
+    <?php if($preview == false): ?>
+        main {
+            padding: 12% 10%!important;
+        }
+        #player section {
+            margin: 0!important;
         }
     <?php endif; ?>
 
@@ -91,7 +102,7 @@
             right: 0;
             bottom: 0;
             /* Add transparency when background image is set */
-            background: #<?= $customer->secondary_color ?><?= $customer->background ? 'BB' : '' ?>!important;
+            background: #<?= $customer->secondary_color ?><?= $customer->background ? 'DD' : '' ?>!important;
             z-index: 0;
         }
         progress::-moz-progress-bar, #volume-value {
