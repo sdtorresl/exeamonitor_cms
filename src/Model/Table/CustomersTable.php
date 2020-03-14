@@ -41,6 +41,18 @@ class CustomersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('File', [
+            'logo' => [
+                'file' => 'logo',
+                'file_dir' => 'logo_dir',
+                'file_type' => 'logo_type'
+            ],
+            'background' => [
+                'file' => 'background',
+                'file_dir' => 'background_dir',
+                'file_type' => 'background_type'
+            ],
+        ]);
 
         $this->hasMany('PointsOfSale', [
             'foreignKey' => 'customer_id',
@@ -81,30 +93,21 @@ class CustomersTable extends Table
             ->allowEmptyString('contact_phone');
 
         $validator
-            ->maxLength('logo', 255)
             ->allowEmptyString('logo');
 
         $validator
-            ->maxLength('logo_dir', 255)
             ->allowEmptyString('logo_dir');
 
         $validator
-            ->maxLength('logo_type', 255)
             ->allowEmptyString('logo_type');
 
         $validator
-            ->scalar('background')
-            ->maxLength('background', 255)
             ->allowEmptyString('background');
 
         $validator
-            ->scalar('background_dir')
-            ->maxLength('background_dir', 255)
             ->allowEmptyString('background_dir');
 
         $validator
-            ->scalar('background_type')
-            ->maxLength('background_type', 255)
             ->allowEmptyString('background_type');
 
         $validator
