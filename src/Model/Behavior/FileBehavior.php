@@ -44,7 +44,7 @@ class FileBehavior extends Behavior
      * @return string
      */
     protected function getFileName(EntityInterface $entity, string $field, string $name) {
-        return $entity->id . '-' . $field . '-' . strlower($name);
+        return $entity->id . '-' . $field . '-' . strtolower($name);
     }
 
     protected function fileize(EntityInterface $entity)
