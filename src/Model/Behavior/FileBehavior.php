@@ -78,8 +78,4 @@ class FileBehavior extends Behavior
     {
         $this->fileize($entity);
     }
-
-    public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
-        
-    }
 }
