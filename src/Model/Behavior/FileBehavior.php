@@ -80,6 +80,6 @@ class FileBehavior extends Behavior
     }
 
     public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
-        
+        $folder = new Folder();
     }
 }
