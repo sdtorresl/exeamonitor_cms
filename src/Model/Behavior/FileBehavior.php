@@ -78,4 +78,9 @@ class FileBehavior extends Behavior
     {
         $this->fileize($entity);
     }
+
+    public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
+        $folder = new Folder();
+        //TODO: Need a method to delete file
+    }
 }
