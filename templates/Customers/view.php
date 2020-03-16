@@ -17,46 +17,31 @@
     <div class="card-content">
         <div class="row">
 
-            <div class="col s12 m8 l6 offset-m2 offset-l3">
+            <div class="col s12 m4 l3">
 
-                <div class="row">
+                <div class="card">
+                    <?php if($customer->logo): ?>
+                    <div class="card-image">
+                        <?= $this->Html->Image(str_replace(WWW_ROOT, '', $customer->logo_dir) . DS . $customer->logo); ?>
+                    </div>
+                    <?php endif; ?>
+                    <div class="card-content">
                     <p>
                         <?= $this->Text->autoParagraph(h($customer->description)); ?>
                     </p>
+                    </div>
                 </div>
+            </div>
 
+            <div class="col s12 m8 l6 offset-l1">
                 <table class="row">
+                    <tr>
+                        <th><?= __('ID') ?></th>
+                        <td><?= $this->Number->format($customer->id) ?></td>
+                    </tr>
                     <tr>
                         <th><?= __('Contact Person') ?></th>
                         <td><?= h($customer->contact_person) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Contact Phone') ?></th>
-                        <td><?= h($customer->contact_phone) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Logo') ?></th>
-                        <td><?= h($customer->logo) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Logo Dir') ?></th>
-                        <td><?= h($customer->logo_dir) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Logo Type') ?></th>
-                        <td><?= h($customer->logo_type) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Background') ?></th>
-                        <td><?= h($customer->background) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Background Dir') ?></th>
-                        <td><?= h($customer->background_dir) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Background Type') ?></th>
-                        <td><?= h($customer->background_type) ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Stream Name') ?></th>
@@ -71,16 +56,34 @@
                         <td><?= h($customer->backup_url) ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Id') ?></th>
-                        <td><?= $this->Number->format($customer->id) ?></td>
+                        <th><?= __('Background') ?></th>
+                        <td>
+                            <?= $customer->background ? $this->Html->Link(
+                                        h('Yes'),
+                                        str_replace(WWW_ROOT, '', $customer->background_dir) . DS . $customer->background,
+                                        ['target' => '_blank']
+                                    ) : h('No') ?>
+                        </td>
                     </tr>
                     <tr>
                         <th><?= __('Primary Color') ?></th>
-                        <td><?= $this->Number->format($customer->primary_color) ?></td>
+                        <td>
+                        <?php if($customer->primary_color): ?>
+                            <div class="color-preview z-depth-1" style="background: #<?= $customer->primary_color ?>"></div>
+                        <?php else: ?>
+                            <?= h('No') ?>
+                        <?php endif; ?>
+                        </td>
                     </tr>
                     <tr>
                         <th><?= __('Secondary Color') ?></th>
-                        <td><?= $this->Number->format($customer->secondary_color) ?></td>
+                        <td>
+                        <?php if($customer->secondary_color): ?>
+                            <div class="color-preview z-depth-1" style="background: #<?= $customer->secondary_color ?>"></div>
+                        <?php else: ?>
+                            <?= h('No') ?>
+                        <?php endif; ?>
+                        </td>
                     </tr>
                     <tr>
                         <th><?= __('Created') ?></th>
@@ -91,10 +94,10 @@
                         <td><?= h($customer->modified) ?></td>
                     </tr>
                 </table>
-                
+
+                <?php if (!empty($customer->points_of_sale)) : ?>
                 <div class="related row">
                     <h2><?= __('Related Points Of Sale') ?></h2>
-                    <?php if (!empty($customer->points_of_sale)) : ?>
                     <div class="table-responsive">
                         <table class="centered responsive-table">
                             <thead>
@@ -110,8 +113,10 @@
                                 <?php foreach ($customer->points_of_sale as $pointsOfSale): ?>
                                 <tr>
                                     <td><?= h($pointsOfSale->name) ?></td>
-                                    <td><?= $pointsOfSale->has('country') ? $this->Html->link($pointsOfSale->country->name, ['controller' => 'Countries', 'action' => 'view', $pointsOfSale->country->id]) : '' ?></td>
-                                    <td><?= $pointsOfSale->has('city') ? $this->Html->link($pointsOfSale->city->name, ['controller' => 'Cities', 'action' => 'view', $pointsOfSale->city->id]) : '' ?></td>
+                                    <td><?= $pointsOfSale->has('country') ? $this->Html->link($pointsOfSale->country->name, ['controller' => 'Countries', 'action' => 'view', $pointsOfSale->country->id]) : '' ?>
+                                    </td>
+                                    <td><?= $pointsOfSale->has('city') ? $this->Html->link($pointsOfSale->city->name, ['controller' => 'Cities', 'action' => 'view', $pointsOfSale->city->id]) : '' ?>
+                                    </td>
 
                                     <td class="actions">
                                         <?= $this->Html->link('<i class="fal fa-eye"></i>', ['action' => 'view', $pointsOfSale->id], ['escape' => false, 'title' => __('View')] ) ?>
@@ -127,8 +132,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <?php endif; ?>
                 </div>
+                <?php endif; ?>
 
                 <div class="row">
                     <div class="form-submit d-flex jc-end">
