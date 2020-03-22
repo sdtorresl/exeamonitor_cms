@@ -6,9 +6,11 @@ use Cake\Database\Type;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 use Cake\ORM\Behavior;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
+use Cake\Log\Log;
 
 class FileBehavior extends Behavior
 {
@@ -30,7 +32,6 @@ class FileBehavior extends Behavior
      */
     protected function getRootFolder() {
         $path = WWW_ROOT . DS . 'files' . DS . $this->_table->getTable();
-        debug($path);
         $folder = new Folder();
         
         if($folder->create($path)) {
@@ -44,6 +45,7 @@ class FileBehavior extends Behavior
      * @return string
      */
     protected function getFileName(EntityInterface $entity, string $field, string $name) {
+        Log::debug("Entity: " . debug($entity));
         return $entity->id . '-' . $field . '-' . strtolower($name);
     }
 
@@ -53,11 +55,15 @@ class FileBehavior extends Behavior
         foreach ($config as $field => $settings) {
             $file = $entity->get($settings['file']);
 
-            if (empty($entity->get($settings['file']))) {
+            if (is_string($file)) {
                 continue;
             }
 
-            if ($entity->get($settings['file'])->getError() !== UPLOAD_ERR_OK) {
+            if (empty($file)) {
+                continue;
+            }
+
+            if ($file->getError() !== UPLOAD_ERR_OK) {
                 $entity->set($field, $entity->getOriginal($field));
                 $entity->setDirty($field, false);
                 continue;
@@ -74,13 +80,24 @@ class FileBehavior extends Behavior
         }
     }
 
-    public function beforeRules(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         $this->fileize($entity);
     }
 
     public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options) {
-        $folder = new Folder();
-        //TODO: Need a method to delete file
+        $config = $this->getConfig();
+
+        foreach ($config as $field => $settings) {
+            $file = new File($entity->get($settings['file_dir']) . DS . $entity->get($settings['file']));
+            if ($file->exists()) {
+                try {
+                    $file->delete();
+                } catch (\Throwable $th) {
+                    Log::error("Can't delete file " . $entity->get($settings['file']));
+                    Log::error($th->getMessage);
+                }
+            }
+        }
     }
 }
