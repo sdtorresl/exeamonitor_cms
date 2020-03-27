@@ -97,7 +97,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  */
 $routes->scope('/api', function (RouteBuilder $routes) {
-    $routes->setExtensions(['json']);
+    $routes->setExtensions(['json', 'xml']);
     $routes->resources('Cities', [
         'map' => [
             'getByCountry' => [
@@ -108,4 +108,5 @@ $routes->scope('/api', function (RouteBuilder $routes) {
         ],
         'id' => '[a-zA-Z]+'
     ]);
+    $routes->resources('Checks');
 });
