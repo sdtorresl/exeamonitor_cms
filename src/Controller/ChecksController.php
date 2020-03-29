@@ -31,17 +31,26 @@ class ChecksController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Check id.
+     * @param string|null $id Customer id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($customer_id = null)
     {
-        $check = $this->Checks->get($id, [
-            'contain' => [],
+        $now = FrozenTime::now();
+        $recent = $now->subMinutes(60);
+
+        $checks = $this->Checks->find('all')
+            ->contain(['PointsOfSale'])
+            ->where(['customer_id =' => $customer_id, 'Checks.created >=' => $recent]);
+
+        $Customers = TableRegistry::getTableLocator()->get('Customers');
+        $customer = $Customers->get($customer_id, [
+            'contain' => ['PointsOfSale']
         ]);
 
-        $this->set('check', $check);
+        $this->set(compact('checks'));
+        $this->set(compact('customer'));
     }
 
     /**
