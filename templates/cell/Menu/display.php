@@ -1,3 +1,13 @@
+<?php
+
+$first_name = $this->getRequest()->getSession()->read('Auth.first_name'); 
+$last_name = $this->getRequest()->getSession()->read('Auth.last_name'); 
+$role = $this->getRequest()->getSession()->read('Auth.role'); 
+
+$name = $first_name . ' ' . $last_name;
+
+?>
+
 <ul id="slide-out" class="sidenav sidenav-fixed">
     <li>
         <div class="customer-info">
@@ -12,8 +22,8 @@
 
     <li>
         <div class="user-info">
-            <div class="user-name">Sergio Daniel Torres</div>
-            <div class="user-role">Administrator</div>
+            <div class="user-name"><?= $name ?></div>
+            <div class="user-role"><?= $role ?></div>
         </div>
     </li>
     

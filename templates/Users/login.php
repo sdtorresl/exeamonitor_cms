@@ -10,7 +10,7 @@
             <?= $this->Html->image('logo-ems.png', ['alt' => 'Logo EMS', 'id' => 'logo']); ?>
         </figure>
 
-        <?= $this->Flash->render('auth') ?>
+        <?= $this->Flash->render() ?>
         
         <div class="form">
             <?= $this->Form->create() ?>
@@ -18,7 +18,7 @@
                 <?= $this->Form->control('username', ['placeholder' => __('Please input your username')]) ?>
                 <?= $this->Form->control('password', ['placeholder' => __('Please input your password')]) ?>
                 <div id="login-btn">
-                    <?= $this->Form->button(__('Login'), ['class' => 'btn']); ?>
+                    <?= $this->Form->submit(__('Login'), ['class' => 'btn']); ?>
                 </div>
 
                 <div id="password-remember" class="center-align">
