@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\I18n\FrozenTime;
 use Cake\Log\Log;
+use Cake\ORM\TableRegistry;
 
 /**
  * Checks Controller
@@ -21,10 +22,10 @@ class ChecksController extends AppController
      */
     public function index()
     {
-        $checks = $this->paginate($this->Checks);
+        $Customers = TableRegistry::getTableLocator()->get('Customers');
+        $customers = $Customers->find('all');
 
-        $this->set(compact('checks'));
-        $this->viewBuilder()->setOption('serialize', ['checks']);
+        $this->set(compact('customers'));
     }
 
     /**

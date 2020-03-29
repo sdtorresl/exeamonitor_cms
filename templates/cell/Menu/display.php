@@ -20,7 +20,7 @@
     <li>
         <?= $this->Html->link(
             '<i class="fal fa-file-alt"></i>' . __('Reports'),
-            ['controller' => 'reports'],
+            ['controller' => 'checks'],
             ['escape' => false]);
         ?> 
     </li>

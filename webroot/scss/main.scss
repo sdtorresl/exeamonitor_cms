@@ -54,6 +54,10 @@ figure {
     padding: 0;
 }
 
+.bg-red {
+    background-color: $primary-red;
+}
+
 .d-flex {
     &.jc-flex-start {
         justify-content: flex-start;
@@ -285,6 +289,14 @@ nav {
         .user-role {
             font-size: 1rem;
             line-height: 1.3rem;
+        }
+    }
+}
+
+.checks {
+    .card-image {
+        img {
+            height: 280px;
         }
     }
 }
