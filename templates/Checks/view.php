@@ -30,6 +30,7 @@
                     <thead>
                         <tr>
                             <th><?= _('Point of sale') ?></th>
+                            <th><?= _('Current song') ?></th>
                             <th><?= _('Status') ?></th>
                         </tr>
                     </thead>
@@ -37,23 +38,26 @@
                         <?php foreach ($customer->points_of_sale as $pos): ?>
                         <tr>
                             <td><?= $pos->name ?></td>
-
-                            <?php 
-                            $gotStatus = false;
-                            foreach ($checks as $check) {
-                                if ($check->points_of_sale->id == $pos->id && !$gotStatus) {
-                                    echo '<td>' . ucfirst($check->state) . '</td>';
-                                    echo '<td><i class="fas fa-circle enabled"></td>';
-                                    $gotStatus = true;
+                            <td><?= $pos->current_song ? $pos->current_song : _('Unknown') ?></td>
+                            <td><?php
+                                switch ($pos->state) {
+                                    case 'stopped':
+                                        echo _('Stopped');
+                                        break;
+                                    case 'playing':
+                                        echo _('Playing');
+                                        break;
+                                    default:
+                                        echo _('Unknown');
+                                        break;
                                 }
-                            } 
-                            
-                            if (!$gotStatus) {
-                                echo '<td>Failed</td>';
-                                echo '<td><i class="fas fa-circle disabled"></td>';
-                            }
-                            ?>
+                            ?></td>
 
+                            <?php if ($pos->state != 'failed'): ?>
+                                <td><i class="fas fa-circle enabled"></td>
+                            <?php else: ?>
+                                <td><i class="fas fa-circle disabled"></td>
+                            <?php endif; ?>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -64,3 +68,10 @@
 
     </div>
 </section>
+
+<script type="text/javascript">
+/*
+window.setInterval(function() {
+    location.reload();
+}, 60000);*/
+</script>

@@ -38,16 +38,34 @@ class ChecksController extends AppController
     public function view($customer_id = null)
     {
         $now = FrozenTime::now();
-        $recent = $now->subMinutes(60);
+        $recent = $now->subMinutes(1);
 
         $checks = $this->Checks->find('all')
             ->contain(['PointsOfSale'])
-            ->where(['customer_id =' => $customer_id, 'Checks.created >=' => $recent]);
+            ->where(['customer_id =' => $customer_id, 'Checks.created >=' => $recent])
+            ->order(['Checks.created' => 'DESC']);
 
         $Customers = TableRegistry::getTableLocator()->get('Customers');
         $customer = $Customers->get($customer_id, [
             'contain' => ['PointsOfSale']
         ]);
+        
+        foreach ($customer->points_of_sale as $pos) {
+
+            $gotStatus = false;
+            foreach ($checks as $check) {
+                if ($check->points_of_sale->id == $pos->id && !$gotStatus) {
+                    $pos->state = $check->state;
+                    $pos->current_song = $check->current_song;
+                    $gotStatus = true;
+                }
+            } 
+            
+            if (!$gotStatus) {
+                $pos->state = 'failed';
+                $pos->current_song = '';
+            }
+        }
 
         $this->set(compact('checks'));
         $this->set(compact('customer'));

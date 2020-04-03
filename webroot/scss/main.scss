@@ -8,7 +8,7 @@ $primary-green-hover: #374f5a;
 $primary-dark: #333;
 $secondary-dark: #979797;
 $primary-red: #D6456A;
-
+$primary-red-hover: #D6456A88;
 
 body {
     background: #EEE;
@@ -77,6 +77,20 @@ figure {
 
     &.direction-col {
         flex-direction: column;
+    }
+}
+
+.tabs {
+    .indicator {
+        background-color: $primary-red;
+    }
+    .tab {
+        a {
+            color: $primary-red-hover;
+        }
+        a:hover, a.active {
+            color: $primary-red;
+        }
     }
 }
 
