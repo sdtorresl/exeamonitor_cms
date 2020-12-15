@@ -6,6 +6,9 @@
 /tmp/*
 /vendor/*
 
+# PHP Files "
+.composer.lock
+
 # Node Packages #
 #################
 /webroot/node_modules
