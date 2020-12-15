@@ -34,5 +34,11 @@ class MenuCell extends Cell
      */
     public function display()
     {
+        $roles = [
+            'admin' => __('Administrator'),
+            'user' => __('User')
+        ];
+
+        $this->set(compact("roles"));
     }
 }

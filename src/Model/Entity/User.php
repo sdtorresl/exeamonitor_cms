@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
+use Authentication\IdentityInterface;
 
 /**
  * User Entity
@@ -25,7 +26,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property \App\Model\Entity\PointOfSale $point_of_sale
  * @property \App\Model\Entity\PasswordsReset[] $passwords_resets
  */
-class User extends Entity
+class User extends Entity implements IdentityInterface
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -66,5 +67,21 @@ class User extends Entity
         if (strlen($password) > 0) {
             return (new DefaultPasswordHasher())->hash($password);
         }
+    }
+
+    /**
+     * Authentication\IdentityInterface method
+     */
+    public function getIdentifier()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Authentication\IdentityInterface method
+     */
+    public function getOriginalData()
+    {
+        return $this;
     }
 }

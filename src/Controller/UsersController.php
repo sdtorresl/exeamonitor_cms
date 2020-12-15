@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\Time;
 
 /**
  * Users Controller
@@ -17,7 +18,7 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+        $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
     /**
@@ -125,14 +126,24 @@ class UsersController extends AppController
 
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
-            // redirect to /articles after login success
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Checks',
                 'action' => 'index',
             ]);
 
-            return $this->redirect($redirect);
+            $user = $this->Authentication->getIdentity()->getOriginalData();
+            if($user->enabled) {
+                $user->last_access = Time::now();
+                $this->Users->save($user);
+
+                return $this->redirect($redirect);
+            }
+            else {
+                $this->Flash->error(__('User is not enabled'));
+            }
+
         }
+
         // display error if user submitted and authentication failed
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid username or password'));

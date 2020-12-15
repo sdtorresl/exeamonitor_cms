@@ -80,7 +80,7 @@ class PointsOfSaleController extends AppController
 
         $cities = [];
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'countryChoices'));
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
     }
 
     /**
@@ -105,7 +105,7 @@ class PointsOfSaleController extends AppController
             // As value is country code we need retrieve country ID
             $country_id = $countriesTable->findByCode($postData['country_id'])->first()['id'];
             $pointsOfSale->country_id = $country_id;
-            
+
             if ($this->PointsOfSale->save($pointsOfSale)) {
                 $this->Flash->success(__('The points of sale has been saved.'));
 
@@ -113,13 +113,13 @@ class PointsOfSaleController extends AppController
             }
             $this->Flash->error(__('The points of sale could not be saved. Please, try again.'));
         }
-        
+
         $countries = array();
         $query = $countriesTable->find();
         foreach ($query as $id => $country) {
             $countries[$country->code] = $country->name;
         }
-        
+
         // Get the list of the cities related with the current country
         $country = $countriesTable->get($pointsOfSale->country_id);
         $cities = array();
@@ -128,7 +128,7 @@ class PointsOfSaleController extends AppController
         foreach ($citiesQuery as $id => $city) {
             $cities[$city->id] = $city->name;
         }
-        
+
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
         // Override country_id to the view to use country code
         $pointsOfSale->country_id = $country->code;

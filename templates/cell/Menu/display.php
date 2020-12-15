@@ -1,8 +1,13 @@
 <?php
+$email = $this->getRequest()->getSession()->read('Auth.email');
+$first_name = $this->getRequest()->getSession()->read('Auth.first_name');
+$last_name = $this->getRequest()->getSession()->read('Auth.last_name');
+$role = $this->getRequest()->getSession()->read('Auth.role');
 
-$first_name = $this->getRequest()->getSession()->read('Auth.first_name'); 
-$last_name = $this->getRequest()->getSession()->read('Auth.last_name'); 
-$role = $this->getRequest()->getSession()->read('Auth.role'); 
+# Gravatar
+$default = "retro";
+$size = 80;
+$grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . $default . "&s=" . $size;
 
 $name = $first_name . ' ' . $last_name;
 
@@ -12,27 +17,27 @@ $name = $first_name . ' ' . $last_name;
     <li>
         <div class="customer-info">
             <figure class="customer-logo">
-                <?= $this->Html->image('customer-logo.png') ?>
+                <?= $this->Html->image($grav_url) ?>
             </figure>
             <div class="customer-name">
-                El Corral
+                <?= $name ?>
             </div>
         </div>
     </li>
 
     <li>
         <div class="user-info">
-            <div class="user-name"><?= $name ?></div>
-            <div class="user-role"><?= $role ?></div>
+            <div class="user-name"><?= $roles[$role] ?></div>
+            <div class="user-role"><?= $email ?></div>
         </div>
     </li>
-    
+
     <li>
         <?= $this->Html->link(
             '<i class="fal fa-file-alt"></i>' . __('Reports'),
             ['controller' => 'checks'],
             ['escape' => false]);
-        ?> 
+        ?>
     </li>
 
     <li>

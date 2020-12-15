@@ -264,7 +264,7 @@ nav {
             }
         }
     }
-    
+
     .customer-info {
         display: flex;
         flex-direction: row;
@@ -317,12 +317,12 @@ nav {
 
 section.card {
     margin-top: 4rem;
-    
+
     .card-header {
         padding: 0 24px;
         margin-bottom: -35px;
         display: flex;
-        
+
         .card-icon {
             top: -35px;
             background: $primary-green;
@@ -334,7 +334,7 @@ section.card {
             align-content: center;
             align-items: center;
             justify-content: center;
-    
+
             i {
                 font-size: 4rem;
                 color: white;
@@ -460,7 +460,7 @@ section.card {
 
     .col {
         height: 150px;
-        
+
         &#logo-container {
             justify-content: center;
         }
@@ -496,7 +496,7 @@ section.card {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        
+
         #volume-bar {
             width: 80px;
             height: 5px;
@@ -547,11 +547,11 @@ section.card {
         padding: 0px;
         width: 100%;
         border: none;
-        
+
         &::-moz-progress-bar {
             background: $primary-red;
             position: relative;
-        
+
             &:after {
                 content: 'H';
                 position: absolute;
@@ -588,7 +588,7 @@ section.card {
                 width: 75px;
                 height: 75px;
                 top: -25px;
-    
+
                 i {
                     font-size: 2rem;
                 }

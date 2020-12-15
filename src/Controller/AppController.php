@@ -50,5 +50,12 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
         $this->loadComponent('Authentication.Authentication');
+
+        $roles = [
+            'admin' => __('Administrator'),
+            'user' => __('User')
+        ];
+
+        $this->set(compact('roles'));
     }
 }

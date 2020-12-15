@@ -30,7 +30,7 @@
                     echo $this->Form->control('first_name');
                     echo $this->Form->control('last_name');
                     echo $this->Form->control('email');
-                    echo $this->Form->control('role', ['admin' => 'Administrator']);
+                    echo $this->Form->control('role', $roles);
                     echo $this->Form->control('point_of_sale_id', ['empty' => true]);
                     echo $this->Form->control('enabled', ['type' => 'checkbox', 'label' => '<span>' . __('Enable') . '</span>', 'escape' => false]);
                 ?>
