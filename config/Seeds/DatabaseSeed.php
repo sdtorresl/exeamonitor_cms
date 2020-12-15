@@ -22,5 +22,6 @@ class DatabaseSeed extends AbstractSeed
     {
         $this->call('CountriesSeed');
         $this->call('CitiesSeed');
+        $this->call('UsersSeed');
     }
 }

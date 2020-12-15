@@ -58,7 +58,7 @@ class CreateUsers extends AbstractMigration
         ]);
         $table->addColumn('last_access', 'timestamp', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('point_of_sale_id', 'integer', [
             'default' => null,
@@ -98,7 +98,7 @@ class CreateUsers extends AbstractMigration
             'points_of_sale',
             'id',
             [
-                'delete' => 'RESTRICT', 
+                'delete' => 'RESTRICT',
                 'update' => 'CASCADE'
             ]
         );
