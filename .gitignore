@@ -14,6 +14,9 @@
 /webroot/node_modules
 /webroot/package-lock.json
 
+# Files #
+/webroot/files/
+
 # OS generated files #
 ######################
 .DS_Store

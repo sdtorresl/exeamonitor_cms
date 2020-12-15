@@ -52,7 +52,7 @@ class CreatePointsOfSale extends AbstractMigration
         ]);
         $table->addColumn('last_access', 'timestamp', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
@@ -74,7 +74,7 @@ class CreatePointsOfSale extends AbstractMigration
             'customers',
             'id',
             [
-                'delete' => 'NO_ACTION', 
+                'delete' => 'NO_ACTION',
                 'update' => 'NO_ACTION'
             ]
         );
@@ -83,7 +83,7 @@ class CreatePointsOfSale extends AbstractMigration
             'cities',
             'id',
             [
-                'delete' => 'NO_ACTION', 
+                'delete' => 'NO_ACTION',
                 'update' => 'NO_ACTION'
             ]
         );
@@ -92,7 +92,7 @@ class CreatePointsOfSale extends AbstractMigration
             'countries',
             'id',
             [
-                'delete' => 'NO_ACTION', 
+                'delete' => 'NO_ACTION',
                 'update' => 'NO_ACTION'
             ]
         );

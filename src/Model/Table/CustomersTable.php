@@ -41,16 +41,18 @@ class CustomersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('File', [
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
             'logo' => [
-                'file' => 'logo',
-                'file_dir' => 'logo_dir',
-                'file_type' => 'logo_type'
+                'fields' => [
+                    'dir' => 'logo_dir',
+                    'type' => 'logo_type'
+                ]
             ],
             'background' => [
-                'file' => 'background',
-                'file_dir' => 'background_dir',
-                'file_type' => 'background_type'
+                'fields' => [
+                    'dir' => 'background_dir',
+                    'type' => 'background_type'
+                ]
             ],
         ]);
 

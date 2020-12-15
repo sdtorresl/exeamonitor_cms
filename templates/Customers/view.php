@@ -22,7 +22,7 @@
                 <div class="card">
                     <?php if($customer->logo): ?>
                     <div class="card-image">
-                        <?= $this->Html->Image(str_replace(WWW_ROOT, '', $customer->logo_dir) . DS . $customer->logo); ?>
+                        <?= $this->Html->Image('../' . $customer->logo_dir . DS . $customer->logo); ?>
                     </div>
                     <?php endif; ?>
                     <div class="card-content">
