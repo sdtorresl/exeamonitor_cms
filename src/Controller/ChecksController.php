@@ -15,6 +15,20 @@ use Cake\ORM\TableRegistry;
  */
 class ChecksController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['add']);
+    }
+
     /**
      * Index method
      *
@@ -49,7 +63,7 @@ class ChecksController extends AppController
         $customer = $Customers->get($customer_id, [
             'contain' => ['PointsOfSale']
         ]);
-        
+
         foreach ($customer->points_of_sale as $pos) {
 
             $gotStatus = false;
@@ -59,8 +73,8 @@ class ChecksController extends AppController
                     $pos->current_song = $check->current_song;
                     $gotStatus = true;
                 }
-            } 
-            
+            }
+
             if (!$gotStatus) {
                 $pos->state = 'failed';
                 $pos->current_song = '';
@@ -91,12 +105,14 @@ class ChecksController extends AppController
             $code = 500;
             $this->response->withStatus(500);
         }
+
         $this->set([
+            'code' => $code,
             'message' => $message,
-            'check' => $this->request->getData(),
+            'check' => $check,
             'timestamp' => FrozenTime::now()
         ]);
-        
+
         $this->viewBuilder()->setOption('serialize', ['check', 'message', 'code', 'timestamp']);
     }
 
