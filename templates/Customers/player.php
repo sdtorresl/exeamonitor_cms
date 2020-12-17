@@ -2,7 +2,7 @@
     <section class="card">
         <div class="row">
             <figure id="logo-container" class="col s12 m3 l2">
-                <?= $this->Html->Image(str_replace(WWW_ROOT, '', $customer->logo_dir) . DS . $customer->logo); ?>
+                <?= $this->Html->Image('../' . $customer->logo_dir . DS . $customer->logo); ?>
             </figure>
 
             <div class="col s12 m6 l8 player-container">
@@ -43,7 +43,7 @@
                         <a href="javascript:;" id="volume-down">
                             <i class="fas fa-minus"></i>
                         </a>
-                        
+
                         <div id="volume-bar">
                             <span id="volume-value"></span>
                         </div>
@@ -67,7 +67,7 @@
         min-height: 100vh;
         z-index: -1;
     }
-    
+
     <?php if($customer->primary_color): ?>
         #btn-play-pause, progress, #volume-bar {
             background: #<?= $customer->primary_color ?>!important;
@@ -76,7 +76,7 @@
             color: #<?= $customer->primary_color ?>!important;
         }
     <?php endif; ?>
-        
+
     <?php if($customer->background): ?>
         body {
             background-image: url('<?= '..' . DS . '..' . DS . str_replace(WWW_ROOT, '', $customer->background_dir) . DS . $customer->background ?>');
