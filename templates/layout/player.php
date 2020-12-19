@@ -42,7 +42,10 @@ $menuCell = $this->cell('Menu');
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right">
-                <li><a href="collapsible.html"><?= __('Logout') ?></a></li>
+                <?= $this->Html->link(_('Logout'), [
+                        'controller' => 'Users',
+                        'action' => 'logout'
+                    ]) ?>
             </ul>
         </div>
     </nav>

@@ -52,7 +52,7 @@ class ChecksController extends AppController
     public function view($customer_id = null)
     {
         $now = FrozenTime::now();
-        $recent = $now->subMinutes(1);
+        $recent = $now->subMinutes(60);
 
         $checks = $this->Checks->find('all')
             ->contain(['PointsOfSale'])
@@ -114,6 +114,25 @@ class ChecksController extends AppController
         ]);
 
         $this->viewBuilder()->setOption('serialize', ['check', 'message', 'code', 'timestamp']);
+    }
+
+    /**
+     * Stats method
+     *
+     * @param string|null $id Customer id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function stats($customer_id = null)
+    {
+        $now = FrozenTime::now();
+        $recent = $now->subMinutes(1);
+
+        $Customers = TableRegistry::getTableLocator()->get('Customers');
+        $stats = $Customers->find('checks', ['recent' => $recent]);
+
+        $this->set(compact('stats'));
+        $this->viewBuilder()->setOption('serialize', ['stats']);
     }
 
 }

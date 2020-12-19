@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\FrozenTime;
 
 /**
  * Customers Model
@@ -156,5 +157,19 @@ class CustomersTable extends Table
         $rules->add($rules->isUnique(['name']));
 
         return $rules;
+    }
+
+    public function findChecks(Query $query, array $options)
+    {
+        $query = $query
+            ->contain('PointsOfSale')
+            ->contain('PointsOfSale.Checks', function (Query $q) {
+                $now = FrozenTime::now();
+                $recent = $now->subMinutes(60);
+
+                return $q->where(['Checks.created >=' => $recent]);
+            });
+
+        return $query;
     }
 }

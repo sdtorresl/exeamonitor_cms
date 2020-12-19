@@ -114,6 +114,7 @@
 
 <script type="text/javascript">
     const source = '<?= $customer->stream_url ?>';
+    const posId = "<?= $this->getRequest()->getSession()->read('Auth.point_of_sale_id'); ?>";
 </script>
 
 <?= $this->Html->script('player'); ?>

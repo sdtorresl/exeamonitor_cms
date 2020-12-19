@@ -128,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    player.addEventListener('volumechange', function(e) { 
+    player.addEventListener('volumechange', function(e) {
         volumeValue.style.width = player.volume * 100 + '%';
-    }, false);	
+    }, false);
 
     function seek(e) {
         if (player.src) {
@@ -186,6 +186,30 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    async function sendStats() {
+        const url = "http://localhost/exeamonitor_cms/api/checks.json";
+
+
+        data = {
+            "state": player.paused ? 'stopped' : 'playing',
+            "pos_id": posId,
+            "volume": player.volume * 100,
+            "current_song": ""
+        };
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        console.log(response.json());
+    }
+
+    window.setInterval(sendStats, 10000);
 });
 
-window.setInterval(updateMetadata, 1000);
+window.setInterval(updateMetadata, 5000);
+

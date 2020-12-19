@@ -56,6 +56,10 @@ class PointsOfSaleTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Checks', [
+            'foreignKey' => 'pos_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
