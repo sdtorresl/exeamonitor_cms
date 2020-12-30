@@ -1,5 +1,4 @@
-var artist, title, previousArtist, previousTitle;
-const metadataURI = source + '?metadata.php&tag=getTags';
+let artist, title, previousArtist, previousTitle;
 
 /** Make an http request and return the
  *  results in a string
@@ -17,32 +16,21 @@ function updateMetadata() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var json = JSON.parse(this.responseText);
-            console.log(json);
+            var response = JSON.parse(this.responseText);
 
-            /*
-            if (json[0] != artist && json[1] != title) {
-                previousArtist = artist;
+            previousArtist = artist;
+            previousTitle = title;
 
-                previousTitle = title;
+            title = response.metadata.title ?? '';
+            artist = response.metadata.artist ?? '';
+            artist = (title == null || artist == '') ? artist : ' - ' + artist;
 
-                artist = json[0];
-                if (artist.length > 23) {
-                    artist;
-                }
-
-                title = json[1];
-                if (artist.length > 23) {
-                    title;
-                }
-
-                $("#artist").text(artist);
-            }*/
+            document.getElementById("song-title").innerHTML = title;
+            document.getElementById("artist").innerHTML = artist;
         }
     };
     xhttp.open("GET", metadataURI, true);
     xhttp.send();
-    console.log(metadataURI);
 }
 
 function toHHMMSS(seconds) {
@@ -189,12 +177,11 @@ document.addEventListener("DOMContentLoaded", function() {
     async function sendStats() {
         const url = "http://localhost/exeamonitor_cms/api/checks.json";
 
-
         data = {
             "state": player.paused ? 'stopped' : 'playing',
             "pos_id": posId,
             "volume": player.volume * 100,
-            "current_song": ""
+            "current_song": title + artist
         };
 
         const response = await fetch(url, {
@@ -208,8 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(response.json());
     }
 
-    window.setInterval(sendStats, 10000);
+    window.setInterval(sendStats, 60000);
 });
 
-window.setInterval(updateMetadata, 5000);
-
+window.setInterval(updateMetadata, 30000);

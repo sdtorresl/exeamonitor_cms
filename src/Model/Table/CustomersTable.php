@@ -132,14 +132,14 @@ class CustomersTable extends Table
 
         $validator
             ->scalar('primary_color')
-            ->maxLength('primary_color', 6)
-            ->minLength('primary_color', 6)
+            ->maxLength('primary_color', 7)
+            ->minLength('primary_color', 7)
             ->allowEmptyString('primary_color');
 
         $validator
             ->scalar('secondary_color')
-            ->maxLength('secondary_color', 6)
-            ->minLength('secondary_color', 6)
+            ->maxLength('secondary_color', 7)
+            ->minLength('secondary_color', 7)
             ->allowEmptyString('secondary_color');
 
         return $validator;

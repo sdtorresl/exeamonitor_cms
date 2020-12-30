@@ -1,15 +1,17 @@
 <div id="player">
     <section class="card">
-        <div class="row">
+        <div class="row d-flex">
             <figure id="logo-container" class="col s12 m3 l2">
                 <?= $this->Html->Image('../' . $customer->logo_dir . DS . $customer->logo); ?>
             </figure>
 
             <div class="col s12 m6 l8 player-container">
-                <div>
+                <aside>
                     <h2 class="title"><?= $customer->stream_name ?></h2>
-                    <p class="description"><p id="artist"></p></p>
-                </div>
+                    <div class="description">
+                        <span id="song-title"><?= __('Loading...') ?></span><span id="artist"></span>
+                    </div>
+                </aside>
                 <div id="player-controls">
                     <a href="javascript:;" id="btn-play-pause" class="play">
                         <i id="play-pause-icon"></i>
@@ -26,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m3 l2">
+            <div class="col s12 m3 l2 d-flex ai-center jc-center">
                 <div class="media-wrapper">
                     <div id="download">
                         <?php if($customer->backup_url): ?>
@@ -114,6 +116,12 @@
 
 <script type="text/javascript">
     const source = '<?= $customer->stream_url ?>';
+    const metadataURI = '<?= $this->Url->build([
+            "controller" => "Customers",
+            "action" => "metadata",
+            "?" => ["stream" => $customer->stream_url],
+            "_ext" => "json",
+    ]); ?>';
     const posId = "<?= $this->getRequest()->getSession()->read('Auth.point_of_sale_id'); ?>";
 </script>
 

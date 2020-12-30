@@ -60,7 +60,7 @@
                         <td>
                             <?= $customer->background ? $this->Html->Link(
                                         h('Yes'),
-                                        str_replace(WWW_ROOT, '', $customer->background_dir) . DS . $customer->background,
+                                        DS . $customer->background_dir . DS . $customer->background,
                                         ['target' => '_blank']
                                     ) : h('No') ?>
                         </td>

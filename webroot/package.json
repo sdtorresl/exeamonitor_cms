@@ -9,6 +9,7 @@
   "author": "Sergio Torres",
   "license": "Apache-2.0",
   "dependencies": {
+    "bootstrap-colorpicker": "^3.2.0",
     "materialize-css": "^1.0.0"
   }
 }

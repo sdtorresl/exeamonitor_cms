@@ -15,6 +15,8 @@
 
 $cakeDescription = 'EMS - Exea Monitoring System';
 $menuCell = $this->cell('Menu');
+$session = $this->getRequest()->getSession();
+$name = $session->read('Auth.first_name') . ' ' . $session->read('Auth.last_name');
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +42,9 @@ $menuCell = $this->cell('Menu');
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
+            <p class="brand-logo">
+                <?= $this->getRequest()->getSession()->read('Auth.first_name'); ?>
+            </p>
             <ul id="nav-mobile" class="right">
                 <?= $this->Html->link(_('Logout'), [
                         'controller' => 'Users',

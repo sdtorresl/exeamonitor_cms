@@ -108,6 +108,15 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             ]
         ]
     ]);
+    $routes->resources('Customers', [
+        'map' => [
+            'metadata' => [
+                'action' => 'metadata',
+                'method' => 'GET',
+                'path' => 'metadata'
+            ]
+        ]
+    ]);
     $routes->resources('Cities', [
         'map' => [
             'getByCountry' => [
