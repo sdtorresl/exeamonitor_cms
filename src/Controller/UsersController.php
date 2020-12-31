@@ -126,17 +126,13 @@ class UsersController extends AppController
 
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
-            $redirect = $this->request->getQuery('redirect', [
-                'controller' => 'Checks',
-                'action' => 'index',
-            ]);
-
             $user = $this->Authentication->getIdentity()->getOriginalData();
-            if($user->enabled) {
+
+            if ($user->enabled) {
                 $user->last_access = Time::now();
                 $this->Users->save($user);
 
-                return $this->redirect($redirect);
+                return $this->redirect($this->getRedirect($user));
             }
             else {
                 $this->Flash->error(__('User is not enabled'));
@@ -158,8 +154,29 @@ class UsersController extends AppController
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
             $this->Authentication->logout();
-            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            return $this->redirect(['_name' => 'login']);
         }
+    }
+
+    private function getRedirect($user) {
+        if ($user->role == 'admin') {
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Checks',
+                'action' => 'index',
+            ]);
+        } else {
+            $this->loadModel('PointsOfSale');
+            $pos =  $this->PointsOfSale->get($user->point_of_sale_id);
+            $customerId = $pos->customer_id;
+
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Customers',
+                'action' => 'player',
+                $customerId
+            ]);
+        }
+
+        return $redirect;
     }
 
 }

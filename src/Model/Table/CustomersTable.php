@@ -172,4 +172,5 @@ class CustomersTable extends Table
 
         return $query;
     }
+
 }

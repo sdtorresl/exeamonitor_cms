@@ -28,6 +28,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -121,7 +122,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
-            'unauthenticatedRedirect' => '/exeamonitor_cms/users/login',
+            'unauthenticatedRedirect' => Router::url('/', false),
             'queryParam' => 'redirect',
         ]);
 
@@ -141,7 +142,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'username' => 'username',
                 'password' => 'password',
             ],
-            'loginUrl' => '/exeamonitor_cms/users/login',
+            'loginUrl' => Router::url('/', false),
         ]);
 
         return $authenticationService;
