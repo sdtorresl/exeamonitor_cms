@@ -88,12 +88,12 @@ class CreateCustomers extends AbstractMigration
         ]);
         $table->addColumn('primary_color', 'string', [
             'default' => null,
-            'limit' => 6,
+            'limit' => 7,
             'null' => true,
         ]);
         $table->addColumn('secondary_color', 'string', [
             'default' => null,
-            'limit' => 6,
+            'limit' => 7,
             'null' => true,
         ]);
         $table->addColumn('created', 'datetime', [

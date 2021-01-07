@@ -10,9 +10,9 @@ $this->loadHelper('Form', [
 
 ?>
 
-<?= $this->Html->css('/node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') ?>
+<?= $this->Html->css('materialize-colorpicker.min.css') ?>
 <?= $this->Html->script('/node_modules/jquery/dist/jquery.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') ?>
+<?= $this->Html->script('materialize-colorpicker.min.js') ?>
 
 <section class="customers index card">
     <div class="card-header">
@@ -38,9 +38,20 @@ $this->loadHelper('Form', [
                     echo $this->Form->control('stream_name');
                     echo $this->Form->control('stream_url');
                     echo $this->Form->control('backup_url');
-                    echo '<div id="demo">' . $this->Form->control('primary_color', ['value' => '#5367ce']) . "</div>";
-                    echo $this->Form->control('secondary_color');
                 ?>
+
+                <div id="primary-component" class="file-field">
+                    <div class="btn"></div>
+                    <div class="file-path-wrapper">
+                    <?= $this->Form->control('primary_color', ['value' => '#d6456a']); ?>
+                    </div>
+                </div>
+                <div id="secondary-component" class="file-field">
+                    <div class="btn"></div>
+                    <div class="file-path-wrapper">
+                    <?= $this->Form->control('secondary_color', ['value' => '#319ea3']); ?>
+                    </div>
+                </div>
 
                 <div class="form-submit d-flex jc-end">
                     <?= $this->Html->link(__('Cancel'), ['controller' => 'customers', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
@@ -54,11 +65,17 @@ $this->loadHelper('Form', [
 </section>
 
 <script>
-    $(function() {
-        $('#demo').colorpicker({
-            popover: true,
-            inline: true,
-            container: '#demo'
+    $(function(){
+        $('#primary-component').colorpicker({
+            format: 'hex',
+            component: '.btn'
         });
+        $('#primary-component').colorpicker('setValue', '#d6456a');
+
+        $('#secondary-component').colorpicker({
+            format: 'hex',
+            component: '.btn'
+        });
+        $('#secondary-component').colorpicker('setValue', '#319ea3');
     });
 </script>

@@ -72,10 +72,10 @@
 
     <?php if($customer->primary_color): ?>
         #btn-play-pause, progress, #volume-bar {
-            background: #<?= $customer->primary_color ?>!important;
+            background: <?= $customer->primary_color ?>!important;
         }
         #volume-down > i, #volume-up > i, #download-icon {
-            color: #<?= $customer->primary_color ?>!important;
+            color: <?= $customer->primary_color ?>!important;
         }
     <?php endif; ?>
 
@@ -104,11 +104,11 @@
             right: 0;
             bottom: 0;
             /* Add transparency when background image is set */
-            background: #<?= $customer->secondary_color ?><?= $customer->background ? 'DD' : '' ?>!important;
+            background: <?= $customer->secondary_color ?><?= $customer->background ? 'DD' : '' ?>!important;
             z-index: 0;
         }
         progress::-moz-progress-bar, #volume-value {
-            background: #<?= $customer->secondary_color ?>!important;
+            background: <?= $customer->secondary_color ?>!important;
         }
     <?php endif; ?>
 </style>

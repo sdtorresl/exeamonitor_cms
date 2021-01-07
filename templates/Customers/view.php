@@ -69,7 +69,7 @@
                         <th><?= __('Primary Color') ?></th>
                         <td>
                         <?php if($customer->primary_color): ?>
-                            <div class="color-preview z-depth-1" style="background: #<?= $customer->primary_color ?>"></div>
+                            <div class="color-preview z-depth-1" style="background: <?= $customer->primary_color ?>"></div>
                         <?php else: ?>
                             <?= h('No') ?>
                         <?php endif; ?>
@@ -79,7 +79,7 @@
                         <th><?= __('Secondary Color') ?></th>
                         <td>
                         <?php if($customer->secondary_color): ?>
-                            <div class="color-preview z-depth-1" style="background: #<?= $customer->secondary_color ?>"></div>
+                            <div class="color-preview z-depth-1" style="background: <?= $customer->secondary_color ?>"></div>
                         <?php else: ?>
                             <?= h('No') ?>
                         <?php endif; ?>
