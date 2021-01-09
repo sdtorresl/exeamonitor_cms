@@ -107,6 +107,11 @@ $routes->scope('/api', function (RouteBuilder $routes) {
                 'action' => 'stats',
                 'method' => 'GET',
                 'path' => 'stats/:id'
+            ],
+            'view' => [
+                'action' => 'view',
+                'method' => 'GET',
+                'path' => '/:id'
             ]
         ]
     ]);

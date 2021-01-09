@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data = {
             "state": player.paused ? 'stopped' : 'playing',
             "pos_id": posId,
-            "volume": player.volume * 100,
+            "volume": Number.parseInt(player.volume * 100),
             "current_song": title + artist
         };
 
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(response.json());
     }
 
-    window.setInterval(sendStats, 60000);
+    window.setInterval(sendStats, 5000);
 });
 
 window.setInterval(updateMetadata, 30000);

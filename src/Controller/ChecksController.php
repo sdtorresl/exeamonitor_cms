@@ -81,7 +81,6 @@ class ChecksController extends AppController
             }
         }
 
-        $this->set(compact('checks'));
         $this->set(compact('customer'));
     }
 
@@ -126,10 +125,10 @@ class ChecksController extends AppController
     public function stats($customer_id = null)
     {
         $now = FrozenTime::now();
-        $recent = $now->subMinutes(1);
+        $recent = $now->subMinutes(60);
 
         $Customers = TableRegistry::getTableLocator()->get('Customers');
-        $stats = $Customers->find('checks', ['recent' => $recent]);
+        $stats = $Customers->find('checks', ['recent' => $recent, 'id' => $customer_id]);
 
         $this->set(compact('stats'));
         $this->viewBuilder()->setOption('serialize', ['stats']);

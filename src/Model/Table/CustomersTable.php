@@ -163,12 +163,10 @@ class CustomersTable extends Table
     {
         $query = $query
             ->contain('PointsOfSale')
-            ->contain('PointsOfSale.Checks', function (Query $q) {
-                $now = FrozenTime::now();
-                $recent = $now->subMinutes(60);
-
-                return $q->where(['Checks.created >=' => $recent]);
-            });
+            ->contain('PointsOfSale.Checks', function (Query $q) use ($options) {
+                return $q->where(['Checks.created >=' => $options['recent']]);
+            })
+            ->where(['id' => $options['id']]);
 
         return $query;
     }
