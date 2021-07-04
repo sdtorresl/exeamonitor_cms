@@ -53,3 +53,6 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+
+# Development DB
+data/*

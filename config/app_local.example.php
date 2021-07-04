@@ -71,6 +71,18 @@ return [
             'database' => 'test_myapp',
             //'schema' => 'myapp',
         ],
+
+        /*
+         * Debug kit
+         */
+        'test' => [
+            'host' => 'localhost',
+            //'port' => 'non_standard_port_number',
+            'username' => 'my_app',
+            'password' => 'secret',
+            'database' => 'test_myapp',
+            //'schema' => 'myapp',
+        ],
     ],
 
     /*

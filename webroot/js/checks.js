@@ -8,57 +8,172 @@ var chartColors = {
     grey: 'rgb(201, 203, 207)'
 };
 
-function randomScalingFactor() {
-	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+async function onRefresh(chart) {
+    let curDate = moment().subtract(1, 'minutes').toDate();
+    let playing = 0;
+    let total = 0;
+    let stopped = 0;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.responseText);
+            let posList = response.stats.points_of_sale;
+
+            posList.forEach(pos => {
+                pos.lastCheck = getLastCheck(pos);
+                if (pos.lastCheck.state == 'playing') {
+                    playing++;
+                } else {
+                    stopped++;
+                }
+                total++;
+            });
+
+            updateRealtime(posList);
+
+            console.log(chart);
+
+            chart.config.data.labels.push(curDate);
+            chart.config.data.datasets[0].data.push(playing);
+            chart.config.data.datasets[1].data.push(total);
+            chart.config.data.datasets[2].data.push(stopped);
+        }
+    };
+
+    xhttp.open("GET", statsURI, true);
+    xhttp.send();
 }
 
-function onRefresh(chart) {
-    chart.config.data.labels.push(Date.now());
-    chart.config.data.datasets.forEach(function(dataset) {
-        dataset.data.push(randomScalingFactor());
+function updateRealtime(posList) {
+    const tableBody = document.querySelector("#real-time tbody");
+
+    tableBody.innerHTML = '';
+
+    posList.forEach(pos => {
+        let row = document.createElement("tr");
+        posName = document.createElement("td");
+        posDate = document.createElement("td");
+        posStatus = document.createElement("td");
+        posStatusIcon = document.createElement("td");
+        posVolume = document.createElement("td");
+        icon = document.createElement("i");
+
+        if (pos.lastCheck.state == 'playing') {
+            icon.className = "fas fa-circle enabled";
+        } else {
+            icon.className = "fas fa-circle disabled";
+        }
+        posStatusIcon.append(icon);
+
+        created = new Date(pos.lastCheck.created);
+        formattedCreatedDate = moment(created).format('YYYY-MM-DD hh:mm:ss A');
+        posName.innerHTML = pos.name;
+        posDate.innerHTML = formattedCreatedDate;
+        posStatus.innerHTML = status[pos.lastCheck.state];
+        posVolume.innerHTML = pos.lastCheck.volume + '%';
+
+        row.append(posName);
+        row.append(posVolume);
+        row.append(posDate);
+        row.append(posStatus);
+        row.append(posStatusIcon);
+
+        tableBody.appendChild(row);
     });
+
+    return posList;
+}
+
+function getLastCheck(pos) {
+    let checks = pos.checks;
+    let lastCheck;
+
+    const lastUpdatedDate = moment().subtract(1, 'minutes').toDate();
+
+    checks.forEach(stat => {
+        if (lastCheck == null) {
+            lastCheck = stat;
+        } else {
+            if (stat.created >= lastCheck.created) {
+                lastCheck = stat;
+            }
+        }
+    });
+
+    if (lastCheck == null) {
+        lastCheck = {
+            state: 'disconnected',
+            volume: 0,
+            current_song: status['unknown'],
+            created: new Date()
+        }
+    } else {
+        let createdDate = new Date(lastCheck.created)
+        if (createdDate < lastUpdatedDate) {
+            lastCheck = {
+                state: 'disconnected',
+                volume: 0,
+                current_song: status['unknown'],
+                created: new Date()
+            }
+        }
+    }
+
+    return lastCheck;
 }
 
 var color = Chart.helpers.color;
-var config = {
+var configRealTime = {
     type: 'bar',
     data: {
         labels: [],
         datasets: [{
-            label: 'Dataset 1 (line)',
+            label: 'Reproduciendo',
+            type: 'line',
+            backgroundColor: color(chartColors.green).alpha(0.5).rgbString(),
+            borderColor: chartColors.green,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            data: []
+        }, {
+            label: 'Total',
+            backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: chartColors.blue,
+            borderWidth: 1,
+            data: []
+        }, {
+            label: 'Detenidos',
             type: 'line',
             backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
             borderColor: chartColors.red,
             fill: false,
             cubicInterpolationMode: 'monotone',
             data: []
-        }, {
-            label: 'Dataset 2 (bars)',
-            backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
-            borderColor: chartColors.blue,
-            borderWidth: 1,
-            data: []
         }]
     },
     options: {
         title: {
             display: true,
-            text: 'Mixed chart (horizontal scroll) sample'
+            text: 'Active players'
         },
         scales: {
             xAxes: [{
                 type: 'realtime',
                 realtime: {
-                    duration: 60000,
-                    refresh: 1000,
-                    delay: 2000,
+                    duration: 60000 * 15,
+                    refresh: 5000,
+                    delay: 60000,
                     onRefresh: onRefresh
                 }
             }],
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'value'
+                    labelString: 'Puntos de venta'
+                },
+                ticks: {
+                    beginAtZero: true
                 }
             }]
         },
@@ -73,45 +188,140 @@ var config = {
     }
 };
 
-window.onload = function() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    window.myChart = new Chart(ctx, config);
+var configToday = {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Reproduciendo',
+            type: 'line',
+            backgroundColor: color(chartColors.green).alpha(0.5).rgbString(),
+            borderColor: chartColors.green,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            data: generateData()
+        }, {
+            label: 'Total',
+            backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: chartColors.blue,
+            borderWidth: 1,
+            data: []
+        }, {
+            label: 'Detenidos',
+            type: 'line',
+            backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
+            borderColor: chartColors.red,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            data: []
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Active players'
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                distribution: 'series',
+                offset: true,
+                ticks: {
+                    major: {
+                        enabled: true,
+                        fontStyle: 'bold'
+                    },
+                    source: 'data',
+                    autoSkip: true,
+                    autoSkipPadding: 75,
+                    maxRotation: 0,
+                    sampleSize: 100
+                }
+            }],
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Puntos de venta'
+                },
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        tooltips: {
+            mode: 'nearest',
+            intersect: false
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: false
+        }
+    }
 };
 
-document.getElementById('randomizeData').addEventListener('click', function() {
-    config.data.datasets.forEach(function(dataset) {
-        for (var i = 0; i < dataset.data.length; ++i) {
-            dataset.data[i] = randomScalingFactor();
+function generateData() {
+    var unit = 'hour';
+
+    function unitLessThanDay() {
+        return unit === 'second' || unit === 'minute' || unit === 'hour';
+    }
+
+    function beforeNineThirty(date) {
+        return date.hour() < 9 || (date.hour() === 9 && date.minute() < 30);
+    }
+
+    // Returns true if outside 9:30am-4pm on a weekday
+    function outsideMarketHours(date) {
+        if (date.isoWeekday() > 5) {
+            return true;
         }
-    });
+        if (unitLessThanDay() && (beforeNineThirty(date) || date.hour() > 16)) {
+            return true;
+        }
+        return false;
+    }
 
-    window.myChart.update();
-});
+    function randomNumber(min, max) {
+        return Math.random() * (max - min) + min;
+    }
 
-var colorNames = Object.keys(chartColors);
-document.getElementById('addDataset').addEventListener('click', function() {
-    var colorName = colorNames[config.data.datasets.length % colorNames.length];
-    var newColor = chartColors[colorName];
-    var newDataset = {
-        label: 'Dataset ' + (config.data.datasets.length + 1),
-        type: 'line',
-        backgroundColor: color(newColor).alpha(0.5).rgbString(),
-        borderColor: newColor,
-        fill: false,
-        cubicInterpolationMode: 'monotone',
-        data: new Array(config.data.labels.length)
-    };
+    function randomBar(date, lastClose) {
+        var open = randomNumber(lastClose * 0.95, lastClose * 1.05).toFixed(2);
+        var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
+        return {
+            t: date.valueOf(),
+            y: close
+        };
+    }
 
-    config.data.datasets.push(newDataset);
-    window.myChart.update();
-});
+    var date = moment('Jan 01 1990', 'MMM DD YYYY');
+    var now = moment();
+    var data = [];
+    var lessThanDay = unitLessThanDay();
+    for (; data.length < 600 && date.isBefore(now); date = date.clone().add(1, unit).startOf(unit)) {
+        if (outsideMarketHours(date)) {
+            if (!lessThanDay || !beforeNineThirty(date)) {
+                date = date.clone().add(date.isoWeekday() >= 5 ? 8 - date.isoWeekday() : 1, 'day');
+            }
+            if (lessThanDay) {
+                date = date.hour(9).minute(30).second(0);
+            }
+        }
+        data.push(randomBar(date, data.length > 0 ? data[data.length - 1].y : 30));
+    }
 
-document.getElementById('removeDataset').addEventListener('click', function() {
-    config.data.datasets.pop();
-    window.myChart.update();
-});
+    return data;
+}
 
-document.getElementById('addData').addEventListener('click', function() {
-    onRefresh(window.myChart);
-    window.myChart.update();
-});
+window.onload = function () {
+
+    var ctxRealtime = document.getElementById('realtimeChart').getContext('2d');
+    var ctxToday = document.getElementById('todayChart').getContext('2d');
+
+    window.myChart = new Chart(ctxRealtime, configRealTime);
+    window.myChart = new Chart(ctxToday, configToday);
+
+};
+
+//getStats();
+//window.setInterval(getStats, 1000, customerId);

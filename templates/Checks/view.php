@@ -24,58 +24,30 @@
                 </ul>
             </div>
 
-
             <div id="real-time" class="col s12">
                 <table>
                     <thead>
                         <tr>
                             <th><?= _('Point of sale') ?></th>
-                            <th><?= _('Current song') ?></th>
+                            <th><?= _('Volume') ?></th>
+                            <th><?= _('Date') ?></th>
                             <th><?= _('Status') ?></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php foreach ($customer->points_of_sale as $pos): ?>
-                        <tr>
-                            <td><?= $pos->name ?></td>
-                            <td><?= $pos->current_song ? $pos->current_song : _('Unknown') ?></td>
-                            <td><?php
-                                switch ($pos->state) {
-                                    case 'stopped':
-                                        echo _('Stopped');
-                                        break;
-                                    case 'playing':
-                                        echo _('Playing');
-                                        break;
-                                    default:
-                                        echo _('Unknown');
-                                        break;
-                                }
-                            ?></td>
-
-                            <?php if ($pos->state == 'playing'): ?>
-                                <td><i class="fas fa-circle enabled"></td>
-                            <?php else: ?>
-                                <td><i class="fas fa-circle disabled"></td>
-                            <?php endif; ?>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
 
 
-            <div id="historic" class="col s12">
+            <section id="historic" class="col s12">
                 <div>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="realtimeChart"></canvas>
                 </div>
-                <p>
-                    <button id="randomizeData">Randomize Data</button>
-                    <button id="addDataset">Add Dataset</button>
-                    <button id="removeDataset">Remove Dataset</button>
-                    <button id="addData">Add Data</button>
-                </p>
-            </div>
+
+                <div>
+                    <canvas id="todayChart"></canvas>
+                </div>
+            </section>
         </div>
     </div>
 </section>
@@ -83,5 +55,22 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@1.8.0"></script>
+
+<script>
+    const statsURI = '<?= $this->Url->build([
+            "controller" => "Checks",
+            "action" => "stats",
+            "_ext" => "json",
+            $customer->id,
+    ]); ?>';
+    const customerId = <?= $customer->id; ?>
+
+    const status = {
+        'stopped': '<?= _('Stopped') ?>',
+        'playing': '<?= _('Playing') ?>',
+        'unknown': '<?= _('Unknown') ?>',
+        'disconnected': '<?= _('Disconnected') ?>'
+    };
+</script>
 
 <?= $this->Html->script('checks'); ?>

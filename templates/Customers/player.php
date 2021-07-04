@@ -123,6 +123,12 @@
             "_ext" => "json",
     ]); ?>';
     const posId = "<?= $this->getRequest()->getSession()->read('Auth.point_of_sale_id'); ?>";
+
+    const checksURI = '<?= $this->Url->build([
+            "controller" => "Checks",
+            "action" => "index",
+            "_ext" => "json"
+    ]); ?>';
 </script>
 
 <?= $this->Html->script('player'); ?>

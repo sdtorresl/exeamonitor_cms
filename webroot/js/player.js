@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     player.addEventListener('volumechange', function(e) {
         volumeValue.style.width = player.volume * 100 + '%';
+        sendStats();
     }, false);
 
     function seek(e) {
@@ -172,11 +173,12 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.className = "play";
             playPauseIcon.className = "fas fa-play";
         }
+
+        sendStats();
+        updateMetadata();
     }
 
     async function sendStats() {
-        const url = "http://localhost/exeamonitor_cms/api/checks.json";
-
         data = {
             "state": player.paused ? 'stopped' : 'playing',
             "pos_id": posId,
@@ -184,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
             "current_song": title + artist
         };
 
-        const response = await fetch(url, {
+        const response = await fetch(checksURI, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -195,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(response.json());
     }
 
-    window.setInterval(sendStats, 5000);
+    window.setInterval(sendStats, 15000);
 });
 
 window.setInterval(updateMetadata, 30000);

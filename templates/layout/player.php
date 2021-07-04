@@ -43,7 +43,7 @@ $name = $session->read('Auth.first_name') . ' ' . $session->read('Auth.last_name
     <nav>
         <div class="nav-wrapper">
             <p class="brand-logo">
-                <?= $this->getRequest()->getSession()->read('Auth.first_name'); ?>
+                <?= $name; ?>
             </p>
             <ul id="nav-mobile" class="right">
                 <?= $this->Html->link(_('Logout'), [
