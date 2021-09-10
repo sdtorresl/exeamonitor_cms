@@ -12,8 +12,10 @@ services:
       - WEB_DOCUMENT_ROOT=/app/webroot
     env_file:
       - mysql.env
-    ports:
-      - "80:80"
+    labels:
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
+      - 'traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:noindex, nofollow, nosnippet, noarchive'
 
   mysql:
     image: mysql:5.6
@@ -21,9 +23,8 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./tmp/data/mysql_db:/var/lib/mysql
+      - ./data/mysql_db:/var/lib/mysql
     env_file:
       - mysql.env
     command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
-    ports:
-      - "3306:3306"
+
