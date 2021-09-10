@@ -24,6 +24,7 @@ class PointsOfSaleController extends AppController
         $this->paginate = [
             'contain' => ['Countries', 'Cities', 'Customers'],
         ];
+        $this->Authorization->Authorize($this->PointsOfSale);
         $pointsOfSale = $this->paginate($this->PointsOfSale);
 
         $this->set(compact('pointsOfSale'));
@@ -41,6 +42,7 @@ class PointsOfSaleController extends AppController
         $pointsOfSale = $this->PointsOfSale->get($id, [
             'contain' => ['Countries', 'Cities', 'Customers'],
         ]);
+        $this->Authorization->Authorize($pointsOfSale);
 
         $this->set('pointsOfSale', $pointsOfSale);
     }
@@ -53,6 +55,8 @@ class PointsOfSaleController extends AppController
     public function add()
     {
         $pointsOfSale = $this->PointsOfSale->newEmptyEntity();
+        $this->Authorization->Authorize($pointsOfSale);
+
         $countriesTable = TableRegistry::getTableLocator()->get('Countries');
 
         if ($this->request->is('post')) {
@@ -95,6 +99,8 @@ class PointsOfSaleController extends AppController
         $pointsOfSale = $this->PointsOfSale->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->Authorize($pointsOfSale);
+
         $countriesTable = TableRegistry::getTableLocator()->get('Countries');
         $citiesTable = TableRegistry::getTableLocator()->get('Cities');
 
@@ -146,6 +152,8 @@ class PointsOfSaleController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $pointsOfSale = $this->PointsOfSale->get($id);
+        $this->Authorization->Authorize($pointsOfSale);
+
         if ($this->PointsOfSale->delete($pointsOfSale)) {
             $this->Flash->success(__('The points of sale has been deleted.'));
         } else {

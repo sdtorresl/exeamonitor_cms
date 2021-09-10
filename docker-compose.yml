@@ -1,12 +1,29 @@
-version: "3"  # optional since v1.27.0
+version: "3.1"
+
 services:
-  web:
-    build: .
+
+  php-fpm:
+    image: webdevops/php-nginx:7.4
+    container_name: exeamonitor-webserver
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/webroot
+    env_file:
+      - mysql.env
     ports:
       - "80:80"
+
+  mysql:
+    image: mysql:5.6
+    container_name: exeamonitor-mysql
+    working_dir: /app
     volumes:
-      - .:/var/www/html
-      - ./data:/var/lib/mysql
-
-
-
+      - .:/app
+      - ./tmp/data/mysql_db:/var/lib/mysql
+    env_file:
+      - mysql.env
+    command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
+    ports:
+      - "3306:3306"

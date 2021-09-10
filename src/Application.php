@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,12 +15,18 @@ declare(strict_types=1);
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App;
 
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\OrmResolver;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
@@ -37,7 +44,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface, AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -49,6 +56,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $this->addPlugin('Josegonzalez/Upload');
 
         $this->addPlugin('ExeaTheme');
+
+        $this->addPlugin('Authorization');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -94,8 +103,21 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
             ->add(new AuthenticationMiddleware($this))
+            ->add(new AuthorizationMiddleware($this))
             ->add(new BodyParserMiddleware());
 
+        if (Configure::read('debug')) {
+            // Disable authz for debugkit
+            $middlewareQueue->add(function ($req, $res, $next) {
+                if ($req->getParam('plugin') === 'DebugKit') {
+                    $req->getAttribute('authorization')->skipAuthorization();
+                }
+                if (preg_match("/api/i", $req->getParam('_matchedRoute'))) {
+                    $req->getAttribute('authorization')->skipAuthorization();
+                }
+                return $next($req, $res);
+            });
+        }
         return $middlewareQueue;
     }
 
@@ -146,5 +168,17 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         ]);
 
         return $authenticationService;
+    }
+
+    /**
+     * Authorization service
+     * 
+     * @return AuthorizationService
+     */
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
+    {
+        $resolver = new OrmResolver();
+
+        return new AuthorizationService($resolver);
     }
 }
