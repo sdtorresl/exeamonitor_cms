@@ -56,3 +56,4 @@ nbproject/*
 
 # Development DB
 data/*
+mysql.env
