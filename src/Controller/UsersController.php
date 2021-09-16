@@ -66,12 +66,21 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            try {
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            } catch (\PDOException $error) {
+                if ($error->errorInfo[0] = '23000') {
+                    $this->Flash->error(__('A user is already assigned to this point of sale'));
+                } else {
+                    $this->Flash->error($error->errorInfo[2]);
+                }
+                $this->set('error', $error);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $pointOfSales = $this->Users->PointsOfSale->find('list', ['limit' => 200]);
         $this->set(compact('user', 'pointOfSales'));
@@ -93,12 +102,21 @@ class UsersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            try {
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            } catch (\PDOException $error) {
+                if ($error->errorInfo[0] = '23000') {
+                    $this->Flash->error(__('A user is already assigned to this point of sale'));
+                } else {
+                    $this->Flash->error($error->errorInfo[2]);
+                }
+                $this->set('error', $error);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $pointOfSales = $this->Users->PointsOfSale->find('list', ['limit' => 200]);
         $this->set(compact('user', 'pointOfSales'));
