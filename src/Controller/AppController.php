@@ -16,7 +16,10 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use Cake\Controller\Controller;
+use Cake\I18n\I18n;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -57,5 +60,14 @@ class AppController extends Controller
         ];
 
         $this->set(compact('roles'));
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        $session = $this->getRequest()->getSession();
+        if ($session->read('Config.language') == 'es')
+            I18n::setLocale('es_CO');
+        else
+            I18n::setLocale('en_US');
     }
 }

@@ -25,13 +25,13 @@ $this->loadHelper('Form', [
                 
                 <?= $this->Form->create($pointsOfSale, ['class' => 'form']) ?>
                 <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('phone');
-                    echo $this->Form->control('contact');
-                    echo $this->Form->control('address');
-                    echo $this->Form->control('country_id', ['options' => $countries, 'empty' => true]);
-                    echo $this->Form->control('city_id', ['options' => $cities, 'empty' => true]);
-                    echo $this->Form->control('customer_id', ['options' => $customers, 'empty' => true]);
+                    echo $this->Form->control(__('name'));
+                    echo $this->Form->control(__('phone'));
+                    echo $this->Form->control(__('contact'));
+                    echo $this->Form->control(__('address'));
+                    echo $this->Form->control(__('country_id'), ['options' => $countries, 'empty' => true]);
+                    echo $this->Form->control(__('city_id'), ['options' => $cities, 'empty' => true]);
+                    echo $this->Form->control(__('customer_id'), ['options' => $customers, 'empty' => true]);
                 ?>
 
                 <div class="form-submit d-flex jc-end">

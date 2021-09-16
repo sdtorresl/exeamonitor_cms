@@ -18,13 +18,13 @@
         <table class="centered responsive-table">
             <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('first_name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('last_name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('enabled') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('last_access') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('point_of_sale_id') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('username')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('first_name')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('last_name')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('role')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('enabled')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('last_access')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('point_of_sale_id')) ?></th>
                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>

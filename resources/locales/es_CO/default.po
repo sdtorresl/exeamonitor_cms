@@ -1,0 +1,355 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2021-07-28 03:54+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: layout/default.php:52
+msgid "Spanish"
+msgstr "Español"
+
+#: layout/default.php:54
+msgid "English"
+msgstr "Ingles"
+
+#: layout/default.php:59
+msgid "Logout"
+msgstr "Salir"
+
+#: Menu/display.php:37
+msgid "Reports"
+msgstr "Reportes"
+
+#: Menu/display.php:48
+msgid "Users"
+msgstr "Usuarios"
+
+#: Menu/display.php:52
+msgid "List"
+msgstr "Lista"
+
+#: Menu/display.php:53
+msgid "Create"
+msgstr "Crear"
+
+#: Menu/display.php:65
+msgid "Customers"
+msgstr "Clientes"
+
+#: Menu/display.php:82
+msgid "Points Of Sales"
+msgstr "Puntos De Venta"
+
+#: Users/add.php:19
+msgid "Add Users"
+msgstr "Crear Usuarios"
+
+#: Users/add.php:28
+msgid "username"
+msgstr "nombre de usuario"
+
+#: Users/add.php:29
+msgid "password"
+msgstr "contraseña"
+
+#: Users/add.php:30
+msgid "first_name"
+msgstr "Nombre"
+
+#: Users/add.php:31
+msgid "last_name"
+msgstr "Apellido"
+
+#: Users/add.php:32
+msgid "email"
+msgstr "Correo"
+
+#: Users/add.php:33
+msgid "Enable"
+msgstr "Habilitar"
+
+#: Users/add.php:38
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: Users/add.php:39
+msgid "Back"
+msgstr "Atras"
+
+#: Users/add.php:40
+msgid "Submit"
+msgstr "Enviar"
+
+#: Users/edit.php:19
+msgid "Edit Users"
+msgstr "Editar usuario"
+
+#: Users/index.php:25
+msgid "enabled"
+msgstr "Habilitado"
+
+#: Users/index.php:26
+msgid "last_access"
+msgstr "Ultimo Acceso"
+
+#: Users/index.php:27
+msgid "point_of_sale_id"
+msgstr "Punto De Venta"
+
+#: Users/index.php:28
+msgid "Actions"
+msgstr "Acciones"
+
+#: Users/index.php:43
+msgid "View"
+msgstr "Ver"
+
+#: Users/index.php:44
+msgid "Edit"
+msgstr "Editar"
+
+#: Users/index.php:49
+msgid "Delete"
+msgstr "Eliminar"
+
+#: Users/login.php:18
+msgid "Please input your username"
+msgstr "Por favor ingresar el nombre de usuario"
+
+#: Users/login.php:19
+msgid "Please input your password"
+msgstr "Por favor ingresar la contraseña"
+
+#: Users/login.php:21
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: Users/login.php:26
+msgid "Have you forgotten your password?"
+msgstr "Olvidaste tu contraseña?"
+
+#: Users/view.php:29
+msgid "Username"
+msgstr "Nombre De Usuario"
+
+#: Users/view.php:33
+msgid "Email"
+msgstr "Correo"
+
+#: Users/view.php:37
+msgid "Role"
+msgstr "Rol"
+
+#: Users/view.php:41
+msgid "Point Of Sale"
+msgstr "Punto De Venta"
+
+#: Users/view.php:45
+msgid "Last Access"
+msgstr "Ultimo Ingreso"
+
+#: Users/view.php:49
+msgid "Created"
+msgstr "Creación"
+
+#: Users/view.php:53
+msgid "Modified"
+msgstr "Modificado"
+
+#: Users/view.php:57
+msgid "Enabled"
+msgstr "Habilitado"
+
+#: Users/view.php:58
+msgid "Yes"
+msgstr "Si"
+
+#: Users/view.php:58
+msgid "No"
+msgstr "No"
+
+#: PointsOfSale/add.php:19
+msgid "Add Points Of Sale"
+msgstr "Crear Punto de Venta"
+
+#: PointsOfSale/add.php:28
+msgid "name"
+msgstr "Nombre"
+
+#: PointsOfSale/add.php:29
+msgid "phone"
+msgstr "Telefono"
+
+#: PointsOfSale/add.php:30
+msgid "contact"
+msgstr "Contacto"
+
+#: PointsOfSale/add.php:31
+msgid "address"
+msgstr "Direccion"
+
+#: PointsOfSale/add.php:32
+msgid "country_id"
+msgstr "País"
+
+#: PointsOfSale/add.php:33
+msgid "city_id"
+msgstr "Ciudad"
+
+#: PointsOfSale/add.php:34
+msgid "customer_id"
+msgstr "Cliente"
+
+#: PointsOfSale/view.php:23
+msgid "Name"
+msgstr "Nombre"
+
+#: PointsOfSale/view.php:27
+msgid "Phone"
+msgstr "Telefono"
+
+#: PointsOfSale/view.php:31
+msgid "Contact"
+msgstr "Contacto"
+
+#: PointsOfSale/view.php:39
+msgid "Country"
+msgstr "País"
+
+#: PointsOfSale/view.php:43
+msgid "City"
+msgstr "Ciudad"
+
+#: PointsOfSale/view.php:47
+msgid "Customer"
+msgstr "Cliente"
+
+#: PointsOfSale/view.php:55
+msgid "Last Access"
+msgstr "Ultimo Ingreso"
+
+#: PointsOfSale/view.php:59
+msgid "Created"
+msgstr "Creacion"
+
+#: PointsOfSale/view.php:63
+msgid "Modified"
+msgstr "Modificacion"
+
+#: PointsOfSale/view.php:72
+msgid "Are you sure you want to delete # {0}?"
+msgstr "¿Estás seguro de que quieres eliminar # {0}?"
+
+#: Customers/add.php:23
+msgid "Add Customers"
+msgstr "Crear Clientes"
+
+#: Customers/add.php:33
+msgid "description"
+msgstr "Descripcion"
+
+#: Customers/add.php:34
+msgid "contact_person"
+msgstr "Persona de Contacto"
+
+#: Customers/add.php:35
+msgid "contact_phone"
+msgstr "Telefono de Contacto"
+
+#: Customers/add.php:36
+msgid "logo"
+msgstr "Logo"
+
+#: Customers/add.php:37
+msgid "background"
+msgstr "Imagen De Fondo"
+
+#: Customers/add.php:38
+msgid "stream_name"
+msgstr "Nombre Emisora"
+
+#: Customers/add.php:39
+msgid "stream_url"
+msgstr "Url De La Emisora"
+
+#: Customers/add.php:40
+msgid "backup_url"
+msgstr "Url De Respaldo"
+
+#: Customers/add.php:46
+msgid "primary_color"
+msgstr "Color Primario"
+
+#: Customers/add.php:52
+msgid "secondary_color"
+msgstr "Color Secundario"
+
+#: Customers/edit.php:23
+msgid "Edit Customers"
+msgstr "Editar Clientes"
+
+#: Customers/index.php:62
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr "Pagina {{page}} de {{pages}}, mostrando {{current}} registro(s) de {{count}} total"
+
+#: Customers/player.php:12
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: Customers/player.php:12
+msgid "Download"
+msgstr "Descargar"
+
+#: Customers/view.php:43
+msgid "Contact Person"
+msgstr "Persona de Contacto"
+
+#: Customers/view.php:47
+msgid "Stream Name"
+msgstr "Nombre De La Emisora"
+
+#: Customers/view.php:51
+msgid "Stream Url"
+msgstr "Url De La Emisora"
+
+#: Customers/view.php:55
+msgid "Backup Url"
+msgstr "Url De Respaldo"
+
+#: Customers/view.php:59
+msgid "Background"
+msgstr "Imagen De Fondo"
+
+#: Customers/view.php:69
+msgid "Primary Color"
+msgstr "Color Primario"
+
+#: Customers/view.php:79
+msgid "Secondary Color"
+msgstr "Color Secundario"
+
+#: Customers/view.php:89
+msgid "Created"
+msgstr "Crear"
+
+#: Customers/view.php:93
+msgid "Modified"
+msgstr "Modificar"
+
+#: Customers/view.php:100
+msgid "Related Points Of Sale"
+msgstr "Puntos De Venta Relacionados"
+
+#: Customers/view.php:141
+msgid "View Player"
+msgstr "Ver Reproductor"

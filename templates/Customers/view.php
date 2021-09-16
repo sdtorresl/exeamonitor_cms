@@ -59,10 +59,10 @@
                         <th><?= __('Background') ?></th>
                         <td>
                             <?= $customer->background ? $this->Html->Link(
-                                        h('Yes'),
+                                        h(__('Yes')),
                                         DS . $customer->background_dir . DS . $customer->background,
                                         ['target' => '_blank']
-                                    ) : h('No') ?>
+                                    ) : h(__('No')) ?>
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@
                         <?php if($customer->primary_color): ?>
                             <div class="color-preview z-depth-1" style="background: <?= $customer->primary_color ?>"></div>
                         <?php else: ?>
-                            <?= h('No') ?>
+                            <?= h(__('No')) ?>
                         <?php endif; ?>
                         </td>
                     </tr>
@@ -81,7 +81,7 @@
                         <?php if($customer->secondary_color): ?>
                             <div class="color-preview z-depth-1" style="background: <?= $customer->secondary_color ?>"></div>
                         <?php else: ?>
-                            <?= h('No') ?>
+                            <?= h(__('No')) ?>
                         <?php endif; ?>
                         </td>
                     </tr>
@@ -102,9 +102,9 @@
                         <table class="centered responsive-table">
                             <thead>
                                 <tr>
-                                    <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('country_id') ?></th>
-                                    <th scope="col"><?= $this->Paginator->sort('city_id') ?></th>
+                                    <th scope="col"><?= $this->Paginator->sort(__('name')) ?></th>
+                                    <th scope="col"><?= $this->Paginator->sort(__('country_id')) ?></th>
+                                    <th scope="col"><?= $this->Paginator->sort(__('city_id')) ?></th>
                                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                                 </tr>
                             </thead>

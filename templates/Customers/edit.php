@@ -29,27 +29,27 @@ $this->loadHelper('Form', [
 
             <?= $this->Form->create($customer, ['class' => 'form', 'type' => 'file']) ?>
                 <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('description', ['class' => 'materialize-textarea', 'data-length' => '500']);
-                    echo $this->Form->control('contact_person');
-                    echo $this->Form->control('contact_phone');
-                    echo $this->Form->control('logo', ['type' => 'file', 'label' => false, 'placeholder' => __('Logo')]);
-                    echo $this->Form->control('background', ['type' => 'file', 'label' => false, 'placeholder' => __('Background')]);
-                    echo $this->Form->control('stream_name');
-                    echo $this->Form->control('stream_url');
-                    echo $this->Form->control('backup_url');
+                    echo $this->Form->control(__('name'));
+                    echo $this->Form->control(__('description'), ['class' => 'materialize-textarea', 'data-length' => '500']);
+                    echo $this->Form->control(__('contact_person'));
+                    echo $this->Form->control(__('contact_phone'));
+                    echo $this->Form->control(__('logo'), ['type' => 'file', 'label' => false, 'placeholder' => __('Logo')]);
+                    echo $this->Form->control(__('background'), ['type' => 'file', 'label' => false, 'placeholder' => __('Background')]);
+                    echo $this->Form->control(__('stream_name'));
+                    echo $this->Form->control(__('stream_url'));
+                    echo $this->Form->control(__('backup_url'));
                 ?>
 
                 <div id="primary-component" class="file-field">
                     <div class="btn"></div>
                     <div class="file-path-wrapper">
-                    <?= $this->Form->control('primary_color'); ?>
+                    <?= $this->Form->control(__('primary_color')); ?>
                     </div>
                 </div>
                 <div id="secondary-component" class="file-field">
                     <div class="btn"></div>
                     <div class="file-path-wrapper">
-                    <?= $this->Form->control('secondary_color'); ?>
+                    <?= $this->Form->control(__('secondary_color')); ?>
                     </div>
                 </div>
 
