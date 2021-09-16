@@ -160,7 +160,7 @@ msgstr "Último Ingreso"
 
 #: Users/view.php:49
 msgid "Created"
-msgstr "Creación"
+msgstr "Creado"
 
 #: Users/view.php:53
 msgid "Modified"
@@ -240,7 +240,7 @@ msgstr "Último Ingreso"
 
 #: PointsOfSale/view.php:59
 msgid "Created"
-msgstr "Creación"
+msgstr "Creado"
 
 #: PointsOfSale/view.php:63
 msgid "Modified"
@@ -340,7 +340,7 @@ msgstr "Color Secundario"
 
 #: Customers/view.php:89
 msgid "Created"
-msgstr "Creación"
+msgstr "Creado"
 
 #: Customers/view.php:93
 msgid "Modified"
