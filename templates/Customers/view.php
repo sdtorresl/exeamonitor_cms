@@ -22,7 +22,7 @@
                 <div class="card">
                     <?php if($customer->logo): ?>
                     <div class="card-image">
-                        <?= $this->Html->Image('../' . $customer->logo_dir . DS . $customer->logo); ?>
+                        <?= $this->Html->Image('../' . str_replace('webroot', '', $customer->logo_dir) . DS . $customer->logo); ?>
                     </div>
                     <?php endif; ?>
                     <div class="card-content">
@@ -60,7 +60,7 @@
                         <td>
                             <?= $customer->background ? $this->Html->Link(
                                         h('Yes'),
-                                        DS . $customer->background_dir . DS . $customer->background,
+                                        str_replace('webroot', '', $customer->background_dir) . DS . $customer->background,
                                         ['target' => '_blank']
                                     ) : h('No') ?>
                         </td>

@@ -47,15 +47,13 @@ class CustomersTable extends Table
                 'fields' => [
                     'dir' => 'logo_dir',
                     'type' => 'logo_type'
-                ],
-                'path' => 'files{DS}{model}{DS}{field}{DS}'
+                ]
             ],
             'background' => [
                 'fields' => [
                     'dir' => 'background_dir',
                     'type' => 'background_type'
-                ],
-                'path' => 'files{DS}{model}{DS}{field}{DS}'
+                ]
             ],
         ]);
 
