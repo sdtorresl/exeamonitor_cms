@@ -16,6 +16,8 @@ services:
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
       - 'traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:noindex, nofollow, nosnippet, noarchive'
+    ports: 
+      - ${APP_PORT}:80
 
   mysql:
     image: mysql:5.6
