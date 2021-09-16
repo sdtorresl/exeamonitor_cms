@@ -353,3 +353,9 @@ msgstr "Related Points Of Sale"
 #: Customers/view.php:141
 msgid "View Player"
 msgstr "View Player"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "User"
+msgstr "User"
