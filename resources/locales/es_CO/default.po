@@ -56,11 +56,11 @@ msgstr "Crear Usuarios"
 
 #: Users/add.php:28
 msgid "username"
-msgstr "nombre de usuario"
+msgstr "Nombre de Usuario"
 
 #: Users/add.php:29
 msgid "password"
-msgstr "contraseña"
+msgstr "Contraseña"
 
 #: Users/add.php:30
 msgid "first_name"
@@ -100,7 +100,7 @@ msgstr "Habilitado"
 
 #: Users/index.php:26
 msgid "last_access"
-msgstr "Ultimo Acceso"
+msgstr "Último Acceso"
 
 #: Users/index.php:27
 msgid "point_of_sale_id"
@@ -196,7 +196,7 @@ msgstr "Contacto"
 
 #: PointsOfSale/add.php:31
 msgid "address"
-msgstr "Direccion"
+msgstr "Dirección"
 
 #: PointsOfSale/add.php:32
 msgid "country_id"
