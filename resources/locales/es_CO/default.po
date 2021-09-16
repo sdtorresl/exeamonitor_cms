@@ -20,7 +20,7 @@ msgstr "Español"
 
 #: layout/default.php:54
 msgid "English"
-msgstr "Ingles"
+msgstr "Inglés"
 
 #: layout/default.php:59
 msgid "Logout"
@@ -84,7 +84,7 @@ msgstr "Cancelar"
 
 #: Users/add.php:39
 msgid "Back"
-msgstr "Atras"
+msgstr "Atrás"
 
 #: Users/add.php:40
 msgid "Submit"
@@ -156,7 +156,7 @@ msgstr "Punto De Venta"
 
 #: Users/view.php:45
 msgid "Last Access"
-msgstr "Ultimo Ingreso"
+msgstr "Último Ingreso"
 
 #: Users/view.php:49
 msgid "Created"
@@ -188,7 +188,7 @@ msgstr "Nombre"
 
 #: PointsOfSale/add.php:29
 msgid "phone"
-msgstr "Telefono"
+msgstr "Teléfono"
 
 #: PointsOfSale/add.php:30
 msgid "contact"
@@ -216,7 +216,7 @@ msgstr "Nombre"
 
 #: PointsOfSale/view.php:27
 msgid "Phone"
-msgstr "Telefono"
+msgstr "Teléfono"
 
 #: PointsOfSale/view.php:31
 msgid "Contact"
@@ -236,15 +236,15 @@ msgstr "Cliente"
 
 #: PointsOfSale/view.php:55
 msgid "Last Access"
-msgstr "Ultimo Ingreso"
+msgstr "Último Ingreso"
 
 #: PointsOfSale/view.php:59
 msgid "Created"
-msgstr "Creacion"
+msgstr "Creación"
 
 #: PointsOfSale/view.php:63
 msgid "Modified"
-msgstr "Modificacion"
+msgstr "Modificación"
 
 #: PointsOfSale/view.php:72
 msgid "Are you sure you want to delete # {0}?"
@@ -256,7 +256,7 @@ msgstr "Crear Clientes"
 
 #: Customers/add.php:33
 msgid "description"
-msgstr "Descripcion"
+msgstr "Descripción"
 
 #: Customers/add.php:34
 msgid "contact_person"
@@ -264,7 +264,7 @@ msgstr "Persona de Contacto"
 
 #: Customers/add.php:35
 msgid "contact_phone"
-msgstr "Telefono de Contacto"
+msgstr "Teléfono de Contacto"
 
 #: Customers/add.php:36
 msgid "logo"
@@ -340,7 +340,7 @@ msgstr "Color Secundario"
 
 #: Customers/view.php:89
 msgid "Created"
-msgstr "Crear"
+msgstr "Creación"
 
 #: Customers/view.php:93
 msgid "Modified"
