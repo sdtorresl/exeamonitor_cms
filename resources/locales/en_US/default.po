@@ -55,24 +55,24 @@ msgid "Add Users"
 msgstr "Add Users"
 
 #: Users/add.php:28
-msgid "username"
+msgid "Username"
 msgstr "username"
 
 #: Users/add.php:29
-msgid "password"
+msgid "Password"
 msgstr "password"
 
 #: Users/add.php:30
-msgid "first_name"
+msgid "First Name"
 msgstr "First Name"
 
 #: Users/add.php:31
-msgid "last_name"
+msgid "Last Name"
 msgstr "Last Name"
 
 #: Users/add.php:32
-msgid "email"
-msgstr "email"
+msgid "Email"
+msgstr "Email"
 
 #: Users/add.php:33
 msgid "Enable"
@@ -95,15 +95,15 @@ msgid "Edit Users"
 msgstr "Edit Users"
 
 #: Users/index.php:25
-msgid "enabled"
+msgid "Enabled"
 msgstr "Enable"
 
 #: Users/index.php:26
-msgid "last_access"
+msgid "Last Access"
 msgstr "Last Access"
 
 #: Users/index.php:27
-msgid "point_of_sale_id"
+msgid "Point Of Sale"
 msgstr "Point Of Sale"
 
 #: Users/index.php:28
@@ -183,31 +183,31 @@ msgid "Add Points Of Sale"
 msgstr "Add Points Of Sale"
 
 #: PointsOfSale/add.php:28
-msgid "name"
+msgid "Name"
 msgstr "Name"
 
 #: PointsOfSale/add.php:29
-msgid "phone"
+msgid "Phone"
 msgstr "Phone"
 
 #: PointsOfSale/add.php:30
-msgid "contact"
+msgid "Contact"
 msgstr "Contact"
 
 #: PointsOfSale/add.php:31
-msgid "address"
+msgid "Address"
 msgstr "Address"
 
 #: PointsOfSale/add.php:32
-msgid "country_id"
+msgid "Country"
 msgstr "Country"
 
 #: PointsOfSale/add.php:33
-msgid "city_id"
+msgid "City"
 msgstr "City"
 
 #: PointsOfSale/add.php:34
-msgid "customer_id"
+msgid "Customer"
 msgstr "Customer"
 
 #: PointsOfSale/view.php:23
@@ -255,43 +255,43 @@ msgid "Add Customers"
 msgstr "Add Customers"
 
 #: Customers/add.php:33
-msgid "description"
+msgid "Description"
 msgstr "Description"
 
 #: Customers/add.php:34
-msgid "contact_person"
+msgid "Contact Person"
 msgstr "Contact Person"
 
 #: Customers/add.php:35
-msgid "contact_phone"
+msgid "Contact Phone"
 msgstr "Contact Phone"
 
 #: Customers/add.php:36
-msgid "logo"
+msgid "Logo"
 msgstr "Logo"
 
 #: Customers/add.php:37
-msgid "background"
+msgid "Background"
 msgstr "Background"
 
 #: Customers/add.php:38
-msgid "stream_name"
+msgid "Stream Name"
 msgstr "Stream Name"
 
 #: Customers/add.php:39
-msgid "stream_url"
+msgid "Stream Url"
 msgstr "Stream Url"
 
 #: Customers/add.php:40
-msgid "backup_url"
+msgid "Backup Url"
 msgstr "Backup Url"
 
 #: Customers/add.php:46
-msgid "primary_color"
+msgid "Primary Color"
 msgstr "Primary Color"
 
 #: Customers/add.php:52
-msgid "secondary_color"
+msgid "Secondary Color"
 msgstr "Secondary Color"
 
 #: Customers/edit.php:23
@@ -359,3 +359,6 @@ msgstr "Administrator"
 
 msgid "User"
 msgstr "User"
+
+msgid "Upload"
+msgstr "Upload"

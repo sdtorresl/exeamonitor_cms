@@ -183,31 +183,31 @@ msgid "Add Points Of Sale"
 msgstr "Crear Punto de Venta"
 
 #: PointsOfSale/add.php:28
-msgid "name"
+msgid "Name"
 msgstr "Nombre"
 
 #: PointsOfSale/add.php:29
-msgid "phone"
+msgid "Phone"
 msgstr "Telefono"
 
 #: PointsOfSale/add.php:30
-msgid "contact"
+msgid "Contact"
 msgstr "Contacto"
 
 #: PointsOfSale/add.php:31
-msgid "address"
+msgid "Address"
 msgstr "Direccion"
 
 #: PointsOfSale/add.php:32
-msgid "country_id"
+msgid "Country"
 msgstr "País"
 
 #: PointsOfSale/add.php:33
-msgid "city_id"
+msgid "City"
 msgstr "Ciudad"
 
 #: PointsOfSale/add.php:34
-msgid "customer_id"
+msgid "Customer"
 msgstr "Cliente"
 
 #: PointsOfSale/view.php:23
@@ -255,35 +255,35 @@ msgid "Add Customers"
 msgstr "Crear Clientes"
 
 #: Customers/add.php:33
-msgid "description"
+msgid "Description"
 msgstr "Descripcion"
 
 #: Customers/add.php:34
-msgid "contact_person"
+msgid "Contact Person"
 msgstr "Persona de Contacto"
 
 #: Customers/add.php:35
-msgid "contact_phone"
+msgid "Contact Phone"
 msgstr "Telefono de Contacto"
 
 #: Customers/add.php:36
-msgid "logo"
+msgid "Logo"
 msgstr "Logo"
 
 #: Customers/add.php:37
-msgid "background"
+msgid "Background"
 msgstr "Imagen De Fondo"
 
 #: Customers/add.php:38
-msgid "stream_name"
+msgid "Stream Name"
 msgstr "Nombre Emisora"
 
 #: Customers/add.php:39
-msgid "stream_url"
+msgid "Stream Url"
 msgstr "Url De La Emisora"
 
 #: Customers/add.php:40
-msgid "backup_url"
+msgid "Backup Url"
 msgstr "Url De Respaldo"
 
 #: Customers/add.php:46
@@ -359,3 +359,6 @@ msgstr "Administrador"
 
 msgid "User"
 msgstr "Usuario"
+
+msgid "Upload"
+msgstr "Subir"
