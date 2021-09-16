@@ -20,6 +20,7 @@ class CustomersController extends AppController
     public function index()
     {
         $customers = $this->paginate($this->Customers);
+        $this->Authorization->authorize($this->Customers);
 
         $this->set(compact('customers'));
     }
@@ -36,6 +37,7 @@ class CustomersController extends AppController
         $customer = $this->Customers->get($id, [
             'contain' => ['PointsOfSale', 'PointsOfSale.Countries', 'PointsOfSale.Cities'],
         ]);
+        $this->Authorization->authorize($customer);
 
         $this->set('customer', $customer);
     }
@@ -48,6 +50,8 @@ class CustomersController extends AppController
     public function add()
     {
         $customer = $this->Customers->newEmptyEntity();
+        $this->Authorization->authorize($customer);
+
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if ($this->Customers->save($customer)) {
@@ -72,6 +76,8 @@ class CustomersController extends AppController
         $customer = $this->Customers->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($customer);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if ($this->Customers->save($customer)) {
@@ -95,12 +101,14 @@ class CustomersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $customer = $this->Customers->get($id);
+        $this->Authorization->authorize($customer);
+
         try {
             $this->Customers->delete($customer);
             $this->Flash->success(__('The customer has been deleted.'));
         } catch (\PDOException $e) {
             $this->Flash->error(__('The customer could not be deleted because it has associated data.'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->Flash->error(__('The customer could not be deleted. Please, try again.'));
         }
 
@@ -121,6 +129,7 @@ class CustomersController extends AppController
         $customer = $this->Customers->get($id, [
             'contain' => ['PointsOfSale.Countries', 'PointsOfSale.Cities'],
         ]);
+        $this->Authorization->authorize($customer);
 
         $this->set('customer', $customer);
         $this->set('preview', $preview);
@@ -179,8 +188,8 @@ class CustomersController extends AppController
                 $title = $currentSectionTwo[1];
                 return substr($title, 1, strpos($title, ';') - 2);
             } else
-                return getMp3StreamTitle($streamingUrl, $interval, $offset + $interval, false);
+                return $this->getMp3StreamTitle($streamingUrl, $interval, $offset + $interval, false);
         } else
-            throw new Exception("Unable to open stream [{$streamingUrl}]");
+            throw new \Exception("Unable to open stream [{$streamingUrl}]");
     }
 }

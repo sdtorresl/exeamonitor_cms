@@ -13,6 +13,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use Cake\I18n\I18n;
+
 $cakeDescription = 'EMS - Exea Monitoring System';
 $menuCell = $this->cell('Menu');
 $session = $this->getRequest()->getSession();

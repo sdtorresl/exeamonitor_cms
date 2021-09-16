@@ -10,6 +10,12 @@ use PhpParser\Node\Expr\Cast\String_;
  */
 class LanguagesController extends AppController
 {
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authorization->skipAuthorization();
+    }
+
     /**
      * English method
      *
