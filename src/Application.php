@@ -86,10 +86,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        $csrf = new CsrfProtectionMiddleware([
-            'httponly' => true
-        ]);
-
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
@@ -109,7 +105,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ->add(new RoutingMiddleware($this))
             ->add(new AuthenticationMiddleware($this))
             ->add(new AuthorizationMiddleware($this))
-            ->add($csrf)
+            ->add(new CsrfProtectionMiddleware([
+                'httponly' => true
+            ]))
             ->add(new BodyParserMiddleware());
 
         if (Configure::read('debug')) {

@@ -55,23 +55,23 @@ msgid "Add Users"
 msgstr "Crear Usuarios"
 
 #: Users/add.php:28
-msgid "username"
-msgstr "nombre de usuario"
+msgid "Username"
+msgstr "Nombre de usuario"
 
 #: Users/add.php:29
-msgid "password"
-msgstr "contraseña"
+msgid "Password"
+msgstr "Contraseña"
 
 #: Users/add.php:30
-msgid "first_name"
+msgid "First Name"
 msgstr "Nombre"
 
 #: Users/add.php:31
-msgid "last_name"
+msgid "Last Name"
 msgstr "Apellido"
 
 #: Users/add.php:32
-msgid "email"
+msgid "Email"
 msgstr "Correo"
 
 #: Users/add.php:33
@@ -103,7 +103,7 @@ msgid "last_access"
 msgstr "Ultimo Acceso"
 
 #: Users/index.php:27
-msgid "point_of_sale_id"
+msgid "Point Of Sale"
 msgstr "Punto De Venta"
 
 #: Users/index.php:28
@@ -353,3 +353,9 @@ msgstr "Puntos De Venta Relacionados"
 #: Customers/view.php:141
 msgid "View Player"
 msgstr "Ver Reproductor"
+
+msgid "Administrator"
+msgstr "Administrador"
+
+msgid "User"
+msgstr "Usuario"
