@@ -2,7 +2,7 @@
     <section class="card">
         <div class="row d-flex">
             <figure id="logo-container" class="col s12 m3 l2">
-                <?= $this->Html->Image('../' . $customer->logo_dir . DS . $customer->logo); ?>
+                <?= $this->Html->Image('../' . str_replace('webroot', '', $customer->logo_dir) . DS . $customer->logo); ?>
             </figure>
 
             <div class="col s12 m6 l8 player-container">
@@ -81,7 +81,7 @@
 
     <?php if($customer->background): ?>
         body {
-            background-image: url('<?= '..' . DS . '..' . DS . str_replace(WWW_ROOT, '', $customer->background_dir) . DS . $customer->background ?>');
+            background-image: url('<?= '..' . DS . '..' . DS . str_replace('webroot', '', $customer->background_dir) . DS . $customer->background ?>');
             background-size: 100%;
         }
     <?php endif; ?>
