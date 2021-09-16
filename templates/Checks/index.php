@@ -23,7 +23,7 @@
     <div class="col s12 m4 l3">
         <div class="card">
             <div class="card-image">
-                <?= $this->Html->image('../' . $customer->logo_dir . DS . $customer->logo) ?>
+                <?= $this->Html->image('../' . str_replace('webroot', '', $customer->logo_dir) . DS . $customer->logo) ?>
                 <?= $this->Html->link('<i class="fal fa-arrow-right"></i>',
                     ['action' => 'view', $customer->id], ['class' => 'btn-floating halfway-fab waves-effect waves-light bg-red', 'escape' => false]) ?>
 
