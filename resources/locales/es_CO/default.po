@@ -20,7 +20,7 @@ msgstr "Español"
 
 #: layout/default.php:54
 msgid "English"
-msgstr "Ingles"
+msgstr "Inglés"
 
 #: layout/default.php:59
 msgid "Logout"
@@ -84,7 +84,7 @@ msgstr "Cancelar"
 
 #: Users/add.php:39
 msgid "Back"
-msgstr "Atras"
+msgstr "Atrás"
 
 #: Users/add.php:40
 msgid "Submit"
@@ -100,7 +100,7 @@ msgstr "Habilitado"
 
 #: Users/index.php:26
 msgid "last_access"
-msgstr "Ultimo Acceso"
+msgstr "Último Acceso"
 
 #: Users/index.php:27
 msgid "Point Of Sale"
@@ -156,11 +156,11 @@ msgstr "Punto De Venta"
 
 #: Users/view.php:45
 msgid "Last Access"
-msgstr "Ultimo Ingreso"
+msgstr "Último Ingreso"
 
 #: Users/view.php:49
 msgid "Created"
-msgstr "Creación"
+msgstr "Creado"
 
 #: Users/view.php:53
 msgid "Modified"
@@ -216,7 +216,7 @@ msgstr "Nombre"
 
 #: PointsOfSale/view.php:27
 msgid "Phone"
-msgstr "Telefono"
+msgstr "Teléfono"
 
 #: PointsOfSale/view.php:31
 msgid "Contact"
@@ -236,15 +236,15 @@ msgstr "Cliente"
 
 #: PointsOfSale/view.php:55
 msgid "Last Access"
-msgstr "Ultimo Ingreso"
+msgstr "Último Ingreso"
 
 #: PointsOfSale/view.php:59
 msgid "Created"
-msgstr "Creacion"
+msgstr "Creado"
 
 #: PointsOfSale/view.php:63
 msgid "Modified"
-msgstr "Modificacion"
+msgstr "Modificación"
 
 #: PointsOfSale/view.php:72
 msgid "Are you sure you want to delete # {0}?"
@@ -340,7 +340,7 @@ msgstr "Color Secundario"
 
 #: Customers/view.php:89
 msgid "Created"
-msgstr "Crear"
+msgstr "Creado"
 
 #: Customers/view.php:93
 msgid "Modified"
