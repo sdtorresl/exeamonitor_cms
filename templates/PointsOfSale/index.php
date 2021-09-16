@@ -18,12 +18,12 @@
         <table class="centered responsive-table">
             <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('country_id') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('city_id') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('customer_id') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('name')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('country_id')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('city_id')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('created')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('modified')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('customer_id')) ?></th>
                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>

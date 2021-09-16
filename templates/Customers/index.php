@@ -18,12 +18,12 @@
         <table class="centered responsive-table">
             <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('contact_person') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('contact_phone') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('stream_name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('name')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('contact_person')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('contact_phone')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('stream_name')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('created')) ?></th>
+                    <th scope="col"><?= $this->Paginator->sort(__('modified')) ?></th>
                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>

@@ -46,10 +46,20 @@ $name = $session->read('Auth.first_name') . ' ' . $session->read('Auth.last_name
                 <?= $name; ?>
             </p>
             <ul id="nav-mobile" class="right">
-                <?= $this->Html->link(_('Logout'), [
+                <li>
+                    <?php if (I18n::getLocale() == 'es_CO') {
+                            echo $this->Html->link(__("English"), ['controller' => 'Languages', 'action' => 'en']);
+                        } else {
+                            echo $this->Html->link(__("Spanish"), ['controller' => 'Languages', 'action' => 'es']);
+                        }
+                        ?>
+                </li>
+                <li>
+                <?= $this->Html->link(__('Logout'), [
                         'controller' => 'Users',
                         'action' => 'logout'
                     ]) ?>
+                </li>
             </ul>
         </div>
     </nav>

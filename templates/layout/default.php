@@ -13,6 +13,9 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+
+use Cake\I18n\I18n;
+
 $cakeDescription = 'EMS - Exea Monitoring System';
 $menuCell = $this->cell('Menu');
 ?>
@@ -45,7 +48,15 @@ $menuCell = $this->cell('Menu');
             <a href="#" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right">
                 <li>
-                    <?= $this->Html->link(_('Logout'), [
+                <?php if (I18n::getLocale() == 'es_CO') {
+                        echo $this->Html->link(__("English"), ['controller' => 'Languages', 'action' => 'en']);
+                    } else {
+                        echo $this->Html->link(__("Spanish"), ['controller' => 'Languages', 'action' => 'es']);
+                    }
+                    ?>
+                </li>
+                <li>
+                    <?= $this->Html->link(__('Logout'), [
                         'controller' => 'Users',
                         'action' => 'logout'
                     ]) ?>

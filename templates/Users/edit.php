@@ -25,13 +25,13 @@ $this->loadHelper('Form', [
                 
                 <?= $this->Form->create($user, ['class' => 'form']) ?>
                 <?php
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('first_name');
-                    echo $this->Form->control('last_name');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('role');
-                    echo $this->Form->control('point_of_sale_id', ['empty' => true]);
+                    echo $this->Form->control(__('username'));
+                    echo $this->Form->control(__('password'));
+                    echo $this->Form->control(__('first_name'));
+                    echo $this->Form->control(__('last_name'));
+                    echo $this->Form->control(__('email'));
+                    echo $this->Form->control(__('role'));
+                    echo $this->Form->control(__('point_of_sale_id'), ['empty' => true]);
                     echo $this->Form->control('enabled', ['type' => 'checkbox', 'label' => '<span>' . __('Enable') . '</span>', 'escape' => false]);
 
                 ?>
