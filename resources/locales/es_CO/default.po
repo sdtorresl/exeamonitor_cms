@@ -287,11 +287,11 @@ msgid "backup_url"
 msgstr "Url De Respaldo"
 
 #: Customers/add.php:46
-msgid "primary_color"
+msgid "Primary Color"
 msgstr "Color Primario"
 
 #: Customers/add.php:52
-msgid "secondary_color"
+msgid "Secondary Color"
 msgstr "Color Secundario"
 
 #: Customers/edit.php:23
