@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -107,6 +108,20 @@ class UsersTable extends Table
             ->dateTime('last_access')
             ->notEmptyDateTime('last_access');
 
+        $validator
+            ->scalar('token')
+            ->maxLength('token', 36)
+            ->allowEmptyString('token')
+            ->add('token', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->dateTime('token_expiry_date')
+            ->allowEmptyDateTime('token_expiry_date');
+
+        $validator
+            ->boolean('token_used')
+            ->notEmptyString('token_used');
+
         return $validator;
     }
 
@@ -121,6 +136,7 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['token']));
         $rules->add($rules->existsIn(['point_of_sale_id'], 'PointsOfSale'));
 
         return $rules;

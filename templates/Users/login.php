@@ -27,7 +27,7 @@ use PhpParser\Node\Stmt\Label;
                 <div id="password-remember" class="center-align">
                     <p><?= $this->Html->link(
                         __('Have you forgotten your password?'), 
-                        ['controller' => 'Users', 'action' => 'reset']) ?>
+                        ['controller' => 'Users', 'action' => 'forgot-password']) ?>
                     </p>
                 </div>
             </div>

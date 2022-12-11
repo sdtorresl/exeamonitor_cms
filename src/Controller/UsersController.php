@@ -1,8 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use Cake\I18n\Time;
+use Cake\Utility\Text;
+use Cake\Mailer\MailerAwareTrait;
+
+
 
 /**
  * Users Controller
@@ -13,12 +19,14 @@ use Cake\I18n\Time;
  */
 class UsersController extends AppController
 {
+    use MailerAwareTrait;
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login', 'edit']);
+        $this->Authentication->addUnauthenticatedActions(['login', 'edit', 'forgotPassword', 'resetPassword']);
     }
 
     /**
@@ -69,7 +77,7 @@ class UsersController extends AppController
             try {
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
-    
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -105,7 +113,7 @@ class UsersController extends AppController
             try {
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
-    
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -144,6 +152,11 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Login method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful login, renders view otherwise.
+     */
     public function login()
     {
         $this->Authorization->skipAuthorization();
@@ -161,11 +174,9 @@ class UsersController extends AppController
                 $this->Users->save($user);
 
                 return $this->redirect($this->getRedirect($user));
-            }
-            else {
+            } else {
                 $this->Flash->error(__('User is not enabled'));
             }
-
         }
 
         // display error if user submitted and authentication failed
@@ -176,6 +187,11 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('login');
     }
 
+    /**
+     * Logout method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful logout
+     */
     public function logout()
     {
         $this->Authorization->skipAuthorization();
@@ -188,7 +204,88 @@ class UsersController extends AppController
         }
     }
 
-    private function getRedirect($user) {
+    /**
+     * Forgot Password method
+     *
+     * @return \Cake\Http\Response|null Render view and redirect on successful password change
+     */
+    public function forgotPassword()
+    {
+        $this->Authorization->skipAuthorization();
+
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('email');
+
+            $users = $this->Users;
+            $user = $users->findByEmail($email)->first();
+
+            if ($user) {
+
+                // Setting token to the user
+                $user->token = Text::uuid();
+                $user->token_expiry_date = Time::now()->addHours(2);
+                $user->token_used = false;
+                $users->save($user);
+
+                // Mail to user
+                $this->getMailer("User")->send('resetPassword', [$user]);
+
+                $this->Flash->success('Por favor revisa tu correo electrónico para restablecer tu contraseña.');
+                return $this->redirect(['action' => 'login']);
+            } else {
+                $this->Flash->error('Correo electrónico invalido');
+            }
+        }
+
+        $this->viewBuilder()->setLayout('login');
+    }
+
+    public function resetPassword($token = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        if (!empty($token)) {
+
+            $users = $this->Users;
+            $user = $users->findByToken($token)->first();
+
+            if ($user) {
+                if ($this->request->is('post')) {
+                    if (!$user->token_used && Time::now() < $user->token_expiry_date) {
+
+                        $newPassword = $this->request->getData('password');
+
+                        if ($newPassword == $this->request->getData('passwordConfirmation')) {
+
+                            // Setting token and new password
+                            $user->token_used = true;
+                            $user->password = $newPassword;
+
+                            if ($users->save($user)) {
+                                $this->Flash->success('Tu nueva contraseña ha sido actualizada satisfactoriamente.');
+                                return $this->redirect(['action' => 'login']);
+                            } else {
+                                $this->Flash->error('Tu contraseña no se pudo guardar. Inténtalo de nuevo.');
+                            }
+                        } else {
+                            $this->Flash->error('Las contraseñas no coinciden. Verifica de nuevo.');
+                        }
+                    } else {
+                        $this->Flash->error('El token ha expirado o ya ha sido utilizado.');
+                        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+                    }
+                }
+            } else {
+                $this->Flash->error('El token no es válido.');
+                return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            }
+        }
+
+        $this->viewBuilder()->setLayout('login');
+    }
+
+    private function getRedirect($user)
+    {
         if ($user->role == 'admin') {
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Checks',
@@ -208,5 +305,4 @@ class UsersController extends AppController
 
         return $redirect;
     }
-
 }

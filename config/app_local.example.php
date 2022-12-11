@@ -89,15 +89,22 @@ return [
      * Email configuration.
      *
      * Host and credential configuration in case you are using SmtpTransport
+     * 
+     * Each transport needs a `className`. Valid options are as follows:
+     *
+     * Mail   - Send using PHP mail function
+     * Smtp   - Send using SMTP
+     * Debug  - Do not send the email, just return the result
      *
      * See app.php for more configuration options.
      */
     'EmailTransport' => [
         'default' => [
-            'host' => 'localhost',
-            'port' => 25,
-            'username' => null,
-            'password' => null,
+            'className' => '',
+            'host' => env('SMTP_HOST', 'localhost'),
+            'port' => env('SMTP_PORT', 25),
+            'username' => env('SMTP_LOGIN', null),
+            'password' => env('SMTP_SECRET', null),
             'client' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
