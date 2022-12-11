@@ -14,7 +14,7 @@ function httpGet(URL) {
  */
 function updateMetadata() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(this.responseText);
 
@@ -35,17 +35,17 @@ function updateMetadata() {
 
 function toHHMMSS(seconds) {
     var sec_num = parseInt(seconds, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
+    var hours = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    return hours+':'+minutes+':'+seconds;
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    return hours + ':' + minutes + ':' + seconds;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Setup player
     const player = new Audio();
     player.src = source;
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
     changeButtonType(changeButtonType);
 
     // Update the video volume
-    volumeBar.addEventListener("change", function(evt) {
+    volumeBar.addEventListener("change", function (evt) {
         function displayMessage(message, canPlay) {
             var element = document.querySelector('#message');
             element.innerHTML = message;
@@ -78,17 +78,17 @@ document.addEventListener("DOMContentLoaded", function() {
     player.addEventListener('timeupdate', updateProgressBar, false);
 
     // Add a listener for the play and pause events so the buttons state can be updated
-    player.addEventListener('play', function() {
+    player.addEventListener('play', function () {
         // Change the button to be a pause button
         changeButtonType(btnPlayPause);
     }, false);
 
-    player.addEventListener('pause', function() {
+    player.addEventListener('pause', function () {
         // Change the button to be a play button
         changeButtonType(btnPlayPause);
     }, false);
 
-    player.addEventListener('ended', function() {
+    player.addEventListener('ended', function () {
         this.pause();
     }, false);
 
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     btnVolumeDown.addEventListener("click", function () {
         if (player.src) {
-            if ((player.volume-0.1) >= 0) {
+            if ((player.volume - 0.1) >= 0) {
                 player.volume = player.volume - 0.1;
             } else {
                 player.volume = 0;
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    player.addEventListener('volumechange', function(e) {
+    player.addEventListener('volumechange', function (e) {
         volumeValue.style.width = player.volume * 100 + '%';
         sendStats();
     }, false);
@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function sendStats() {
         data = {
+            "csrfToken": csrfToken,
             "state": player.paused ? 'stopped' : 'playing',
             "pos_id": posId,
             "volume": Number.parseInt(player.volume * 100),
@@ -189,7 +190,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const response = await fetch(checksURI, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
             },
             body: JSON.stringify(data)
         });

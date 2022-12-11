@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -24,8 +25,6 @@ class ChecksController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // Configure the login action to not require authentication, preventing
-        // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['add']);
     }
 
@@ -73,8 +72,7 @@ class ChecksController extends AppController
         if ($this->Checks->save($check)) {
             $message = "saved";
             $code = 200;
-        }
-        else {
+        } else {
             $message = "failed";
             $code = 500;
             $this->response->withStatus(500);
@@ -108,5 +106,4 @@ class ChecksController extends AppController
         $this->set(compact('stats'));
         $this->viewBuilder()->setOption('serialize', ['stats']);
     }
-
 }
