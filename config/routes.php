@@ -104,6 +104,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
  */
 $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->setExtensions(['json', 'xml']);
+    $routes->resources('Player');
     $routes->resources('Checks');
     $routes->resources('Checks', [
         'map' => [
