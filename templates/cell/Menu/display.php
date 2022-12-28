@@ -7,7 +7,7 @@ $role = $this->getRequest()->getSession()->read('Auth.role');
 # Gravatar
 $default = "retro";
 $size = 80;
-$grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . $default . "&s=" . $size;
+$grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . $default . "&s=" . $size;
 
 $name = $first_name . ' ' . $last_name;
 
@@ -36,7 +36,8 @@ $name = $first_name . ' ' . $last_name;
         <?= $this->Html->link(
             '<i class="fal fa-file-alt"></i>' . __('Reports'),
             ['controller' => 'checks'],
-            ['escape' => false]);
+            ['escape' => false]
+        );
         ?>
     </li>
 
@@ -73,7 +74,6 @@ $name = $first_name . ' ' . $last_name;
             </li>
         </ul>
     </li>
-
     <li>
         <ul class="collapsible collapsible-accordion">
             <li>
@@ -85,6 +85,22 @@ $name = $first_name . ' ' . $last_name;
                     <ul>
                         <li><?= $this->Html->link(__('List'), ['controller' => 'points-of-sale']) ?></li>
                         <li><?= $this->Html->link(__('Create'), ['controller' => 'points-of-sale', 'action' => 'add']) ?></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">
+                    <i class="fal fa-music"></i>
+                    <?= __('Playbooks') ?>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><?= $this->Html->link(__('List'), ['controller' => 'playbooks']) ?></li>
+                        <li><?= $this->Html->link(__('Create'), ['controller' => 'playbooks', 'action' => 'add']) ?></li>
                     </ul>
                 </div>
             </li>

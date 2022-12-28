@@ -1,17 +1,17 @@
-@import './fontawesome/fontawesome.scss';
-@import './fontawesome/fa-light.scss';
-@import './fontawesome/fa-regular.scss';
-@import './fontawesome/fa-solid.scss';
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/fa-light.scss";
+@import "./fontawesome/fa-regular.scss";
+@import "./fontawesome/fa-solid.scss";
 
-$primary-green: #319EA3;
+$primary-green: #319ea3;
 $primary-green-hover: #374f5a;
 $primary-dark: #333;
 $secondary-dark: #979797;
-$primary-red: #D6456A;
-$primary-red-hover: #D6456A88;
+$primary-red: #d6456a;
+$primary-red-hover: #d6456a88;
 
 body {
-    background: #EEE;
+    background: #eee;
 }
 
 h1 {
@@ -30,7 +30,9 @@ h5 {
     font-size: 1.1rem;
 }
 
-header, main, footer {
+header,
+main,
+footer {
     padding-left: 300px;
 }
 
@@ -55,7 +57,7 @@ a {
     transition: 0.2s ease-in-out;
 
     &:hover {
-        color:$primary-green-hover;
+        color: $primary-green-hover;
     }
 }
 
@@ -98,13 +100,17 @@ figure {
         a {
             color: $primary-red-hover;
         }
-        a:hover, a.active {
+        a:hover,
+        a.active {
             color: $primary-red;
         }
     }
 }
 
-a.btn, .btn, .btn-large, .btn-small {
+a.btn,
+.btn,
+.btn-large,
+.btn-small {
     background-color: $primary-green;
     border-radius: 4px;
     transition: 0.25s ease-in-out;
@@ -220,7 +226,7 @@ nav {
 }
 
 #slide-out {
-    background: url('../img/menu-bg.png');
+    background: url("../img/menu-bg.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -228,13 +234,16 @@ nav {
     color: white;
     height: 100%;
 
-    i, .fal, .far, .fas {
+    i,
+    .fal,
+    .far,
+    .fas {
         color: white;
         margin-right: 1rem;
         width: 1.5rem;
         height: 1.5rem;
         text-align: center;
-        font-size: 1rem!important;
+        font-size: 1rem !important;
     }
 
     a {
@@ -365,11 +374,9 @@ section.card {
 
     .card-content {
         table {
-
             overflow-x: scroll;
 
             tbody {
-
                 tr {
                     &:hover {
                         cursor: pointer;
@@ -393,7 +400,6 @@ section.card {
                         color: $primary-red;
                     }
                 }
-
             }
 
             .enabled {
@@ -412,7 +418,7 @@ section.card {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../img/bg.png');
+    background: url("../img/bg.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -531,7 +537,8 @@ section.card {
         }
     }
 
-    .play, .pause {
+    .play,
+    .pause {
         height: 50px;
         width: 50px;
         background: $primary-red;
@@ -571,7 +578,7 @@ section.card {
             position: relative;
 
             &:after {
-                content: 'H';
+                content: "H";
                 position: absolute;
                 top: 0;
                 right: 0;
@@ -585,17 +592,20 @@ section.card {
 }
 
 /* Desktop devices */
-@media only screen and (max-width : 1200px) {}
+@media only screen and (max-width: 1200px) {
+}
 
 /* Tablet devices */
-@media only screen and (max-width : 992px) {
-    header, main, footer {
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
         padding-left: 0;
     }
 }
 
 /* Mobile devices */
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width: 600px) {
     section.card {
         margin-top: 3rem;
 
@@ -610,7 +620,6 @@ section.card {
                 i {
                     font-size: 2rem;
                 }
-
             }
 
             .title {

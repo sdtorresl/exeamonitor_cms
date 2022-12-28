@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \Cake\Datasource\EntityInterface[]|\Cake\Collection\CollectionInterface $checks
@@ -19,23 +20,26 @@
 </section>
 
 <section id="customers-wrapper" class="row">
-    <?php foreach ($customers as $customer): ?>
-    <div class="col s12 m4 l3">
-        <div class="card">
-            <div class="card-image">
-                <?= $this->Html->image('../' . str_replace('webroot', '', $customer->logo_dir) . DS . $customer->logo) ?>
-                <?= $this->Html->link('<i class="fal fa-arrow-right"></i>',
-                    ['action' => 'view', $customer->id], ['class' => 'btn-floating halfway-fab waves-effect waves-light bg-red', 'escape' => false]) ?>
+    <?php foreach ($customers as $customer) : ?>
+        <div class="col s12 m4 l3">
+            <div class="card">
+                <div class="card-image">
+                    <?= $this->Html->image('../' . str_replace('webroot', '', $customer->logo_dir) . DS . $customer->logo) ?>
+                    <?= $this->Html->link(
+                        '<i class="fal fa-arrow-right"></i>',
+                        ['action' => 'view', $customer->id],
+                        ['class' => 'btn-floating halfway-fab waves-effect waves-light bg-red', 'escape' => false]
+                    ) ?>
 
-                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="https://google.com">
+                    <!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="https://google.com">
                     <i class="fal fa-arrow-right"></i>
                 </a> -->
-            </div>
-            <div class="card-content">
-                <span class="card-title"><?= $customer->name ?></span>
-                <p><?= $customer->description ?></p>
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><?= $customer->name ?></span>
+                    <p><?= $customer->description ?></p>
+                </div>
             </div>
         </div>
-    </div>
     <?php endforeach; ?>
 </section>

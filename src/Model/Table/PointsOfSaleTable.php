@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -50,6 +51,10 @@ class PointsOfSaleTable extends Table
         ]);
         $this->belongsTo('Cities', [
             'foreignKey' => 'city_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('Playbooks', [
+            'foreignKey' => 'playbook_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Customers', [

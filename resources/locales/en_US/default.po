@@ -362,3 +362,6 @@ msgstr "User"
 
 msgid "Upload"
 msgstr "Upload"
+
+msgid "Add Rule"
+msgstr "Add Rule"
