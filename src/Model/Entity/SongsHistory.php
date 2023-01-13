@@ -6,20 +6,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * SongsRequest Entity
+ * SongsHistory Entity
  *
  * @property int $id
  * @property string $title
  * @property string $author
  * @property int $song_id
  * @property int $pos_id
- * @property bool $played
  * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \App\Model\Entity\PointsOfSale $points_of_sale
  */
-class SongsRequest extends Entity
+class SongsHistory extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -35,9 +33,7 @@ class SongsRequest extends Entity
         'author' => true,
         'song_id' => true,
         'pos_id' => true,
-        'played' => true,
         'created' => true,
-        'modified' => true,
         'points_of_sale' => true,
     ];
 }
