@@ -137,9 +137,11 @@ class PointsOfSaleController extends AppController
         }
 
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
+        $playbooks = $this->PointsOfSale->Playbooks->find('list', ['limit' => 200]);
+
         // Override country_id to the view to use country code
         $pointsOfSale->country_id = $country->code;
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'playbooks'));
     }
 
     /**
