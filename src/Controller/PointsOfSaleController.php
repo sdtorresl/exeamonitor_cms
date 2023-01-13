@@ -84,7 +84,8 @@ class PointsOfSaleController extends AppController
 
         $cities = [];
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
+        $playbooks = $this->PointsOfSale->Playbooks->find('list', ['limit' => 200]);
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'playbooks'));
     }
 
     /**

@@ -61,6 +61,10 @@ class PointsOfSaleTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Playbooks', [
+            'foreignKey' => 'playbook_id',
+            'joinType' => 'INNER',
+        ]);
         $this->hasMany('Checks', [
             'foreignKey' => 'pos_id',
             'joinType' => 'INNER',
@@ -122,6 +126,7 @@ class PointsOfSaleTable extends Table
         $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['city_id'], 'Cities'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['playbook_id'], 'Playbooks'));
 
         return $rules;
     }

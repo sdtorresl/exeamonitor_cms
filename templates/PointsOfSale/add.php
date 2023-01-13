@@ -32,6 +32,7 @@ $this->loadHelper('Form', [
                     echo $this->Form->control(__('country_id'), ['options' => $countries, 'empty' => true]);
                     echo $this->Form->control(__('city_id'), ['options' => $cities, 'empty' => true]);
                     echo $this->Form->control(__('customer_id'), ['options' => $customers, 'empty' => true]);
+                    echo $this->Form->control(__('playbook_id'), ['options' => $playbooks, 'empty' => true]);
                 ?>
 
                 <div class="form-submit d-flex jc-end">
