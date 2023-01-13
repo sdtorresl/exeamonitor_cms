@@ -4,10 +4,10 @@ namespace App\Controller\Component;
 
 use Cake\Http\Client;
 use Cake\Controller\Component;
+use Cake\Log\Log;
 
 class AmpacheComponent extends Component implements AmpacheComponentI
 {
-    private static ?AmpacheComponentI $instance = null;
     public $url;
     public $user;
     public $pass;
@@ -22,7 +22,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
         $this->user = $config['user'];
         $this->pass = $config['pass'];
         $this->type = $config['type'];
-        $this->httpClient = new Client();
+        $this->httpClient = new Client(['timeout' => 5]);
     }
 
     public function setType(String $type)
@@ -54,6 +54,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
         $key = hash('sha256', $this->pass);
         $passphrase = hash('sha256', $time . $key);
 
+        Log::write('debug', "Ampache handshake intialized");
         $response = $this->httpClient->get($this->getEndpoint(), [
             'action' => 'handshake',
             'auth' => $passphrase,
@@ -61,6 +62,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
             'version' => '5.0.0',
             'user' => $this->user
         ]);
+        Log::write('debug', "Ampache handshake response: {$response->getStringBody()}");
 
         $content = $this->getContent($response->getStringBody());
         $this->apiAuth = (string) $content->auth;
@@ -78,17 +80,41 @@ class AmpacheComponent extends Component implements AmpacheComponentI
         $options['auth'] = $this->apiAuth;
 
         $response = $this->httpClient->get($this->getEndpoint(), $options);
+        Log::write('debug', "Ampache response: {$response->getStringBody()}");
+
         return $this->getContent($response->getStringBody());
     }
 
     public function getSong($uid)
     {
-        return $this->sendCommand('song', ['filter' => $uid])->song;
+        $response = $this->sendCommand('song', ['filter' => $uid]);
+        if (property_exists($response, 'song')) {
+            return $response->playlist;
+        } else if (!property_exists($response, 'error'))
+            return $response;
+
+        return null;
     }
 
     public function getSongs(DataParams $dataParams)
     {
         return $this->sendCommand('songs', $dataParams->getParams());
+    }
+
+    public function getPlaylists(DataParams $dataParams)
+    {
+        return $this->sendCommand('playlists', $dataParams->getParams());
+    }
+
+    public function getPlaylist($uid)
+    {
+        $response = $this->sendCommand('playlist', ['filter' => $uid]);
+        if (property_exists($response, 'playlist')) {
+            return $response->playlist;
+        } else if (!property_exists($response, 'error'))
+            return $response;
+
+        return null;
     }
 
     public function getNext()

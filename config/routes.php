@@ -112,7 +112,42 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             'prefix' => 'Api'
         ]
     );
-    $routes->resources('Player');
+    $routes->resources('Player', [
+        'prefix' => 'Api',
+        'map' => [
+            'list' => [
+                'action' => 'index',
+                'method' => 'GET',
+                'path' => '/'
+            ],
+            'playlists' => [
+                'action' => 'playlists',
+                'method' => 'GET',
+                'path' => 'playlists'
+            ],
+            'playlist' => [
+                'action' => 'playlist',
+                'method' => 'GET',
+                'path' => 'playlists/:id'
+            ],
+            'songs' => [
+                'action' => 'songs',
+                'method' => 'GET',
+                'path' => 'songs'
+            ],
+            'song' => [
+                'action' => 'song',
+                'method' => 'GET',
+                'path' => 'songs/:id'
+            ]
+        ]
+    ]);
+    $routes->resources('SongsHistory', [
+        'prefix' => 'Api',
+    ]);
+    $routes->resources('SongsRequests', [
+        'prefix' => 'Api',
+    ]);
     $routes->resources('Checks');
     $routes->resources('Checks', [
         'map' => [
