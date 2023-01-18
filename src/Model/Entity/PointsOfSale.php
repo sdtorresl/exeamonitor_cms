@@ -46,6 +46,7 @@ class PointsOfSale extends Entity
         'created' => true,
         'modified' => true,
         'customer_id' => true,
+        'playbook_id' => true,
         'country' => true,
         'city' => true,
         'customer' => true,

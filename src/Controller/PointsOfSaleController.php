@@ -40,7 +40,7 @@ class PointsOfSaleController extends AppController
     public function view($id = null)
     {
         $pointsOfSale = $this->PointsOfSale->get($id, [
-            'contain' => ['Countries', 'Cities', 'Customers'],
+            'contain' => ['Countries', 'Cities', 'Customers', 'Playbooks'],
         ]);
         $this->Authorization->Authorize($pointsOfSale);
 

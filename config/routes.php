@@ -130,6 +130,11 @@ $routes->scope('/api', function (RouteBuilder $routes) {
                 'method' => 'GET',
                 'path' => 'playlists/:id'
             ],
+            'playlist-songs' => [
+                'action' => 'playlistSongs',
+                'method' => 'GET',
+                'path' => 'playlists-songs/:id'
+            ],
             'songs' => [
                 'action' => 'songs',
                 'method' => 'GET',
@@ -139,6 +144,11 @@ $routes->scope('/api', function (RouteBuilder $routes) {
                 'action' => 'song',
                 'method' => 'GET',
                 'path' => 'songs/:id'
+            ],
+            'next' => [
+                'action' => 'nextSong',
+                'method' => 'GET',
+                'path' => 'next/:id'
             ]
         ]
     ]);

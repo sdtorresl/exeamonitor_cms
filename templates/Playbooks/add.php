@@ -66,5 +66,6 @@ $this->loadHelper('Form', [
 </section>
 
 <div id="logic-values" data-value='<?= json_encode($logicValues) ?>'></div>
+<div id="playlist-values" data-value='<?= json_encode($playlistValues) ?>'></div>
 
 <?= $this->Html->script('playbooks', ['block' => true]); ?>

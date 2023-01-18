@@ -106,6 +106,16 @@ class AmpacheComponent extends Component implements AmpacheComponentI
         return $this->sendCommand('playlists', $dataParams->getParams());
     }
 
+    public function getPlaylistSongs($uid)
+    {
+        $response = $this->sendCommand('playlist_songs', ['filter' => $uid]);
+        if (property_exists($response, 'song')) {
+            return $response->song;
+        } else if (!property_exists($response, 'error'))
+            return $response;
+
+    }
+
     public function getPlaylist($uid)
     {
         $response = $this->sendCommand('playlist', ['filter' => $uid]);

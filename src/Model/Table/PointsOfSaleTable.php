@@ -69,6 +69,10 @@ class PointsOfSaleTable extends Table
             'foreignKey' => 'pos_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('SongsRequests', [
+            'foreignKey' => 'pos_id',
+            'joinType' => 'LEFT',
+        ]);
     }
 
     /**

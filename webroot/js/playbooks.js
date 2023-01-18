@@ -1,6 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
     const logicValues = JSON.parse(document.getElementById('logic-values').dataset.value);
+    const playlists = JSON.parse(document.getElementById('playlist-values').dataset.value);
 
     const addButton = document.getElementById('add-button');
     const removeButton = document.getElementById('remove-button');
@@ -23,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         ruleContainer.setAttribute("id", `rule-${rulesNumber}`);
         ruleContainer.setAttribute("class", "row");
 
-        ruleContainer.appendChild(createTagInput(rulesNumber));
+        //ruleContainer.appendChild(createTagInput(rulesNumber));
+        ruleContainer.appendChild(createTagSelect(rulesNumber, playlists));
         ruleContainer.appendChild(createSelect(rulesNumber, logicValues));
 
         rulesContainer.appendChild(ruleContainer);
@@ -72,11 +74,6 @@ function createSelect(rulesNumber, logicValues) {
     select.setAttribute("name", `rules[${rulesNumber}][logic]`);
     select.setAttribute("id", `rules-${rulesNumber}-logic`);
 
-    // Create the options for the dropdown
-    const option1 = document.createElement("option");
-    option1.setAttribute("value", "1");
-    option1.textContent = "Option 1";
-
     Object.keys(logicValues).forEach(key => {
         const option = document.createElement("option");
         option.setAttribute("value", key);
@@ -87,7 +84,31 @@ function createSelect(rulesNumber, logicValues) {
     selectContainer.appendChild(select);
     col.appendChild(selectContainer);
 
+    return col;
+}
 
+function createTagSelect(rulesNumber, logicValues) {
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const select = document.createElement("select");
+    select.setAttribute("name", "options");
+    select.setAttribute("name", `rules[${rulesNumber}][tag]`);
+    select.setAttribute("id", `rules-${rulesNumber}-tag`);
+
+    Object.keys(logicValues).forEach(key => {
+        const option = document.createElement("option");
+        option.setAttribute("value", key);
+        option.textContent = logicValues[key];
+        select.appendChild(option);
+    });
+
+    selectContainer.appendChild(select);
+    col.appendChild(selectContainer);
 
     return col;
 }

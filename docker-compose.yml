@@ -44,3 +44,14 @@ services:
       - ./data/ampache/mysql:/var/lib/mysql
     ports:
       - 8090:80
+    labels:
+      - 'traefik.port=8090'
+      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
+      - 'traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:noindex, nofollow, nosnippet, noarchive'
+
+  cache:
+    image: redis:latest
+    container_name: exeamonitor-cache
+    restart: unless-stopped
+    volumes:
+      - "./data/redis/db-data:/data"

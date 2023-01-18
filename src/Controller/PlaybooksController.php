@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\Component\DataParams;
+
+
 /**
  * Playbooks Controller
  *
@@ -12,6 +15,21 @@ namespace App\Controller;
  */
 class PlaybooksController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $url = env('AMPACHE_HOST', 'ampache') . ':' .  env('AMPACHE_PORT', '80');;
+        $user = env('AMPACHE_USER', 'admin');
+        $pass = env('AMPACHE_PASS', 'admin');
+
+        $this->loadComponent('Ampache', [
+            'url' => $url,
+            'user' => $user,
+            'pass' => $pass,
+            'type' => 'json'
+        ]);
+    }
+
     /**
      * Index method
      *
@@ -42,7 +60,9 @@ class PlaybooksController extends AppController
         ]);
         $this->Authorization->authorize($playbook);
 
-        $this->set(compact('playbook'));
+        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
+        $playlistValues = $this->getPlaylistValues();
+        $this->set(compact('playbook', 'logicValues', 'playlistValues'));
     }
 
     /**
@@ -64,9 +84,11 @@ class PlaybooksController extends AppController
             }
             $this->Flash->error(__('The playbook could not be saved. Please, try again.'));
         }
+
         $customers = $this->Playbooks->Customers->find('list', ['limit' => 200])->all();
         $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
-        $this->set(compact('playbook', 'customers', 'logicValues'));
+        $playlistValues = $this->getPlaylistValues();
+        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues'));
     }
 
     /**
@@ -79,7 +101,7 @@ class PlaybooksController extends AppController
     public function edit($id = null)
     {
         $playbook = $this->Playbooks->get($id, [
-            'contain' => [],
+            'contain' => ['Rules'],
         ]);
         $this->Authorization->authorize($playbook);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -92,7 +114,9 @@ class PlaybooksController extends AppController
             $this->Flash->error(__('The playbook could not be saved. Please, try again.'));
         }
         $customers = $this->Playbooks->Customers->find('list', ['limit' => 200])->all();
-        $this->set(compact('playbook', 'customers'));
+        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
+        $playlistValues = $this->getPlaylistValues();
+        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues'));
     }
 
     /**
@@ -113,5 +137,16 @@ class PlaybooksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    private function getPlaylistValues()
+    {
+        $playlists = $this->Ampache->getPlaylists(new DataParams())->playlist;
+        $playlistValues = [];
+        foreach ($playlists as $key => $value) {
+            $playlistValues[$value->id] = $value->name;
+        }
+
+        return $playlistValues;
     }
 }
