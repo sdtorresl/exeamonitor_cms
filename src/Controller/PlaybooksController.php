@@ -130,6 +130,7 @@ class PlaybooksController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $playbook = $this->Playbooks->get($id);
+        $this->Authorization->authorize($playbook);
         if ($this->Playbooks->delete($playbook)) {
             $this->Flash->success(__('The playbook has been deleted.'));
         } else {

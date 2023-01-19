@@ -29,19 +29,8 @@ $this->loadHelper('Form', [
                 echo $this->Form->control('name');
                 echo $this->Form->control('customer_id', ['options' => $customers]);
                 ?>
-                <!-- <?php for ($i = 0; $i < 3; $i++) : ?>
-                    <div class="row">
-                        <div class="col s6">
-                            <?= $this->Form->control('rules.' . $i . '.tag'); ?>
-                        </div>
-                        <div class="col s6">
-
-                            <?= $this->Form->control('rules.' . $i . '.logic', ['options' => $logicValues]); ?>
-                        </div>
-                    </div>
-                <?php endfor ?> -->
-
-                <div id="rules" class="row"></div>
+       
+                <div id="rules"></div>
 
                 <div class="d-flex jc-end">
 

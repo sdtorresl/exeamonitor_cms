@@ -65,6 +65,7 @@
                 <div class="row">
                     <div class="form-submit d-flex jc-end">
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $playbook->id], ['confirm' => __('Are you sure you want to delete # {0}?', $playbook->id), 'class' => ['btn', 'cancel']]); ?>
+                        <?= $this->Html->link(__('Back'), ['controller' => 'playbooks', 'action' => 'index'], ['class' => ['btn']]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $playbook->id], ['class' => 'btn']) ?>
                     </div>
                 </div>

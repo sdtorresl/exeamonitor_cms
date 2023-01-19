@@ -63,7 +63,7 @@ class PointsOfSaleTable extends Table
         ]);
         $this->belongsTo('Playbooks', [
             'foreignKey' => 'playbook_id',
-            'joinType' => 'INNER',
+            'joinType' => 'LEFT',
         ]);
         $this->hasMany('Checks', [
             'foreignKey' => 'pos_id',

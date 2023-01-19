@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     const rulesContainer = document.getElementById('rules');
-    let rulesNumber = 0;
+    let rulesNumber = rulesContainer.children.length;
 
     removeButton.onclick = function () {
         if (rulesNumber > 0) {
             console.log("Remove")
-            const lastRuleContainer = document.getElementById(`rule-${rulesNumber - 1}`);
+            const lastRuleContainer = rulesContainer.children[rulesContainer.children.length - 1] 
             lastRuleContainer.remove();
             rulesNumber--;
         }
@@ -66,6 +66,9 @@ function createSelect(rulesNumber, logicValues) {
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
 
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
     const selectContainer = document.createElement("div");
     selectContainer.setAttribute("class", "input-field col s12");
 
@@ -82,7 +85,8 @@ function createSelect(rulesNumber, logicValues) {
     });
 
     selectContainer.appendChild(select);
-    col.appendChild(selectContainer);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
 
     return col;
 }
@@ -91,6 +95,9 @@ function createTagSelect(rulesNumber, logicValues) {
 
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
 
     const selectContainer = document.createElement("div");
     selectContainer.setAttribute("class", "input-field col s12");
@@ -108,7 +115,8 @@ function createTagSelect(rulesNumber, logicValues) {
     });
 
     selectContainer.appendChild(select);
-    col.appendChild(selectContainer);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
 
     return col;
 }
