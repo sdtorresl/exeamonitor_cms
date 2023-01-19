@@ -22,6 +22,11 @@ class ApiController extends AppController
 {
     use MailerAwareTrait;
 
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['login']);
+    }
 
     /**
      * Login method
@@ -30,7 +35,7 @@ class ApiController extends AppController
      */
     public function login()
     {
-        $this->Authorization->skipAuthorization();
+      //  $this->Authorization->skipAuthorization();
         $this->request->allowMethod(['post']);
         $result = $this->Authentication->getResult();
 
