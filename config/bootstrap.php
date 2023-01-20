@@ -214,3 +214,6 @@ ServerRequest::addDetector('tablet', function ($request) {
 
 // Custom bake theme
 Configure::write('Bake.theme', 'ExeaTheme');
+
+// Ignore authorization for DebugKit
+Configure::write('DebugKit.ignoreAuthorization', true);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\I18n\Time;
+use Cake\I18n\FrozenTime;
 use Cake\Utility\Text;
 use Cake\Mailer\MailerAwareTrait;
 
@@ -170,7 +170,7 @@ class UsersController extends AppController
             $user = $this->Authentication->getIdentity()->getOriginalData();
 
             if ($user->enabled) {
-                $user->last_access = Time::now();
+                $user->last_access = FrozenTime::now();
                 $this->Users->save($user);
 
                 return $this->redirect($this->getRedirect($user));
@@ -223,7 +223,7 @@ class UsersController extends AppController
 
                 // Setting token to the user
                 $user->token = Text::uuid();
-                $user->token_expiry_date = Time::now()->addHours(2);
+                $user->token_expiry_date = FrozenTime::now()->addHours(2);
                 $user->token_used = false;
                 $users->save($user);
 
@@ -251,7 +251,7 @@ class UsersController extends AppController
 
             if ($user) {
                 if ($this->request->is('post')) {
-                    if (!$user->token_used && Time::now() < $user->token_expiry_date) {
+                    if (!$user->token_used && FrozenTime::now() < $user->token_expiry_date) {
 
                         $newPassword = $this->request->getData('password');
 
