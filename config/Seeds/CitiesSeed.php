@@ -16,7 +16,7 @@ class CitiesSeed extends AbstractSeed
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $data = [
             ["name" => "Tokyo", "country_code" => "JP"],

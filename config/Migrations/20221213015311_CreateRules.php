@@ -30,7 +30,6 @@ class CreateRules extends AbstractMigration
             'default' => null,
             'limit' => 11,
             'null' => false,
-            'signed' => false
         ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
