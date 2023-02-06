@@ -22,7 +22,7 @@ class PlayerController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['index', 'songs', 'song', 'playlists', 'playlist', 'nextSong']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'song', 'playlists', 'playlist', 'nextSong']);
     }
 
     public function initialize(): void
@@ -109,7 +109,7 @@ class PlayerController extends AppController
      */
     public function songs()
     {
-        $this->Authorization->skipAuthorization();
+        //$this->Authorization->skipAuthorization();
         $this->set('data', $this->Ampache->getSongs(new DataParams())->song);
         $this->viewBuilder()->setOption('serialize', 'data');
     }
