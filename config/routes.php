@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -42,6 +43,7 @@ use Cake\Routing\RouteBuilder;
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
  */
+
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
@@ -62,9 +64,11 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, templates/Pages/home.php)...
      */
-    $builder->connect('/',
+    $builder->connect(
+        '/',
         ['controller' => 'Users', 'action' => 'login', 'home'],
-        ['_name' => 'login']);
+        ['_name' => 'login']
+    );
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -100,6 +104,60 @@ $routes->scope('/', function (RouteBuilder $builder) {
  */
 $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->setExtensions(['json', 'xml']);
+    $routes->connect(
+        '/login',
+        [
+            'controller' => 'Api',
+            'action' => 'login',
+            'prefix' => 'Api'
+        ]
+    );
+    $routes->resources('Player', [
+        'prefix' => 'Api',
+        'map' => [
+            'list' => [
+                'action' => 'index',
+                'method' => 'GET',
+                'path' => '/'
+            ],
+            'playlists' => [
+                'action' => 'playlists',
+                'method' => 'GET',
+                'path' => 'playlists'
+            ],
+            'playlist' => [
+                'action' => 'playlist',
+                'method' => 'GET',
+                'path' => 'playlists/:id'
+            ],
+            'playlist-songs' => [
+                'action' => 'playlistSongs',
+                'method' => 'GET',
+                'path' => 'playlists-songs/:id'
+            ],
+            'songs' => [
+                'action' => 'songs',
+                'method' => 'GET',
+                'path' => 'songs'
+            ],
+            'song' => [
+                'action' => 'song',
+                'method' => 'GET',
+                'path' => 'songs/:id'
+            ],
+            'next' => [
+                'action' => 'nextSong',
+                'method' => 'GET',
+                'path' => 'next/:id'
+            ]
+        ]
+    ]);
+    $routes->resources('SongsHistory', [
+        'prefix' => 'Api',
+    ]);
+    $routes->resources('SongsRequests', [
+        'prefix' => 'Api',
+    ]);
     $routes->resources('Checks');
     $routes->resources('Checks', [
         'map' => [

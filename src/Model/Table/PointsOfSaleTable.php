@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -52,13 +53,25 @@ class PointsOfSaleTable extends Table
             'foreignKey' => 'city_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Playbooks', [
+            'foreignKey' => 'playbook_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Playbooks', [
+            'foreignKey' => 'playbook_id',
+            'joinType' => 'LEFT',
+        ]);
         $this->hasMany('Checks', [
             'foreignKey' => 'pos_id',
             'joinType' => 'INNER',
+        ]);
+        $this->hasMany('SongsRequests', [
+            'foreignKey' => 'pos_id',
+            'joinType' => 'LEFT',
         ]);
     }
 
@@ -117,6 +130,7 @@ class PointsOfSaleTable extends Table
         $rules->add($rules->existsIn(['country_id'], 'Countries'));
         $rules->add($rules->existsIn(['city_id'], 'Cities'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['playbook_id'], 'Playbooks'));
 
         return $rules;
     }

@@ -40,7 +40,7 @@ class PointsOfSaleController extends AppController
     public function view($id = null)
     {
         $pointsOfSale = $this->PointsOfSale->get($id, [
-            'contain' => ['Countries', 'Cities', 'Customers'],
+            'contain' => ['Countries', 'Cities', 'Customers', 'Playbooks'],
         ]);
         $this->Authorization->Authorize($pointsOfSale);
 
@@ -84,7 +84,8 @@ class PointsOfSaleController extends AppController
 
         $cities = [];
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
+        $playbooks = $this->PointsOfSale->Playbooks->find('list', ['limit' => 200]);
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'playbooks'));
     }
 
     /**
@@ -136,9 +137,11 @@ class PointsOfSaleController extends AppController
         }
 
         $customers = $this->PointsOfSale->Customers->find('list', ['limit' => 200]);
+        $playbooks = $this->PointsOfSale->Playbooks->find('list', ['limit' => 200]);
+
         // Override country_id to the view to use country code
         $pointsOfSale->country_id = $country->code;
-        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers'));
+        $this->set(compact('pointsOfSale', 'countries', 'cities', 'customers', 'playbooks'));
     }
 
     /**

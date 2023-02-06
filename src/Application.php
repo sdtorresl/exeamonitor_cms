@@ -74,8 +74,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit');
         }
-
-        // Load more plugins here
     }
 
     /**
@@ -105,22 +103,43 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ->add(new RoutingMiddleware($this))
             ->add(new AuthenticationMiddleware($this))
             ->add(new AuthorizationMiddleware($this))
-            ->add(new CsrfProtectionMiddleware([
-                'httponly' => true
-            ]))
+            // ->add(new CsrfProtectionMiddleware([
+            //     'httponly' => true
+            // ]))
             ->add(new BodyParserMiddleware());
 
+        $csrf = new CsrfProtectionMiddleware();
+        $csrf->skipCheckCallback(function ($request) {
+            if ($request->getParam('prefix') === 'Api') {
+                return true;
+            }
+
+            return false;
+        });
+
+        $middlewareQueue->add($csrf);
+
+        $middlewareQueue->add(function ($request, $handler) {
+            if ($request->getParam('prefix') == 'Api' || preg_match("/api/i", $request->getParam('_matchedRoute'))) {
+                $request->getAttribute('authorization')->skipAuthorization();
+            }
+            return $handler->handle($request);
+        });
+
         if (Configure::read('debug')) {
-            // Disable authz for debugkit
-            $middlewareQueue->add(function ($req, $res, $next) {
-                if ($req->getParam('plugin') === 'DebugKit') {
-                    $req->getAttribute('authorization')->skipAuthorization();
-                }
-                if (preg_match("/api/i", $req->getParam('_matchedRoute'))) {
-                    $req->getAttribute('authorization')->skipAuthorization();
-                }
-                return $next($req, $res);
-            });
+            // Add CORS for development environments.
+            $middlewareQueue
+                ->add(function ($request, $handler) {
+                    $response = $handler->handle($request)
+                        ->withHeader('Access-Control-Allow-Origin', '*')
+                        ->withHeader('Access-Control-Allow-Methods', '*')
+                        ->withHeader('Access-Control-Allow-Credentials', 'true')
+                        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+                        ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+                        ->withHeader('Access-Control-Allow-Type', 'application/json');
+
+                    return $response;
+                });
         }
         return $middlewareQueue;
     }
@@ -168,7 +187,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'username' => 'username',
                 'password' => 'password',
             ],
-            'loginUrl' => Router::url('/', false),
+            // 'loginUrl' => Router::url('/', false),
         ]);
 
         return $authenticationService;
