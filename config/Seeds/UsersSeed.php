@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Migrations\AbstractSeed;
-use Cake\I18n\Time;
+use Cake\I18n\FrozenTime;
 use Cake\Auth\DefaultPasswordHasher;
 /**
  * Users seed.
@@ -19,9 +19,9 @@ class UsersSeed extends AbstractSeed
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $time = Time::now();
+        $time = FrozenTime::now();
         $time = $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
         $hasher = new DefaultPasswordHasher();
