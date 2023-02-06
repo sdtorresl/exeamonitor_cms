@@ -110,7 +110,23 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             'controller' => 'Api',
             'action' => 'login',
             'prefix' => 'Api'
-        ]
+        ],
+    );
+    $routes->connect(
+        '/logout',
+        [
+            'controller' => 'Api',
+            'action' => 'logout',
+            'prefix' => 'Api'
+        ],
+    );
+    $routes->connect(
+        '/renew',
+        [
+            'controller' => 'Api',
+            'action' => 'renewToken',
+            'prefix' => 'Api'
+        ],
     );
     $routes->resources('Player', [
         'prefix' => 'Api',
@@ -152,6 +168,16 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             ]
         ]
     ]);
+    $routes->resources('PointsOfSale', [
+        'prefix' => 'Api',
+        'map' => [
+            'list' => [
+                'action' => 'index',
+                'method' => 'GET',
+                'path' => 'customer/{id}'
+            ],
+        ]
+    ]);
     $routes->resources('SongsHistory', [
         'prefix' => 'Api',
     ]);
@@ -164,12 +190,12 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             'stats' => [
                 'action' => 'stats',
                 'method' => 'GET',
-                'path' => 'stats/:id'
+                'path' => 'stats/{id}'
             ],
             'view' => [
                 'action' => 'view',
                 'method' => 'GET',
-                'path' => '/:id'
+                'path' => '/{id}'
             ]
         ]
     ]);
@@ -187,7 +213,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
             'getByCountry' => [
                 'action' => 'getByCountry',
                 'method' => 'GET',
-                'path' => 'getByCountry/:id',
+                'path' => 'getByCountry/{id}',
             ],
         ],
         'id' => '[a-zA-Z]+'

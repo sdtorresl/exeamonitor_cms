@@ -160,9 +160,7 @@ class UsersController extends AppController
     public function login()
     {
         $this->Authorization->skipAuthorization();
-
         $this->request->allowMethod(['get', 'post']);
-
         $result = $this->Authentication->getResult();
 
         // regardless of POST or GET, redirect if user is logged in
@@ -286,14 +284,14 @@ class UsersController extends AppController
 
     private function getRedirect($user)
     {
-        if ($user->role == 'admin') {
+        if ($user->role === 'admin') {
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Checks',
                 'action' => 'index',
             ]);
         } else {
-            $this->loadModel('PointsOfSale');
-            $pos =  $this->PointsOfSale->get($user->point_of_sale_id);
+            $PointsOfSale = $this->fetchTable('PointsOfSale');
+            $pos = $PointsOfSale->get($user->point_of_sale_id);
             $customerId = $pos->customer_id;
 
             $redirect = $this->request->getQuery('redirect', [

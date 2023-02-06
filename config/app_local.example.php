@@ -109,4 +109,19 @@ return [
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
+
+    'Cache' => [
+        'short' => [
+            'className' => 'Redis',
+            'host' => 'exeamonitor-cache',
+            'duration' => '+30 seconds',
+            'prefix' => 'exeamonitor_',
+        ],
+        'long' => [
+            'className' => 'Redis',
+            'host' => 'exeamonitor-cache',
+            'duration' => '+10 minutes',
+            'prefix' => 'exeamonitor_',
+        ],
+    ]
 ];

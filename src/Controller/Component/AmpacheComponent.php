@@ -45,6 +45,8 @@ class AmpacheComponent extends Component implements AmpacheComponentI
 
     private function getEndpoint(): String
     {
+        Log::write('debug', $this->url);
+
         return join('/', [$this->url, 'server', $this->type . '.server.php']);
     }
 

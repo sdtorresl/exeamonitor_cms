@@ -35,6 +35,19 @@ class SongsHistoryController extends AppController
     }
 
     /**
+     * View by posId method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function view($posId)
+    {
+        $history = $this->paginate($this->SongsHistory->find()->where(['pos_id' => $posId]));
+
+        $this->set(compact('history'));
+        $this->viewBuilder()->setOption('serialize', 'history');
+    }
+
+    /**
      * Add song to history method
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
