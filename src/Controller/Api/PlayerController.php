@@ -22,7 +22,7 @@ class PlayerController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['index', 'song', 'playlists', 'playlist', 'nextSong']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'songs', 'song', 'playlists', 'playlist', 'nextSong']);
     }
 
     public function initialize(): void
