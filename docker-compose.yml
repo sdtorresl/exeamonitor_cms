@@ -14,9 +14,11 @@ services:
       - .env
       - mysql.env
     labels:
-      - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
-      - 'traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:noindex, nofollow, nosnippet, noarchive'
+      - "traefik.enable=true"
+      - "traefik.http.routers.exeamonitor-webserver.rule=Host(`${PROJECT_BASE_URL}`)"
+      - "traefik.http.routers.exeamonitor-webserver.tls=true"
+      - "traefik.http.routers.exeamonitor-webserver.tls.certresolver=myresolver"
+      - "traefik.http.routers.exeamonitor-webserever.entrypoints=web,websecure"
     ports:
       - ${APP_PORT}:80
 
@@ -38,16 +40,18 @@ services:
     container_name: exeamonitor-ampache
     restart: unless-stopped
     volumes:
-      - /home/sdtorresl/Music:/media
+      - /home/eproductor/Music:/media
       - ./data/ampache/config:/var/www/config
       - ./data/ampache/log:/var/log/ampache
       - ./data/ampache/mysql:/var/lib/mysql
     ports:
       - 8090:80
     labels:
-      - 'traefik.port=8090'
-      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
-      - 'traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:noindex, nofollow, nosnippet, noarchive'
+      - 'traefik.enable=true'
+      - "traefik.http.routers.exeamonitor-ampache.rule=Host(`${AMPACHE_BASE_URL}`)"
+      - "traefik.http.routers.exeamonitor-ampache.tls=true"
+      - "traefik.http.routers.exeamonitor-ampache.tls.certresolver=myresolver"
+      - "traefik.http.routers.exeamonitor-ampache.entrypoints=web,websecure"
 
   cache:
     image: redis:latest
