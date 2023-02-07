@@ -58,6 +58,7 @@
 
 <script>
     const statsURI = '<?= $this->Url->build([
+            "prefix" => "Api",
             "controller" => "Checks",
             "action" => "stats",
             "_ext" => "json",

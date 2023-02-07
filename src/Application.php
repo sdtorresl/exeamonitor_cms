@@ -174,6 +174,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'algorithm' => 'HS256',
                 'returnPayload' => false
             ]);
+            $authenticationService->loadAuthenticator('Authentication.Session');
+
         } else {
             $authenticationService = new AuthenticationService([
                 'unauthenticatedRedirect' => Router::url('/', false),

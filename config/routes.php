@@ -184,8 +184,11 @@ $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->resources('SongsRequests', [
         'prefix' => 'Api',
     ]);
-    $routes->resources('Checks');
     $routes->resources('Checks', [
+        'prefix' => 'Api',
+    ]);
+    $routes->resources('Checks', [
+        'prefix' => 'Api',
         'map' => [
             'stats' => [
                 'action' => 'stats',
