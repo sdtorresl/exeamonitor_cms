@@ -126,23 +126,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             return $handler->handle($request);
         });
 
-        //if (Configure::read('debug')) {
-        // Add CORS for development environments.
-        $middlewareQueue
-            ->add(function ($request, $handler) {
-                $response = $handler->handle($request)
-                    ->withHeader('Access-Control-Allow-Origin', '*')
-                    ->withHeader('Access-Control-Allow-Methods', '*')
-                    ->withHeader('Access-Control-Allow-Credentials', 'true')
-                    ->withHeader('Access-Control-Allow-Headers', 'Origin')
-                    ->withHeader('Access-Control-Allow-Headers', 'Accept')
-                    ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With')
-                    ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
-                    ->withHeader('Access-Control-Allow-Type', 'application/json');
-
-                return $response;
-            });
-        //}
         return $middlewareQueue;
     }
 
