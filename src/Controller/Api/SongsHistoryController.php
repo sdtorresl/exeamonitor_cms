@@ -7,6 +7,8 @@ namespace App\Controller\Api;
 use App\Controller\AppController;
 use App\Controller\Api\Utils\ErrorResponse;
 use Cake\ORM\TableRegistry;
+use Cake\Core\Configure;
+
 
 /**
  * SongsHistory Controller
@@ -15,6 +17,18 @@ use Cake\ORM\TableRegistry;
  */
 class SongsHistoryController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->loadComponent('Pusher', [
+            'appKey' => Configure::read('Pusher.appKey'),
+            'appSecret' => Configure::read('Pusher.appSecret'),
+            'appId' => Configure::read('Pusher.appId'),
+            'cluster' => Configure::read('Pusher.cluster')
+        ]);
+    }
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -57,6 +71,9 @@ class SongsHistoryController extends AppController
         $songHistory = $this->SongsHistory->newEmptyEntity();
         $songHistory = $this->SongsHistory->patchEntity($songHistory, $this->request->getData());
         if ($this->SongsHistory->save($songHistory)) {
+            /* Notify listeners */
+            $this->Pusher->publish("pos-{$songHistory->pos_id}", 'history-add', $songHistory->toArray());
+
             /* Update requests to played */
             $SongsRequests = TableRegistry::getTableLocator()->get('SongsRequests');
             $requests = $SongsRequests->find()->where([

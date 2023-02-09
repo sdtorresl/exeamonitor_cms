@@ -123,5 +123,12 @@ return [
             'duration' => '+10 minutes',
             'prefix' => 'exeamonitor_',
         ],
+    ],
+
+    'Pusher' => [
+        'appKey' => env('PUSHER_KEY'),
+        'appSecret' =>  env('PUSHER_SECRET'),
+        'appId' =>  env('PUSHER_APP_ID'),
+        'cluster' =>  env('PUSHER_CLUSTER'),
     ]
 ];
