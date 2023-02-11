@@ -32,7 +32,7 @@ class SongsHistoryController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['index', 'add']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'add']);
     }
 
     /**
@@ -55,7 +55,7 @@ class SongsHistoryController extends AppController
      */
     public function view($posId)
     {
-        $history = $this->paginate($this->SongsHistory->find()->where(['pos_id' => $posId]));
+        $history = $this->SongsHistory->find()->where(['pos_id' => $posId])->order(['created' => 'DESC'])->limit(15);
 
         $this->set(compact('history'));
         $this->viewBuilder()->setOption('serialize', 'history');
