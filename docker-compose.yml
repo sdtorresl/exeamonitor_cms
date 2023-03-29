@@ -19,7 +19,13 @@ services:
       - "traefik.http.routers.exeamonitor-webserver.rule=Host(`${PROJECT_BASE_URL}`)"
       - "traefik.http.routers.exeamonitor-webserver.tls=true"
       - "traefik.http.routers.exeamonitor-webserver.tls.certresolver=myresolver"
-      - "traefik.http.routers.exeamonitor-webserever.entrypoints=web,websecure"
+      - "traefik.http.routers.exeamonitor-webserver.entrypoints=web,websecure"
+      - "traefik.http.routers.exeamonitor-webserver.middlewares=corsheader@docker"
+      - "traefik.http.middlewares.corsheader.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,PATCH,DELETE"
+      - "traefik.http.middlewares.corsheader.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.middlewares.corsheader.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.corsheader.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.corsheader.headers.addvaryheader=true"
     ports:
       - ${APP_PORT}:80
 
@@ -54,7 +60,7 @@ services:
       - "traefik.http.routers.exeamonitor-ampache.tls=true"
       - "traefik.http.routers.exeamonitor-ampache.tls.certresolver=myresolver"
       - "traefik.http.routers.exeamonitor-ampache.entrypoints=web,websecure"
-
+      - "traefik.http.routers.exeamonitor-ampache.middlewares=corsheader@docker"
   cache:
     image: redis:latest
     container_name: exeamonitor-cache

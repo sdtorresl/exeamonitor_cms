@@ -13,5 +13,7 @@ interface AmpacheComponentI
     public function getSongs(DataParams $params);
     public function getPlaylists(DataParams $params);
 
+    public function search(SearchParams $params);
+
     public function getNext();
 }

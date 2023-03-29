@@ -80,6 +80,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
 
         $options['action'] = $action;
         $options['auth'] = $this->apiAuth;
+//        Log::write('debug', "Ampache options: " . implode(',', $options));
 
         $response = $this->httpClient->get($this->getEndpoint(), $options);
         Log::write('debug', "Ampache response: {$response->getStringBody()}");
@@ -106,6 +107,11 @@ class AmpacheComponent extends Component implements AmpacheComponentI
     public function getPlaylists(DataParams $dataParams)
     {
         return $this->sendCommand('playlists', $dataParams->getParams());
+    }
+
+    public function search(SearchParams $searchParams)
+    {
+        return $this->sendCommand('advanced_search', $searchParams->getParams());
     }
 
     public function getPlaylistSongs($uid)

@@ -6,6 +6,7 @@ namespace App\Controller\Api;
 
 use App\Controller\AppController;
 use App\Controller\Component\DataParams;
+use App\Controller\Component\SearchParams;
 use App\Controller\Api\Utils\ErrorResponse;
 use Cake\Cache\Cache;
 use Cake\Log\Log;
@@ -22,7 +23,7 @@ class PlayerController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['index', 'songs', 'song', 'playlists', 'playlist', 'nextSong']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'songs', 'song', 'playlists', 'playlist', 'nextSong', 'search']);
     }
 
     public function initialize(): void
@@ -109,8 +110,30 @@ class PlayerController extends AppController
      */
     public function songs()
     {
-        //$this->Authorization->skipAuthorization();
-        $this->set('data', $this->Ampache->getSongs(new DataParams())->song);
+        $page = $this->request->getQuery('page', 1);
+        $limit = $this->request->getQuery('limit', 25);
+        $offset = $limit * $page;
+        $this->set('data', $this->Ampache->getSongs(new DataParams($offset, $limit))->song);
+        $this->viewBuilder()->setOption('serialize', 'data');
+    }
+
+    /**
+     * Search songs method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function search()
+    {
+        $query = $this->request->getQuery('query', '');
+        $random = $this->request->getQuery('random', false);
+        $page = $this->request->getQuery('page', 1);
+        $limit = $this->request->getQuery('limit', 25);
+        $offset = $limit * $page;
+
+        $rules = [['title', 0, $query], ['artist', 0, $query], ['album', 0, $query], ['albumartist', 0, $query], ['genre', 0, $query]];
+
+        $searchParams = new SearchParams($rules, $operator = 'or', $type='song', $offset = $offset, $limit = $limit, $random = $random);
+        $this->set('data', $this->Ampache->search($searchParams)->song);
         $this->viewBuilder()->setOption('serialize', 'data');
     }
 

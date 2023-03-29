@@ -156,6 +156,11 @@ $routes->scope('/api', function (RouteBuilder $routes) {
                 'method' => 'GET',
                 'path' => 'songs'
             ],
+            'search' => [
+                'action' => 'search',
+                'method' => 'GET',
+                'path' => 'search'
+            ],
             'song' => [
                 'action' => 'song',
                 'method' => 'GET',
