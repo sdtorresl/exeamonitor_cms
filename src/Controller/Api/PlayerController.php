@@ -10,6 +10,8 @@ use App\Controller\Component\SearchParams;
 use App\Controller\Api\Utils\ErrorResponse;
 use Cake\Cache\Cache;
 use Cake\Log\Log;
+use Cake\Core\Configure;
+
 
 /**
  * Player Controller
@@ -19,7 +21,6 @@ use Cake\Log\Log;
  */
 class PlayerController extends AppController
 {
-
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -29,7 +30,7 @@ class PlayerController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $url = env('AMPACHE_HOST', 'ampache') . ':' .  env('AMPACHE_PORT', '80');;
+        $url = env('AMPACHE_HOST', 'ampache') . ':' . env('AMPACHE_PORT', '80');;
         $user = env('AMPACHE_USER', 'admin');
         $pass = env('AMPACHE_PASS', 'admin');
 
@@ -38,6 +39,13 @@ class PlayerController extends AppController
             'user' => $user,
             'pass' => $pass,
             'type' => 'json'
+        ]);
+
+        $this->loadComponent('Pusher', [
+            'appKey' => Configure::read('Pusher.appKey'),
+            'appSecret' => Configure::read('Pusher.appSecret'),
+            'appId' => Configure::read('Pusher.appId'),
+            'cluster' => Configure::read('Pusher.cluster')
         ]);
     }
 
@@ -130,7 +138,7 @@ class PlayerController extends AppController
         $limit = $this->request->getQuery('limit', 25);
         $offset = $limit * $page;
 
-        $rules = [['title', 6, $query], ['artist', 6, $query], ['album', 6, $query], ['albumartist', 6, $query], ['genre', 6, $query]];
+        $rules = [['title', 2, $query], ['artist', 2, $query], ['artist', 0, $query], ['title', 0, $query], ['album', 0, $query], ['albumartist', 2, $query], ['albumartist', 0, $query], ['genre', 6, $query]];
 
         $searchParams = new SearchParams($rules, 'or', 'song', $offset, $limit, $random);
         $this->set('data', $this->Ampache->search($searchParams)->song);
@@ -179,9 +187,10 @@ class PlayerController extends AppController
         $query = $this->getTableLocator()->get('PointsOfSale')->find()
             ->where(['PointsOfSale.id' => $posId])
             ->contain(['Playbooks', 'Playbooks.Rules'])
-            ->contain('SongsRequests',  function ($q) {
+            ->contain('SongsRequests', function ($q) {
                 return $q
-                    ->where(['SongsRequests.played' => false]);
+                    ->where(['SongsRequests.played' => false])
+                    ->order(['SongsRequests.created' => 'ASC']);
             });
         $pos = $query->first();
 
@@ -202,7 +211,7 @@ class PlayerController extends AppController
     {
         $posId = $pos->id;
 
-        if ( $pos->playbook != null && count($pos->playbook->rules) > 0) {
+        if ($pos->playbook != null && count($pos->playbook->rules) > 0) {
             $lastRule = Cache::read('last-rule-' . $posId, 'long') ?? -1;
 
             $nextRule = $lastRule + 1;
@@ -212,7 +221,7 @@ class PlayerController extends AppController
             Log::write('notice', "Last rule played for POS $posId is $nextRule");
             Cache::write('last-rule-' . $posId, $nextRule, 'long');
 
-            $playlistId = (int) $currentRule->tag;
+            $playlistId = (string) $currentRule->tag;
             $songs = $this->Ampache->getPlaylistSongs($playlistId);
             $song = $songs[array_rand($songs)];
         } else {
@@ -232,6 +241,9 @@ class PlayerController extends AppController
         $songRequest = $songRequestsTable->get($pos->songs_requests[0]->id);
         $songRequest->played = true;
         $songRequestsTable->save($songRequest);
+
+        /* Notify listeners */
+        $this->Pusher->publish("pos-{$songRequest->pos_id}", 'request-played', $songRequest->toArray());
 
         $song = $this->Ampache->getSong($pos->songs_requests[0]->song_id);
         return $song;

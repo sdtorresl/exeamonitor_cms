@@ -6,6 +6,8 @@ namespace App\Controller\Api;
 
 use App\Controller\Api\Utils\ErrorResponse;
 use App\Controller\AppController;
+use Cake\I18n\FrozenTime;
+use Cake\Core\Configure;
 
 
 /**
@@ -15,6 +17,18 @@ use App\Controller\AppController;
  */
 class SongsRequestsController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->loadComponent('Pusher', [
+            'appKey' => Configure::read('Pusher.appKey'),
+            'appSecret' => Configure::read('Pusher.appSecret'),
+            'appId' => Configure::read('Pusher.appId'),
+            'cluster' => Configure::read('Pusher.cluster')
+        ]);
+    }
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -66,7 +80,20 @@ class SongsRequestsController extends AppController
     {
         $songRequest = $this->SongsRequests->newEmptyEntity();
         $songRequest = $this->SongsRequests->patchEntity($songRequest, $this->request->getData());
+
+        $now = FrozenTime::now();
+        $recent = $now->subMinutes(60);
+        $previous = $this->SongsRequests->find()->where(['song_id =' => $songRequest->song_id, 'created >=' => $recent, 'pos_id =' => $songRequest->pos_id])->count();
+
+        if ($previous > 0) {
+            $errorResponse = new ErrorResponse('This song was already requested in the last hour for this POS', 429);
+            return $errorResponse->getResponse($this->response);
+        }
+
         if ($this->SongsRequests->save($songRequest)) {
+            /* Notify listeners */
+            $this->Pusher->publish("pos-{$songRequest->pos_id}", 'request-add', $songRequest->toArray());
+
             $this->set(compact('songRequest'));
             $this->viewBuilder()->setOption('serialize', 'songRequest');
         } else {
