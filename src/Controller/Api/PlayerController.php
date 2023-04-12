@@ -110,7 +110,7 @@ class PlayerController extends AppController
      */
     public function songs()
     {
-        $page = $this->request->getQuery('page', 1);
+        $page = $this->request->getQuery('page', 0);
         $limit = $this->request->getQuery('limit', 25);
         $offset = $limit * $page;
         $this->set('data', $this->Ampache->getSongs(new DataParams($offset, $limit))->song);
@@ -126,13 +126,13 @@ class PlayerController extends AppController
     {
         $query = $this->request->getQuery('query', '');
         $random = $this->request->getQuery('random', false);
-        $page = $this->request->getQuery('page', 1);
+        $page = $this->request->getQuery('page', 0);
         $limit = $this->request->getQuery('limit', 25);
         $offset = $limit * $page;
 
-        $rules = [['title', 0, $query], ['artist', 0, $query], ['album', 0, $query], ['albumartist', 0, $query], ['genre', 0, $query]];
+        $rules = [['title', 6, $query], ['artist', 6, $query], ['album', 6, $query], ['albumartist', 6, $query], ['genre', 6, $query]];
 
-        $searchParams = new SearchParams($rules, $operator = 'or', $type='song', $offset = $offset, $limit = $limit, $random = $random);
+        $searchParams = new SearchParams($rules, 'or', 'song', $offset, $limit, $random);
         $this->set('data', $this->Ampache->search($searchParams)->song);
         $this->viewBuilder()->setOption('serialize', 'data');
     }
