@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -57,6 +58,7 @@ class PlaybooksTable extends Table
         ]);
         $this->hasMany('Rules', [
             'foreignKey' => 'playbook_id',
+            'dependent' => true,
         ]);
     }
 
