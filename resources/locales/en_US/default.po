@@ -56,11 +56,11 @@ msgstr "Add Users"
 
 #: Users/add.php:28
 msgid "Username"
-msgstr "username"
+msgstr "Username"
 
 #: Users/add.php:29
 msgid "Password"
-msgstr "password"
+msgstr "Password"
 
 #: Users/add.php:30
 msgid "First Name"

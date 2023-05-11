@@ -10,6 +10,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bootstrap-colorpicker": "^3.2.0",
+    "icecast-metadata-player": "^1.15.6",
     "materialize-css": "^1.0.0"
   }
 }
