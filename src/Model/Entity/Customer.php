@@ -59,5 +59,6 @@ class Customer extends Entity
         'created' => true,
         'modified' => true,
         'points_of_sale' => true,
+        'created_by' => true
     ];
 }

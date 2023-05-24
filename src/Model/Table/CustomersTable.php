@@ -60,6 +60,10 @@ class CustomersTable extends Table
         $this->hasMany('PointsOfSale', [
             'foreignKey' => 'customer_id',
         ]);
+
+        $this->belongsTo('users', [
+            'foreignKey' => 'created_by',
+        ]);
     }
 
     /**

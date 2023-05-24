@@ -33,6 +33,7 @@ $menuCell = $this->cell('Menu');
 
     <?= $this->Html->css('/node_modules/materialize-css/dist/css/materialize.min.css') ?>
     <?= $this->Html->script('/node_modules/materialize-css/dist/js/materialize.min.js') ?>
+    <?= $this->Html->script('main.js') ?>
     <?= $this->Html->css('main.min.css') ?>
 
     <?= $this->fetch('meta') ?>

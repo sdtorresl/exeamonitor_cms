@@ -51,9 +51,18 @@ class CustomersController extends AppController
     {
         $customer = $this->Customers->newEmptyEntity();
         $this->Authorization->authorize($customer);
-
+        $currentUser = $this->request->getAttribute('identity');
+        $count = $this->Customers->find()
+            ->where(['created_by' => $currentUser->id])
+            ->count();
+        if ($currentUser->amount_customers && $count >= $currentUser->amount_customers) {
+            $this->Flash->error(__('Creation limit exceeded for current user.'));
+            return $this->redirect(['action' => 'index']);
+        }
         if ($this->request->is('post')) {
-            $customer = $this->Customers->patchEntity($customer, $this->request->getData());
+            $data = $this->request->getData();
+            $data['created_by'] = $currentUser->id;
+            $customer = $this->Customers->patchEntity($customer, $data);
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('The customer has been saved.'));
 

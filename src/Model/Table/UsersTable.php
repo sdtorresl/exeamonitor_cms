@@ -101,6 +101,11 @@ class UsersTable extends Table
             ->notEmptyString('role');
 
         $validator
+            ->scalar('amount_customers')
+            ->maxLength('amount_customers', 255)
+            ->allowEmptyString('amount_customers');
+
+        $validator
             ->boolean('enabled')
             ->notEmptyString('enabled');
 

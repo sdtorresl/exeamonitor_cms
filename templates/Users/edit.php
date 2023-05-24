@@ -18,11 +18,11 @@ $this->loadHelper('Form', [
 
         <h2 class="title"><?= __('Edit Users') ?></h2>
     </div>
-    
+
     <div class="card-content">
         <div class="row">
             <div class="col s12 m8 l6 offset-m2 offset-l3">
-                
+
                 <?= $this->Form->create($user, ['class' => 'form']) ?>
                 <?php
                     echo $this->Form->control(__('username'));
@@ -31,6 +31,9 @@ $this->loadHelper('Form', [
                     echo $this->Form->control(__('last_name'));
                     echo $this->Form->control(__('email'));
                     echo $this->Form->control(__('role'));
+                    echo $this->Form->control(__('amount_customers'), [
+                        'visibility' => '{"field":"role","value":"customers_manager"}', // Para ocultar el campo inicialmente
+                    ]);
                     echo $this->Form->control(__('point_of_sale_id'), ['empty' => true]);
                     echo $this->Form->control('enabled', ['type' => 'checkbox', 'label' => '<span>' . __('Enable') . '</span>', 'escape' => false]);
 

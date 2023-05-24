@@ -1,4 +1,5 @@
 <?php
+$roles = $roles ?? [];
 $email = $this->getRequest()->getSession()->read('Auth.email');
 $first_name = $this->getRequest()->getSession()->read('Auth.first_name');
 $last_name = $this->getRequest()->getSession()->read('Auth.last_name');
@@ -27,7 +28,7 @@ $name = $first_name . ' ' . $last_name;
 
     <li>
         <div class="user-info">
-            <div class="user-name"><?= $roles[$role] ?></div>
+            <div class="user-name"><?= $roles[$role] ?? ''?></div>
             <div class="user-role"><?= $email ?></div>
         </div>
     </li>

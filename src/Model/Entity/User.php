@@ -17,6 +17,7 @@ use Authentication\IdentityInterface;
  * @property string $last_name
  * @property string $email
  * @property string $role
+ * @property string $amount_customers
  * @property bool $enabled
  * @property \Cake\I18n\FrozenTime $last_access
  * @property int|null $point_of_sale_id
@@ -44,6 +45,7 @@ class User extends Entity implements IdentityInterface
         'last_name' => true,
         'email' => true,
         'role' => true,
+        'amount_customers' => true,
         'enabled' => true,
         'last_access' => true,
         'point_of_sale_id' => true,

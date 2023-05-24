@@ -59,7 +59,8 @@ class AppController extends Controller
 
         $roles = [
             'admin' => __('Administrator'),
-            'user' => __('User')
+            'user' => __('User'),
+            'customers_manager' => __('Administrator customers')
         ];
 
         $this->set(compact('roles'));
