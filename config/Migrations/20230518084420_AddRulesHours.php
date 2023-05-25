@@ -16,19 +16,19 @@ class AddRulesHours extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('rules');
-        $table->addColumn('start_hour', 'varchar', [
+        $table->addColumn('start_hour', 'string', [
             'default' => null,
             'limit' => 45,
             'null' => true,
             'signed' => false
         ]);
-        $table->addColumn('final_hour', 'varchar', [
+        $table->addColumn('final_hour', 'string', [
             'default' => null,
             'limit' => 45,
             'null' => true,
             'signed' => false
         ]);
-        $table->addColumn('days', 'varchar', [
+        $table->addColumn('days', 'string', [
             'default' => null,
             'limit' => 512,
             'null' => true,
