@@ -29,6 +29,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 .directory
+*.orig
 
 # Tool specific files #
 #######################

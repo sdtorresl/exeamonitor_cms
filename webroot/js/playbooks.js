@@ -1,7 +1,19 @@
+const setSelectOptionDays = (element, input) => {
+    element.addEventListener('change', () => {
+        const options = element.selectedOptions;
+        let selectedOptions = [];
+        Array.from(options).forEach(option => {
+            selectedOptions.push(option.value);
+        });
+        document.querySelector(`#${input}`).value = selectedOptions.join(',');
+    });
+}
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
     const logicValues = JSON.parse(document.getElementById('logic-values').dataset.value);
     const playlists = JSON.parse(document.getElementById('playlist-values').dataset.value);
+    const dayslists = JSON.parse(document.getElementById('days-values').dataset.value);
 
     const addButton = document.getElementById('add-button');
     const removeButton = document.getElementById('remove-button');
@@ -13,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     removeButton.onclick = function () {
         if (rulesNumber > 0) {
             console.log("Remove")
-            const lastRuleContainer = rulesContainer.children[rulesContainer.children.length - 1] 
+            const lastRuleContainer = rulesContainer.children[rulesContainer.children.length - 1]
             lastRuleContainer.remove();
             rulesNumber--;
         }
@@ -27,6 +39,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //ruleContainer.appendChild(createTagInput(rulesNumber));
         ruleContainer.appendChild(createTagSelect(rulesNumber, playlists));
         ruleContainer.appendChild(createSelect(rulesNumber, logicValues));
+        ruleContainer.appendChild(createInputDays(rulesNumber, dayslists));
+        ruleContainer.appendChild(createInputHiddenDays(rulesNumber));
+        ruleContainer.appendChild(createInputHour(rulesNumber, 'start_hour'));
+        ruleContainer.appendChild(createInputHour(rulesNumber, 'final_hour'));
+        ruleContainer.appendChild(createInputOnce(rulesNumber));
 
         rulesContainer.appendChild(ruleContainer);
         rulesNumber++;
@@ -36,7 +53,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             classes: ""
         });
     };
+
 });
+
+
+
+
 
 function createTagInput(rulesNumber) {
     const col = document.createElement("div");
@@ -60,6 +82,8 @@ function createTagInput(rulesNumber) {
     col.appendChild(inputContainer);
     return col;
 }
+
+
 
 function createSelect(rulesNumber, logicValues) {
 
@@ -91,6 +115,65 @@ function createSelect(rulesNumber, logicValues) {
     return col;
 }
 
+function createInputDays(rulesNumber, dayslists) {
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const select = document.createElement("select");
+    select.setAttribute("multiple", 'true');
+    select.setAttribute("name", "options");
+    select.setAttribute("name", `custom[${rulesNumber}][days]`);
+    select.setAttribute("id", `custom-${rulesNumber}-days`);
+    select.setAttribute("class", `rules-days`);
+    setSelectOptionDays(select, `rules-${rulesNumber}-days`);
+
+    Object.keys(dayslists).forEach(key => {
+        const option = document.createElement("option");
+        option.setAttribute("value", key);
+        option.textContent = dayslists[key];
+        select.appendChild(option);
+    });
+
+    selectContainer.appendChild(select);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
+
+    return col;
+}
+
+function createInputHiddenDays(rulesNumber) {
+
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const date = document.createElement("input");
+    date.setAttribute("name", `rules[${rulesNumber}][days]`);
+    date.setAttribute("type", "hidden");
+    date.setAttribute("id", `rules-${rulesNumber}-days`);
+
+
+    selectContainer.appendChild(date);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
+
+    return col;
+
+}
+
 function createTagSelect(rulesNumber, logicValues) {
 
     const col = document.createElement("div");
@@ -115,6 +198,58 @@ function createTagSelect(rulesNumber, logicValues) {
     });
 
     selectContainer.appendChild(select);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
+
+    return col;
+}
+
+function createInputHour(rulesNumber, label) {
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const date = document.createElement("input");
+    date.setAttribute("name", `rules[${rulesNumber}][${label}]`);
+    date.setAttribute("type", "text");
+    date.setAttribute("id", `rules-${rulesNumber}-${label}`);
+
+
+    selectContainer.appendChild(date);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
+
+    return col;
+}
+
+function createInputOnce(rulesNumber) {
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const date = document.createElement("input");
+    date.setAttribute("name", `rules[${rulesNumber}][once]`);
+    date.setAttribute("type", "checkbox");
+    date.setAttribute("id", `rules-${rulesNumber}-once`);
+
+    const elem2 = document.createElement('label');
+    elem2.innerHTML = "Unica canción";
+
+    date.appendChild(elem2);
+
+    selectContainer.appendChild(date);
     row.appendChild(selectContainer);
     col.appendChild(row);
 
