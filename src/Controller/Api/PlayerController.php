@@ -11,7 +11,7 @@ use App\Controller\Api\Utils\ErrorResponse;
 use Cake\Cache\Cache;
 use Cake\Log\Log;
 use Cake\Core\Configure;
-
+use Cake\I18n\FrozenTime;
 
 /**
  * Player Controller
@@ -30,7 +30,7 @@ class PlayerController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $url = env('AMPACHE_HOST', 'ampache') . ':' . env('AMPACHE_PORT', '80');;
+        $url = env('AMPACHE_HOST', 'ampache') . ':' . env('AMPACHE_PORT', '80');
         $user = env('AMPACHE_USER', 'admin');
         $pass = env('AMPACHE_PASS', 'admin');
 
@@ -171,11 +171,16 @@ class PlayerController extends AppController
      */
     public function nextSong($posId = null)
     {
+        // TODO cambio zona horaria.
+        date_default_timezone_set('America/Bogota');
         $this->Authorization->skipAuthorization();
 
         // Get from cache if exists
         $cached = $this->request->getQuery('cached', true);
         $lastSong = Cache::read('last-song-' . $posId, 'short');
+        $last_song_time = $lastSong->time ?? 180;
+        $last_song_time_negative = -1 * abs($last_song_time);
+        $ruleHour = $lastSong->ruleHour ?? FALSE;
         if ($lastSong != null && $cached === true) {
             Log::write('debug', "Loaded song from cache for POS $posId");
             $this->set('song', $lastSong);
@@ -193,27 +198,62 @@ class PlayerController extends AppController
                     ->order(['SongsRequests.created' => 'ASC']);
             });
         $pos = $query->first();
+        $now = FrozenTime::now();
+        $now = $now->format('H:i:s');
+        $day = date('l');
+        $now = strtotime($now);
+        $flag_rule = FALSE;
+        $rule = FALSE;
+        if (isset($pos->playbook->rules) && !$ruleHour) {
+            foreach ($pos->playbook->rules as $key => &$rul) {
+                if ($rul->logic === 'date') {
+                    if ($rul->days && $rul->start_hour && $rul->final_hour) {
+                        $days = explode(',', $rul->days);
+                        $start_hour = strtotime($rul->start_hour);
+                        $final_hour = strtotime($rul->final_hour);
+                        if (in_array($day, $days) && $start_hour <= $now && $final_hour >= $now) {
+                            $flag_rule = TRUE;
+                            $rule = $rul;
+                            break;
+                        }
+                    }
+                    unset($pos->playbook->rules[$key]);
+                }
+            }
 
+        }
         $song = null;
-        if ($pos->songs_requests != null && count($pos->songs_requests) > 0) {
+        if ($flag_rule) {
+            $song = $this->getFromRuleHour($rule);
+        }
+        elseif ($pos->songs_requests != null && count($pos->songs_requests) > 0) {
             $song = $this->getFromRequest($pos);
         } else {
             $song = $this->getFromRule($pos);
         }
-
         Cache::write('last-song-' . $posId, $song, 'short');
 
         $this->set('song', $song);
         $this->viewBuilder()->setOption('serialize', 'song');
     }
 
+    private function getFromRuleHour($rule) {
+        $playlistId = (string) $rule->tag;
+        $songs = $this->Ampache->getPlaylistSongs($playlistId);
+        $song = $songs[array_rand($songs)];
+        $song->ruleHour = $rule->once ?? FALSE;
+        return $song;
+    }
+
     private function getFromRule($pos)
     {
         $posId = $pos->id;
 
-        if ($pos->playbook != null && count($pos->playbook->rules) > 0) {
+        try {
+            if ($pos->playbook == null || count($pos->playbook->rules) == 0) {
+                throw new \Exception("Sin reglas", 1);
+            }
             $lastRule = Cache::read('last-rule-' . $posId, 'long') ?? -1;
-
             $nextRule = $lastRule + 1;
             $nextRule = $nextRule < count($pos->playbook->rules) ? $nextRule : 0;
             $currentRule = $pos->playbook->rules[$nextRule];
@@ -224,8 +264,9 @@ class PlayerController extends AppController
             $playlistId = (string) $currentRule->tag;
             $songs = $this->Ampache->getPlaylistSongs($playlistId);
             $song = $songs[array_rand($songs)];
-        } else {
-            Log::write('warning', "No rules asociated for POS $posId, returning random song");
+        }
+        catch (\Exception $e) {
+            Log::write('notice', "No rules asociated for POS $posId, returning random song");
             $songs = $this->Ampache->getSongs(new DataParams())->song;
             $song = $songs[array_rand($songs)];
         }

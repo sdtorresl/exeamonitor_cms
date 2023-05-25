@@ -18,7 +18,7 @@ class PlaybooksController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $url = env('AMPACHE_HOST', 'ampache') . ':' .  env('AMPACHE_PORT', '80');;
+        $url = env('AMPACHE_HOST', 'ampache') . ':' . env('AMPACHE_PORT', '80');;
         $user = env('AMPACHE_USER', 'admin');
         $pass = env('AMPACHE_PASS', 'admin');
 
@@ -60,7 +60,11 @@ class PlaybooksController extends AppController
         ]);
         $this->Authorization->authorize($playbook);
 
-        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
+        $logicValues = [
+            'random' => __('Random'),
+            'sorted' => __('Sorted'),
+            'date' => __('Date'),
+        ];
         $playlistValues = $this->getPlaylistValues();
         $this->set(compact('playbook', 'logicValues', 'playlistValues'));
     }
@@ -86,9 +90,18 @@ class PlaybooksController extends AppController
         }
 
         $customers = $this->Playbooks->Customers->find('list', ['limit' => 200])->all();
-        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
+        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted'), 'date' => __('Date')];
+        $daysValues = [
+            'Sunday' => __('Domingo'),
+            'Monday' => __('Lunes'),
+            'Tuesday' => __('Martes'),
+            'Wednesday' => __('Miercoles'),
+            'Thursday' => __('Jueves'),
+            'Friday' => __('Viernes'),
+            'Saturday' => __('Sabado'),
+        ];
         $playlistValues = $this->getPlaylistValues();
-        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues'));
+        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues', 'daysValues'));
     }
 
     /**
@@ -114,9 +127,18 @@ class PlaybooksController extends AppController
             $this->Flash->error(__('The playbook could not be saved. Please, try again.'));
         }
         $customers = $this->Playbooks->Customers->find('list', ['limit' => 200])->all();
-        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted')];
+        $logicValues = ['random' => __('Random'), 'sorted' => __('Sorted'), 'date' => __('Date')];
+        $daysValues = [
+            'Sunday' => __('Domingo'),
+            'Monday' => __('Lunes'),
+            'Tuesday' => __('Martes'),
+            'Wednesday' => __('Miercoles'),
+            'Thursday' => __('Jueves'),
+            'Friday' => __('Viernes'),
+            'Saturday' => __('Sabado'),
+        ];
         $playlistValues = $this->getPlaylistValues();
-        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues'));
+        $this->set(compact('playbook', 'customers', 'logicValues', 'playlistValues', 'daysValues'));
     }
 
     /**

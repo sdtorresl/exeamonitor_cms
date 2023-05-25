@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int $playbook_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $hour
  *
  * @property \App\Model\Entity\Playbook $playbook
  */
@@ -34,6 +35,10 @@ class Rule extends Entity
         'playbook_id' => true,
         'created' => true,
         'modified' => true,
+        'start_hour' => true,
+        'final_hour' => true,
+        'days' => true,
+        'once' => true,
         'playbook' => true,
     ];
 }

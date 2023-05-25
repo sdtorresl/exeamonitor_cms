@@ -56,7 +56,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
         $key = hash('sha256', $this->pass);
         $passphrase = hash('sha256', $time . $key);
 
-        Log::write('debug', "Ampache handshake intialized");
+        // Log::write('debug', "Ampache handshake intialized");
         $response = $this->httpClient->get($this->getEndpoint(), [
             'action' => 'handshake',
             'auth' => $passphrase,
@@ -64,7 +64,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
             'version' => '5.0.0',
             'user' => $this->user
         ]);
-        Log::write('debug', "Ampache handshake response: {$response->getStringBody()}");
+        // Log::write('debug', "Ampache handshake response: {$response->getStringBody()}");
 
         $content = $this->getContent($response->getStringBody());
         $this->apiAuth = (string) $content->auth;
@@ -83,7 +83,7 @@ class AmpacheComponent extends Component implements AmpacheComponentI
 //        Log::write('debug', "Ampache options: " . implode(',', $options));
 
         $response = $this->httpClient->get($this->getEndpoint(), $options);
-        Log::write('debug', "Ampache response: {$response->getStringBody()}");
+        // Log::write('debug', "Ampache response: {$response->getStringBody()}");
 
         return $this->getContent($response->getStringBody());
     }
