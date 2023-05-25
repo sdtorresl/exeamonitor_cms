@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Migrations\AbstractMigration;
 
-class AddPlaybookIdToPointsOfSale extends AbstractMigration
+class AddRulesHours extends AbstractMigration
 {
     /**
      * Change Method.
