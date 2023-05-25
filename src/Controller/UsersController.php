@@ -284,7 +284,7 @@ class UsersController extends AppController
 
     private function getRedirect($user)
     {
-        if ($user->role === 'admin') {
+        if ($user->role === 'admin' || $user->role === 'customers_manager') {
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Checks',
                 'action' => 'index',
