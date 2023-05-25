@@ -237,7 +237,7 @@ function createInputOnce(rulesNumber) {
     row.setAttribute("class", "row");
 
     const selectContainer = document.createElement("div");
-    selectContainer.setAttribute("class", "input-field col s12");
+    selectContainer.setAttribute("class", "input-field col s12 check-custom");
 
     const date = document.createElement("input");
     date.setAttribute("name", `rules[${rulesNumber}][once]`);
@@ -247,7 +247,7 @@ function createInputOnce(rulesNumber) {
     const elem2 = document.createElement('label');
     elem2.innerHTML = "Unica canción";
 
-    date.appendChild(elem2);
+    selectContainer.appendChild(elem2);
 
     selectContainer.appendChild(date);
     row.appendChild(selectContainer);
