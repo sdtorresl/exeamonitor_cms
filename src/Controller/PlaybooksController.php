@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Controller\Component\DataParams;
+use Cake\Core\Configure;
 
 
 /**
@@ -18,9 +19,9 @@ class PlaybooksController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $url = env('AMPACHE_HOST', 'ampache') . ':' .  env('AMPACHE_PORT', '80');;
-        $user = env('AMPACHE_USER', 'admin');
-        $pass = env('AMPACHE_PASS', 'admin');
+        $url = Configure::read('Ampache.host') . ':' . Configure::read('Ampache.port');;
+        $user = Configure::read('Ampache.user');
+        $pass = Configure::read('Ampache.pass');
 
         $this->loadComponent('Ampache', [
             'url' => $url,

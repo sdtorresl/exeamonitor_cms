@@ -89,7 +89,7 @@ return [
      * Email configuration.
      *
      * Host and credential configuration in case you are using SmtpTransport
-     * 
+     *
      * Each transport needs a `className`. Valid options are as follows:
      *
      * Mail   - Send using PHP mail function
@@ -130,5 +130,11 @@ return [
         'appSecret' =>  env('PUSHER_SECRET'),
         'appId' =>  env('PUSHER_APP_ID'),
         'cluster' =>  env('PUSHER_CLUSTER'),
+    ],
+    'Ampache' => [
+        'host' => env('AMPACHE_HOST', 'https://ampache.exeamedia.com'),
+        'user' => env('AMPACHE_USER', 'exeadmin'),
+        'pass' => env('AMPACHE_PASS', '3x34Media2023'),
+        'port' => env('AMPACHE_PORT', '80'),
     ]
 ];
