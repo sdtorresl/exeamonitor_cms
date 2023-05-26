@@ -18,7 +18,7 @@ $name = $first_name . ' ' . $last_name;
     <li>
         <div class="customer-info">
             <figure class="customer-logo">
-                <?= $this->Html->image($grav_url) ?>
+                <?= $this->Html->image('logo-ems.svg', ['alt' => 'Logo EMS', 'id' => 'logo', 'style' => 'width:150px;']); ?>
             </figure>
             <div class="customer-name">
                 <?= $name ?>

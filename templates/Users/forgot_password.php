@@ -1,7 +1,7 @@
 <div class="users login">
     <div class="card-panel">
         <figure class="logo-container">
-            <?= $this->Html->image('logo-ems.png', ['alt' => 'Logo EMS', 'id' => 'logo']); ?>
+            <?= $this->Html->image('logo-ems.svg', ['alt' => 'Logo EMS', 'id' => 'logo', 'style' => 'width:150px;']); ?>
         </figure>
 
         <?= $this->Flash->render() ?>

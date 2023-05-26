@@ -22,11 +22,11 @@
 <div class="{{ pluralVar }} login">
     <div class="card-panel">
         <figure class="logo-container">
-            <?= $this->Html->image('logo-ems.png', ['alt' => 'Logo EMS', 'id' => 'logo']); ?>
+            <?php= $this->Html->image('logo-ems.svg', ['alt' => 'Logo EMS', 'id' => 'logo', 'style' => 'width:150px;']); ?>
         </figure>
 
         <?= $this->Flash->render('auth') ?>
-        
+
         <div class="form">
             <?= $this->Form->create() ?>
             <div class="form form-control">
@@ -38,7 +38,7 @@
 
                 <div id="password-remember" class="center-align">
                     <p><?= $this->Html->link(
-                        __('Have you forgotten your password?'), 
+                        __('Have you forgotten your password?'),
                         ['controller' => 'Users', 'action' => 'reset']) ?>
                     </p>
                 </div>
