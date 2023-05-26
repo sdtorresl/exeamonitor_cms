@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Middleware\CorsMiddleware;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
@@ -117,7 +118,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             return false;
         });
 
+        $origin = Configure::read('Cors.AllowOrigin');
+
         $middlewareQueue->add($csrf);
+        $middlewareQueue->add(new CorsMiddleware(['allowUrls' => $origin]));
 
         $middlewareQueue->add(function ($request, $handler) {
             if ($request->getParam('prefix') == 'Api' || preg_match("/api/i", $request->getParam('_matchedRoute'))) {
@@ -191,7 +195,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
     /**
      * Authorization service
-     * 
+     *
      * @return AuthorizationService
      */
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
