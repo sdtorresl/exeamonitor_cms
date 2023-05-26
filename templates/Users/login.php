@@ -10,11 +10,11 @@ use PhpParser\Node\Stmt\Label;
 <div class="users login">
     <div class="card-panel">
         <figure class="logo-container">
-            <?= $this->Html->image('logo-ems.png', ['alt' => 'Logo EMS', 'id' => 'logo']); ?>
+            <?= $this->Html->image('logo-ems.svg', ['alt' => 'Logo EMS', 'id' => 'logo', 'style' => 'width:150px;']); ?>
         </figure>
 
         <?= $this->Flash->render() ?>
-        
+
         <div class="form">
             <?= $this->Form->create() ?>
             <div class="form form-control">
@@ -26,7 +26,7 @@ use PhpParser\Node\Stmt\Label;
 
                 <div id="password-remember" class="center-align">
                     <p><?= $this->Html->link(
-                        __('Have you forgotten your password?'), 
+                        __('Have you forgotten your password?'),
                         ['controller' => 'Users', 'action' => 'forgot-password']) ?>
                     </p>
                 </div>
