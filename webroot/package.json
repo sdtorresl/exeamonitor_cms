@@ -1,15 +1,24 @@
 {
-  "name": "exeamonitor",
-  "version": "1.0.0",
-  "description": "CMS for Exea Monitor System (EMS)",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Sergio Torres",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "bootstrap-colorpicker": "^3.2.0",
-    "materialize-css": "^1.0.0"
-  }
+    "name": "core",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpfile.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "del": "^7.0.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-commonjs-tasks": "^1.2.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-uglify": "^3.0.2",
+        "sass": "^1.55.0",
+        "bootstrap-colorpicker": "^3.2.0",
+        "materialize-css": "^1.0.0"
+    }
 }

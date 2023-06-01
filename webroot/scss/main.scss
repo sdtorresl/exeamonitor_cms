@@ -372,6 +372,10 @@ section.card {
         }
     }
 
+    .card-actions{
+        padding: 24px 24px 0;
+    }
+
     .card-content {
         table {
             overflow-x: scroll;
@@ -628,4 +632,9 @@ section.card {
         }
     }
 }
-.row .col.check-custom {display: flex;align-items: center;}.check-custom [type="checkbox"]:not(:checked), .check-custom [type="checkbox"]:checked{position: initial;opacity: initial;pointer-events: initial;margin-right: 5px;}
+.row .col.check-custom {
+    display: flex;align-items: center;
+}
+.check-custom [type="checkbox"]:not(:checked), .check-custom [type="checkbox"]:checked{
+    position: initial;opacity: initial;pointer-events: initial;margin-right: 5px;
+}
