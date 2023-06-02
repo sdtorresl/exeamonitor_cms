@@ -1,4 +1,7 @@
 <?php
+
+use Cake\Core\Configure;
+
 $roles = $roles ?? [];
 $email = $this->getRequest()->getSession()->read('Auth.email');
 $first_name = $this->getRequest()->getSession()->read('Auth.first_name');
@@ -104,6 +107,16 @@ $name = $first_name . ' ' . $last_name;
                         <li><?= $this->Html->link(__('Create'), ['controller' => 'playbooks', 'action' => 'add']) ?></li>
                     </ul>
                 </div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header" target="_blank" href="<?= Configure::read('Ampache.host') ?>">
+                    <i class="fal fa-briefcase"></i>
+                    <?= 'Automatizador' ?>
+                </a>
             </li>
         </ul>
     </li>
