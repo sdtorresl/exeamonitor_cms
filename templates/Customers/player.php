@@ -14,14 +14,17 @@
                     </div>
                 </aside>
                 <div id="player-controls">
-                    <a href="javascript:;" id="btn-play-pause" class="play">
-                        <i id="play-pause-icon"></i>
+                    <a href="javascript:;" id="btn-play" class="play">
+                        <i id="play-icon" class="fas fa-play"></i>
+                    </a>
+
+                    <span style="width: 10px"></span>
+
+                    <a href="javascript:;" id="btn-pause" class="pause">
+                        <i id="pause-icon" class="fas fa-pause"></i>
                     </a>
 
                     <div id="track-info">
-                        <div id="progress-container">
-                            <progress id='progress-bar' min='0' max='100' value='0'></progress>
-                        </div>
                         <div id="time-container">
                             <div id="elapsed-time">00:00:00</div>
                         </div>
@@ -29,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m3 l2 d-flex ai-center jc-center">
+            <!-- <div class="col s12 m3 l2 d-flex ai-center jc-center">
                 <div class="media-wrapper">
                     <div id="download">
                         <?php if ($customer->backup_url) : ?>
@@ -41,22 +44,8 @@
                             </span>
                         <?php endif; ?>
                     </div>
-
-                    <div id="volume-controls">
-                        <a href="javascript:;" id="volume-down">
-                            <i class="fas fa-minus"></i>
-                        </a>
-
-                        <div id="volume-bar">
-                            <span id="volume-value"></span>
-                        </div>
-
-                        <a href="javascript:;" id="volume-up">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </div>
@@ -73,6 +62,8 @@
     }
 
     <?php if ($customer->primary_color) : ?>#btn-play-pause,
+    #btn-play,
+    #btn-pause,
     progress,
     #volume-bar {
         background: <?= $customer->primary_color ?> !important;
@@ -121,6 +112,7 @@
 <script type="text/javascript">
     const source = '<?= $customer->stream_url ?>';
     const metadataURI = '<?= $this->Url->build([
+                                "prefix" => "Api",
                                 "controller" => "Customers",
                                 "action" => "metadata",
                                 "?" => ["stream" => $customer->stream_url],
@@ -129,6 +121,7 @@
     const posId = "<?= $this->getRequest()->getSession()->read('Auth.point_of_sale_id'); ?>";
 
     const checksURI = '<?= $this->Url->build([
+                            "prefix" => "Api",
                             "controller" => "Checks",
                             "action" => "index",
                             "_ext" => "json"
@@ -137,4 +130,5 @@
     const csrfToken = '<?= $_COOKIE['csrfToken'] ?>';
 </script>
 
+<?= $this->Html->script('/node_modules/icecast-metadata-player/build/icecast-metadata-player-1.15.6.main.min.js'); ?>
 <?= $this->Html->script('player'); ?>

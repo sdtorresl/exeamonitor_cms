@@ -21,6 +21,7 @@ class ChecksController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['add']);
     }
 
 
@@ -74,6 +75,4 @@ class ChecksController extends AppController
         $this->set(compact('stats'));
         $this->viewBuilder()->setOption('serialize', ['stats']);
     }
-
-
 }

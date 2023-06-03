@@ -46,136 +46,52 @@ function toHHMMSS(seconds) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    const onMetadata = (metadata) => {
+        document.getElementById("song-title").innerHTML = metadata.TITLE;
+    };
+    const onError = (message, error) => {
+        console.error(`error message: ${message}`);
+        console.error(`error: ${error}`);
+    };
+
+    const icecastPlayer =
+        new IcecastMetadataPlayer(source,
+            { metadataTypes: [], onError }
+        );
+
+
     // Setup player
-    const player = new Audio();
-    player.src = source;
-    player.autoplay = true;
-    player.volume = 0.7;
+    const player = icecastPlayer.audioElement
 
-    btnPlayPause = document.getElementById('btn-play-pause');
+    btnPlay = document.getElementById('btn-play');
+    btnPause = document.getElementById('btn-pause');
     btnMute = document.getElementById('btn-mute');
-    progressBar = document.getElementById('progress-bar');
-    volumeBar = document.getElementById('volume-bar');
-    volumeValue = document.getElementById('volume-value');
-    btnVolumeUp = document.getElementById('volume-up');
-    btnVolumeDown = document.getElementById('volume-down');
     elapsedTime = document.getElementById('elapsed-time');
-    playPauseIcon = document.getElementById('play-pause-icon');
-
-    changeButtonType(changeButtonType);
-
-    // Update the video volume
-    volumeBar.addEventListener("change", function (evt) {
-        function displayMessage(message, canPlay) {
-            var element = document.querySelector('#message');
-            element.innerHTML = message;
-            element.className = canPlay ? 'info' : 'error';
-        }
-        player.volume = parseInt(evt.target.value) / 10;
-    });
 
     // Add a listener for the timeupdate event so we can update the progress bar
     player.addEventListener('timeupdate', updateProgressBar, false);
 
-    // Add a listener for the play and pause events so the buttons state can be updated
-    player.addEventListener('play', function () {
-        // Change the button to be a pause button
-        changeButtonType(btnPlayPause);
-    }, false);
+    btnPlay.addEventListener("click", play);
+    btnPause.addEventListener("click", stop);
 
-    player.addEventListener('pause', function () {
-        // Change the button to be a play button
-        changeButtonType(btnPlayPause);
-    }, false);
-
-    player.addEventListener('ended', function () {
-        this.pause();
-    }, false);
-
-    progressBar.addEventListener("click", seek);
-
-    btnPlayPause.addEventListener("click", playPauseAudio);
-
-    btnVolumeUp.addEventListener("click", function () {
-        if (player.src) {
-            if ((player.volume + 0.1) <= 1) {
-                player.volume = player.volume + 0.1;
-            } else {
-                player.volume = 1;
-            }
-        }
-    });
-
-    btnVolumeDown.addEventListener("click", function () {
-        if (player.src) {
-            if ((player.volume - 0.1) >= 0) {
-                player.volume = player.volume - 0.1;
-            } else {
-                player.volume = 0;
-            }
-        }
-    });
-
-    player.addEventListener('volumechange', function (e) {
-        volumeValue.style.width = player.volume * 100 + '%';
+    function play() {
+        console.log("playing...")
+        icecastPlayer.play();
         sendStats();
-    }, false);
-
-    function seek(e) {
-        if (player.src) {
-            var percent = e.offsetX / this.offsetWidth;
-            player.currentTime = percent * player.duration;
-            e.target.value = Math.floor(percent / 100);
-            e.target.innerHTML = progressBar.value + '% played';
-        }
+        updateMetadata();
     }
 
-    function playPauseAudio() {
-        if (player.src) {
-            if (player.paused || player.ended) {
-                // Change the button to a pause button
-                changeButtonType(btnPlayPause);
-                player.play();
-            } else {
-                // Change the button to a play button
-                changeButtonType(btnPlayPause);
-                player.pause();
-            }
-
-            volumeValue.style.width = player.volume * 100 + '%';
-        }
+    function stop() {
+        console.log("stopping...")
+        icecastPlayer.stop();
+        sendStats();
+        updateMetadata();
     }
 
-    // Stop the current media from playing, and return it to the start position
-    function stopAudio() {
-        if (player.src) {
-            player.pause();
-            if (player.currentTime) player.currentTime = 0;
-        }
-    }
 
     // Update the progress bar
     function updateProgressBar() {
-        // Work out how much of the media has played via the duration and currentTime parameters
-        var percentage = Math.floor((100 / player.duration) * player.currentTime);
-        // Update the progress bar's value
-        progressBar.value = percentage;
-
         elapsedTime.innerHTML = toHHMMSS(player.currentTime);
-    }
-
-    // Updates a button's title, innerHTML and CSS class
-    function changeButtonType(btn) {
-        if (!player.paused) {
-            btn.className = "pause";
-            playPauseIcon.className = "fas fa-pause";
-        } else {
-            btn.className = "play";
-            playPauseIcon.className = "fas fa-play";
-        }
-
-        sendStats();
-        updateMetadata();
     }
 
     async function sendStats() {
@@ -187,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "current_song": title + artist
         };
 
-        const response = await fetch(checksURI, {
+        await fetch(checksURI, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -196,10 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify(data)
         });
 
-        console.log(response.json());
     }
 
+    updateMetadata()
     window.setInterval(sendStats, 15000);
+    window.setInterval(updateMetadata, 30000);
 });
 
-window.setInterval(updateMetadata, 30000);
+
