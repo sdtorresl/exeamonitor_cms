@@ -58,6 +58,7 @@ class PlaybooksTable extends Table
         ]);
         $this->hasMany('Rules', [
             'foreignKey' => 'playbook_id',
+            'saveStrategy' => 'replace',
             'dependent' => true,
         ]);
     }

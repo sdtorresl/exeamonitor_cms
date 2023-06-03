@@ -29,7 +29,7 @@ $this->loadHelper('Form', [
                 echo $this->Form->control('name');
                 echo $this->Form->control('customer_id', ['options' => $customers]);
                 ?>
-       
+
                 <div id="rules"></div>
 
                 <div class="d-flex jc-end">

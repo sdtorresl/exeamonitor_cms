@@ -34,11 +34,13 @@ $this->loadHelper('Form', [
                     <?php foreach ($playbook->rules as $i => $rule) : ?>
                         <div class="row">
 
+                            <?= $this->Form->control("rules.$i.id"); ?>
+
                             <div class="col s6">
                                 <?= $this->Form->control('rules.' . $i . '.tag', ['options' => $playlistValues]); ?>
                             </div>
                             <div class="col s6">
-                                
+
                                 <?= $this->Form->control('rules.' . $i . '.logic', ['options' => $logicValues]); ?>
                             </div>
                         </div>
