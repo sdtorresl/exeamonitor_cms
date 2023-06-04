@@ -68,6 +68,7 @@ class SongsHistoryController extends AppController
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization();
         $songHistory = $this->SongsHistory->newEmptyEntity();
         $songHistory = $this->SongsHistory->patchEntity($songHistory, $this->request->getData());
         if ($this->SongsHistory->save($songHistory)) {

@@ -15,7 +15,7 @@ class CorsMiddleware implements MiddlewareInterface
         'statusCode' => 200,
         'allowUrls' => [],
         'allowMethods' => [
-            'GET','OPTIONS','PUT','PATCH','DELETE'
+            'GET','OPTIONS','PUT','PATCH','DELETE', 'POST'
         ],
         'allowHeaders' => [
             'Accept-Language',
