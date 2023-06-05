@@ -13,6 +13,7 @@ use Cake\Core\Configure;
 /**
  * SongsHistory Controller
  *
+ * @property \App\Model\Table\SongsHistoryTable $SongsHistory
  * @method \App\Model\Entity\SongsHistory[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class SongsHistoryController extends AppController
@@ -68,9 +69,11 @@ class SongsHistoryController extends AppController
      */
     public function add()
     {
-        $this->Authorization->skipAuthorization();
+        //$this->Authorization->skipAuthorization();
         $songHistory = $this->SongsHistory->newEmptyEntity();
-        $songHistory = $this->SongsHistory->patchEntity($songHistory, $this->request->getData());
+        $data = json_decode($this->request->getBody()->getContents(), true);
+
+        $songHistory = $this->SongsHistory->patchEntity($songHistory, $data);
         if ($this->SongsHistory->save($songHistory)) {
             /* Notify listeners */
             $this->Pusher->publish("pos-{$songHistory->pos_id}", 'history-add', $songHistory->toArray());

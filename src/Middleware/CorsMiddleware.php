@@ -86,20 +86,20 @@ class CorsMiddleware implements MiddlewareInterface
     protected function allowCors(ResponseInterface $response, $allow_url): ResponseInterface
     {
         $response = $response
-            ->withHeader('Access-Control-Allow-Origin', $allow_url)
-            ->withHeader('Access-Control-Allow-Credentials', 'true')
-            ->withHeader('Access-Control-Allow-Methods', implode(',', $this->config['allowMethods']))
-            ->withHeader('Access-Control-Allow-Headers', implode(',', $this->config['allowHeaders']));
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Vary', 'Origin');
+            //->withHeader('Access-Control-Allow-Methods', implode(',', $this->config['allowMethods']));
+            //->withHeader('Access-Control-Allow-Headers', implode(',', $this->config['allowHeaders']));
 
-        if (is_array($this->config['exposeHeaders'])) {
+        /*if (is_array($this->config['exposeHeaders'])) {
             $response = $response
                 ->withHeader('Access-Control-Expose-Headers', implode(',', $this->config['exposeHeaders']));
-        }
+        }*/
 
-        if ($this->config['maxAge'] !== null) {
+        /*if ($this->config['maxAge'] !== null) {
             $response = $response
                 ->withHeader('Access-Control-Max-Age', $this->config['maxAge']);
-        }
+        }*/
 
         return $response;
     }
