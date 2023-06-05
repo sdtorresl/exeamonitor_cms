@@ -14,7 +14,7 @@
         <h2 class="title"><?= $customer->name . ' ' .  _('report') ?></h2>
     </div>
     <div class="card-actions">
-        <?php echo $this->Html->link('Descargar reporte', ['controller' => 'Reports', 'action' => 'dowloadReport']); ?>
+        <?php echo $this->Html->link('Descargar reporte', ['controller' => 'Reports', 'action' => 'dowloadReport', $customer->id]); ?>
     </div>
 
     <div class="card-content">
