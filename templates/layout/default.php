@@ -16,7 +16,7 @@
 
 use Cake\I18n\I18n;
 
-$cakeDescription = 'EMS - Exea Monitoring System';
+$cakeDescription = 'EMS - Monitoring System';
 $menuCell = $this->cell('Menu');
 ?>
 <!DOCTYPE html>

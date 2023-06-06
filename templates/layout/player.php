@@ -15,7 +15,7 @@
 
 use Cake\I18n\I18n;
 
-$cakeDescription = 'EMS - Exea Monitoring System';
+$cakeDescription = 'EMS - Monitoring System';
 $menuCell = $this->cell('Menu');
 $session = $this->getRequest()->getSession();
 $name = $session->read('Auth.first_name') . ' ' . $session->read('Auth.last_name');
