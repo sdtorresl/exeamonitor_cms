@@ -16,7 +16,8 @@
         "mobiledetect/mobiledetectlib": "^2.8",
         "phpoffice/phpexcel": "^1.8",
         "phpoffice/phpspreadsheet": "^1.28",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^7.2",
+        "ext-json": "*"
     },
     "require-dev": {
         "cakephp/bake": "^2.6",

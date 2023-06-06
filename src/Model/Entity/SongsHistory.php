@@ -13,7 +13,6 @@ use Cake\ORM\Entity;
  * @property string $author
  * @property int $song_id
  * @property int $pos_id
- * @property int $customer_id
  * @property \Cake\I18n\FrozenTime $created
  *
  * @property \App\Model\Entity\PointsOfSale $points_of_sale
@@ -35,7 +34,6 @@ class SongsHistory extends Entity
         'song_id' => true,
         'pos_id' => true,
         'created' => true,
-        'points_of_sale' => true,
-        'customer_id' => true
+        'points_of_sale' => true
     ];
 }
