@@ -208,6 +208,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
         ]
     ]);
     $routes->resources('Customers', [
+        'prefix' => 'Api',
         'map' => [
             'metadata' => [
                 'action' => 'metadata',

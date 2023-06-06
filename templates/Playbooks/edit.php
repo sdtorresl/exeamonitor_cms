@@ -33,38 +33,15 @@ $this->loadHelper('Form', [
                 <div id="rules" class="">
                     <?php foreach ($playbook->rules as $i => $rule) : ?>
                         <div class="row">
+
+                            <?= $this->Form->control("rules.$i.id"); ?>
+
                             <div class="col s6">
                                 <?= $this->Form->control('rules.' . $i . '.tag', ['options' => $playlistValues]); ?>
                             </div>
                             <div class="col s6">
+
                                 <?= $this->Form->control('rules.' . $i . '.logic', ['options' => $logicValues]); ?>
-                            </div>
-                            <div class="col s6">
-                                <?= $this->Form->control('custom.' . $i . '.days', [
-                                    'options' => $daysValues,
-                                    'type' => 'select',
-                                    'multiple' => TRUE,
-                                    'class' => 'rules-days',
-                                ]);
-                                ?>
-                            </div>
-                            <div class="col s6">
-                                <?= $this->Form->control('rules.' . $i . '.days', [
-                                    'type' => 'hidden',
-                                ]);
-                                ?>
-                            </div>
-                            <div class="col s6">
-                                <?= $this->Form->control('rules.' . $i . '.start_hour'); ?>
-                            </div>
-                            <div class="col s6">
-                                <?= $this->Form->control('rules.' . $i . '.final_hour'); ?>
-                            </div>
-                            <div class="col s6">
-                                <?= $this->Form->control('custom.' . $i . '.once', [
-                                    'type' => 'checkbox',
-                                ]);
-                                ?>
                             </div>
                         </div>
                     <?php endforeach ?>
@@ -93,6 +70,5 @@ $this->loadHelper('Form', [
 
 <div id="logic-values" data-value='<?= json_encode($logicValues) ?>'></div>
 <div id="playlist-values" data-value='<?= json_encode($playlistValues) ?>'></div>
-<div id="days-values" data-value='<?= json_encode($daysValues) ?>'></div>
 
 <?= $this->Html->script('playbooks', ['block' => true]); ?>
