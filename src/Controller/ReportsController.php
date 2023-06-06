@@ -23,12 +23,14 @@ class ReportsController extends AppController {
     }
 
     public function dowloadReport($id) {
-        $dataArray[0] = ['Título', 'Author', 'Fecha'];
+        $dataArray[0] = ['Título', 'Author', 'Fecha' , 'Punto de venta'];
         $query = $this->getTableLocator()->get('SongsHistory')->find()
-            ->where(['SongsHistory.customer_id' => $id]);
+            ->innerJoin('points_of_sale', 'SongsHistory.pos_id = points_of_sale.id')
+            ->where(['points_of_sale.customer_id' => $id])
+            ->select(['points_of_sale.name', 'SongsHistory.title', 'SongsHistory.author', 'SongsHistory.created']);
         $result = $query->toArray();
         foreach ($result as $value) {
-            $dataArray[] = [$value->title, $value->author, $value->created];
+            $dataArray[] = [$value->title, $value->author, $value->created, $value->points_of_sale['name']];
         }
 
         $spreadsheet = new Spreadsheet();
