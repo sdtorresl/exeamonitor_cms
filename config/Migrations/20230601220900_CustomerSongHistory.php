@@ -18,7 +18,7 @@ class CustomerSongHistory extends AbstractMigration
         $table->addColumn('customer_id', 'integer', [
             'default' => null,
             'limit' => 255,
-            'null' => true,
+            'null' => false,
         ]);
         $table->update();
     }

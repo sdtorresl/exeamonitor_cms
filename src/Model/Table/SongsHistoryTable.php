@@ -79,6 +79,11 @@ class SongsHistoryTable extends Table
             ->notEmptyString('song_id');
 
         $validator
+            ->integer('customer_id')
+            ->requirePresence('customer_id', 'create')
+            ->notEmptyString('customer_id');
+
+        $validator
             ->integer('pos_id')
             ->notEmptyString('pos_id');
 
