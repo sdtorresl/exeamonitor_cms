@@ -38,11 +38,20 @@ class PlaybooksController extends AppController
      */
     public function index()
     {
+        $data = $this->request->getData();
         $this->paginate = [
             'contain' => ['Customers'],
         ];
-        $playbooks = $this->paginate($this->Playbooks);
+
         $this->Authorization->authorize($this->Playbooks);
+        if ($data && $data['name']) {
+            $playbooks = $this->paginate($this->Playbooks->find()
+                ->where(['Playbooks.name' => $data['name']])
+            );
+        }
+        else {
+            $playbooks = $this->paginate($this->Playbooks);
+        }
 
         $this->set(compact('playbooks'));
     }

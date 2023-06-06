@@ -14,7 +14,10 @@
 
         <h2 class="title"><?= h($pointsOfSale->name) ?></h2>
     </div>
+    <?php
 
+    echo $this->Form->control(__('name'));
+    ?>
     <div class="card-content">
         <div class="row">
             <div class="col s12 m8 l6 offset-m2 offset-l3">
@@ -81,5 +84,4 @@
         </div>
 
     </div>
-    </div>
-    </dsection>
+    </section>

@@ -3,8 +3,12 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\PointsOfSale[]|\Cake\Collection\CollectionInterface $pointsOfSale
  */
-?>
 
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
+
+?>
 <section class="pointsOfSale index card">
     <div class="card-header">
         <div class="card-icon">
@@ -13,7 +17,11 @@
 
         <h2 class="title"><?= __('Points Of Sale') ?></h2>
     </div>
-    
+    <?= $this->Form->create($pointsOfSale) ?>
+    <?= $this->Form->control('name'); ?>
+    <?= $this->Form->button(__('Filtrar'), ['class' => 'btn']) ?>
+    <?= $this->Html->link(__('Limpiar filtros'), ['controller' => 'PointsOfSale', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
+    <?= $this->Form->end() ?>
     <div class="card-content">
         <table class="centered responsive-table">
             <thead>
@@ -36,7 +44,7 @@
                     <td><?= h($pointsOfSale->created) ?></td>
                     <td><?= h($pointsOfSale->modified) ?></td>
                     <td><?= $pointsOfSale->has('customer') ? $this->Html->link($pointsOfSale->customer->name, ['controller' => 'Customers', 'action' => 'view', $pointsOfSale->customer->id]) : '' ?></td>
-                            
+
                     <td class="actions">
                         <?= $this->Html->link('<i class="fal fa-eye"></i>', ['action' => 'view', $pointsOfSale->id], ['escape' => false, 'title' => __('View')] ) ?>
                         <?= $this->Html->link('<i class="fal fa-edit"></i>', ['action' => 'edit', $pointsOfSale->id], ['escape' => false, 'title' => __('Edit')] ) ?>
@@ -50,7 +58,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+
         <div class="paginator center-align">
             <ul class="pagination">
                 <?= $this->Paginator->first('<<') ?>

@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
 ?>
 
 <section class="users index card">
@@ -13,7 +16,13 @@
 
         <h2 class="title"><?= __('Users') ?></h2>
     </div>
-    
+
+    <?= $this->Form->create($users) ?>
+    <?= $this->Form->control('username'); ?>
+    <?= $this->Form->button(__('Filtrar'), ['class' => 'btn']) ?>
+    <?= $this->Html->link(__('Limpiar filtros'), ['controller' => 'Users', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
+    <?= $this->Form->end() ?>
+
     <div class="card-content">
         <table class="centered responsive-table">
             <thead>
@@ -38,7 +47,7 @@
                     <td><?= $user->enabled ? '<i class="fas fa-circle enabled"></i> ': '<i class="fas fa-circle disabled"></i>' ?></td>
                     <td><?= h($user->last_access) ?></td>
                     <td><?= $user->has('points_of_sale') ? $this->Html->link($user->points_of_sale->name, ['controller' => 'PointsOfSale', 'action' => 'view', $user->points_of_sale->id]) : '' ?></td>
-            
+
                     <td class="actions">
                         <?= $this->Html->link('<i class="fal fa-eye"></i>', ['action' => 'view', $user->id], ['escape' => false, 'title' => __('View')] ) ?>
                         <?= $this->Html->link('<i class="fal fa-edit"></i>', ['action' => 'edit', $user->id], ['escape' => false, 'title' => __('Edit')] ) ?>
@@ -52,7 +61,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+
         <div class="paginator center-align">
             <ul class="pagination">
                 <?= $this->Paginator->first('<<') ?>

@@ -21,11 +21,20 @@ class PointsOfSaleController extends AppController
      */
     public function index()
     {
+        $data = $this->request->getData();
         $this->paginate = [
             'contain' => ['Countries', 'Cities', 'Customers'],
         ];
         $this->Authorization->Authorize($this->PointsOfSale);
-        $pointsOfSale = $this->paginate($this->PointsOfSale);
+        if ($data && $data['name']) {
+            $pointsOfSale = $this->paginate($this->PointsOfSale->find()
+                ->where(['PointsOfSale.name' => $data['name']])
+            );
+        }
+        else {
+            $pointsOfSale = $this->paginate($this->PointsOfSale);
+        }
+
 
         $this->set(compact('pointsOfSale'));
     }

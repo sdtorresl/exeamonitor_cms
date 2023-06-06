@@ -36,11 +36,19 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $data = $this->request->getData();
         $this->Authorization->authorize($this->Users);
         $this->paginate = [
             'contain' => ['PointsOfSale'],
         ];
-        $users = $this->paginate($this->Users);
+        if ($data && $data['username']) {
+            $users = $this->paginate($this->Users->find()
+                ->where(['Users.username' => $data['username']])
+            );
+        }
+        else {
+            $users = $this->paginate($this->Users);
+        }
 
         $this->set(compact('users'));
     }

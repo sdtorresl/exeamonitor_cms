@@ -4,6 +4,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Playbook[]|\Cake\Collection\CollectionInterface $playbooks
  */
+
+$this->loadHelper('Form', [
+    'templates' => 'materialize_form',
+]);
 ?>
 
 <section class="playbooks index card">
@@ -14,6 +18,12 @@
 
         <h2 class="title"><?= __('Playbooks') ?></h2>
     </div>
+
+    <?= $this->Form->create($playbooks) ?>
+    <?= $this->Form->control('name'); ?>
+    <?= $this->Form->button(__('Filtrar'), ['class' => 'btn']) ?>
+    <?= $this->Html->link(__('Limpiar filtros'), ['controller' => 'Playbooks', 'action' => 'index'], ['class' => ['btn', 'cancel']]) ?>
+    <?= $this->Form->end() ?>
 
     <div class="card-content">
         <table class="centered responsive-table">
