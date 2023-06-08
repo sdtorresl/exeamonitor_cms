@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     removeButton.onclick = function () {
         if (rulesNumber > 0) {
-            console.log("Remove")
             const lastRuleContainer = rulesContainer.children[rulesContainer.children.length - 1]
             lastRuleContainer.remove();
             rulesNumber--;
@@ -46,13 +45,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function addComponent(rulesNumber, playlists, logicValues, dayslists, rulesContainer, values = {}) {
-    console.log(values)
     const ruleContainer = document.createElement("div");
     ruleContainer.setAttribute("id", `rule-${rulesNumber}`);
     ruleContainer.setAttribute("class", "row");
 
     //ruleContainer.appendChild(createTagInput(rulesNumber));
-    ruleContainer.appendChild(createTagSelect(rulesNumber, playlists, values.playbook_id));
+    ruleContainer.appendChild(createTagSelect(rulesNumber, playlists, values.tag));
     ruleContainer.appendChild(createSelect(rulesNumber, logicValues, values.logic));
     ruleContainer.appendChild(createInputDays(rulesNumber, dayslists, values.days));
     ruleContainer.appendChild(createInputHiddenDays(rulesNumber));
@@ -131,7 +129,12 @@ function createSelect(rulesNumber, logicValues, value = false) {
         select.value = value;
     }
 
+    const label = document.createElement("label");
+    label.setAttribute("for", `rules-${rulesNumber}-logic`);
+    label.innerText = "Tipo";
+
     selectContainer.appendChild(select);
+    selectContainer.appendChild(label);
     row.appendChild(selectContainer);
     col.appendChild(row);
 
@@ -139,7 +142,6 @@ function createSelect(rulesNumber, logicValues, value = false) {
 }
 
 function createInputDays(rulesNumber, dayslists, value = false) {
-    console.log(value)
 
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
@@ -159,7 +161,6 @@ function createInputDays(rulesNumber, dayslists, value = false) {
     setSelectOptionDays(select, `rules-${rulesNumber}-days`);
 
     Object.keys(dayslists).forEach(key => {
-        console.log(key)
         const option = document.createElement("option");
         option.setAttribute("value", key);
         option.textContent = dayslists[key];
@@ -172,10 +173,15 @@ function createInputDays(rulesNumber, dayslists, value = false) {
             var option = select.options[i];
             option.selected = selectedValues.includes(option.value);
         }
-        //console.log(value.join(','))
     }
 
+    const label = document.createElement("label");
+    label.setAttribute("for", `rules-${rulesNumber}-days`);
+    label.innerText = "Días";
+
+
     selectContainer.appendChild(select);
+    selectContainer.appendChild(label);
     row.appendChild(selectContainer);
     col.appendChild(row);
 
@@ -209,7 +215,6 @@ function createInputHiddenDays(rulesNumber) {
 }
 
 function createTagSelect(rulesNumber, logicValues, value = false) {
-
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
 
@@ -235,7 +240,12 @@ function createTagSelect(rulesNumber, logicValues, value = false) {
         select.value = value;
     }
 
+    const label = document.createElement("label");
+    label.setAttribute("for", `rules-${rulesNumber}-tag`);
+    label.innerText = "Tag";
+
     selectContainer.appendChild(select);
+    selectContainer.appendChild(label);
     row.appendChild(selectContainer);
     col.appendChild(row);
 
@@ -257,13 +267,25 @@ function createInputHour(rulesNumber, label, value = false) {
     date.setAttribute("name", `rules[${rulesNumber}][${label}]`);
     date.setAttribute("type", "text");
     date.setAttribute("id", `rules-${rulesNumber}-${label}`);
+    const labelField = document.createElement("label");
+    labelField.setAttribute("for", `rules-${rulesNumber}-${label}`);
+
+    if (label == 'start_hour') {
+        labelField.innerText = "Hora de inicio";
+    }
+    else {
+        labelField.innerText = "Hora de Fin";
+    }
 
     if (value) {
         date.value = value;
+        labelField.setAttribute('class', 'active');
     }
 
 
+
     selectContainer.appendChild(date);
+    selectContainer.appendChild(labelField);
     row.appendChild(selectContainer);
     col.appendChild(row);
 
@@ -271,8 +293,6 @@ function createInputHour(rulesNumber, label, value = false) {
 }
 
 function createInputOnce(rulesNumber, value = false) {
-    console.log(value)
-
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
 
