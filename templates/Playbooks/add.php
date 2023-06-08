@@ -53,7 +53,7 @@ $this->loadHelper('Form', [
         </div>
     </div>
 </section>
-
+<div id="rules-values" data-value='<?= json_encode($playbook->rules) ?>'></div>
 <div id="logic-values" data-value='<?= json_encode($logicValues) ?>'></div>
 <div id="playlist-values" data-value='<?= json_encode($playlistValues) ?>'></div>
 <div id="days-values" data-value='<?= json_encode($daysValues) ?>'></div>
