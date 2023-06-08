@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property string $tag
  * @property string $logic
  * @property int $playbook_id
+ * @property string $final_hour
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  * @property string $hour
@@ -37,6 +38,7 @@ class Rule extends Entity
         'modified' => true,
         'start_hour' => true,
         'final_hour' => true,
+        'calendar' => true,
         'days' => true,
         'once' => true,
         'playbook' => true,

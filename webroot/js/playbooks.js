@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function addComponent(rulesNumber, playlists, logicValues, dayslists, rulesContainer, values = {}) {
+    console.log(values)
     const ruleContainer = document.createElement("div");
     ruleContainer.setAttribute("id", `rule-${rulesNumber}`);
     ruleContainer.setAttribute("class", "row");
@@ -57,6 +58,7 @@ function addComponent(rulesNumber, playlists, logicValues, dayslists, rulesConta
     ruleContainer.appendChild(createInputHour(rulesNumber, 'start_hour', values.start_hour));
     ruleContainer.appendChild(createInputHour(rulesNumber, 'final_hour', values.final_hour));
     ruleContainer.appendChild(createInputOnce(rulesNumber, values.once));
+    ruleContainer.appendChild(createInputDate(rulesNumber, values.calendar));
 
     rulesContainer.appendChild(ruleContainer);
     rulesNumber++;
@@ -292,6 +294,41 @@ function createInputHour(rulesNumber, label, value = false) {
     return col;
 }
 
+function createInputDate(rulesNumber, value = false) {
+
+    const col = document.createElement("div");
+    col.setAttribute("class", "col s6");
+
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const selectContainer = document.createElement("div");
+    selectContainer.setAttribute("class", "input-field col s12");
+
+    const date = document.createElement("input");
+    date.setAttribute("name", `rules[${rulesNumber}][calendar]`);
+    date.setAttribute("type", "text");
+    date.setAttribute("id", `rules-${rulesNumber}-calendar`);
+
+    const labelField = document.createElement("label");
+    labelField.setAttribute("for", `rules-${rulesNumber}-calendar`);
+    labelField.innerText = "Calendario";
+
+    if (value) {
+        date.value = value;
+        labelField.setAttribute('class', 'active');
+    }
+
+    buildCalendar(date);
+
+    selectContainer.appendChild(date);
+    selectContainer.appendChild(labelField);
+    row.appendChild(selectContainer);
+    col.appendChild(row);
+
+    return col;
+}
+
 function createInputOnce(rulesNumber, value = false) {
     const col = document.createElement("div");
     col.setAttribute("class", "col s6");
@@ -320,4 +357,14 @@ function createInputOnce(rulesNumber, value = false) {
     col.appendChild(row);
 
     return col;
+}
+
+function buildCalendar(element) {
+    const picker = new LitepickerMin({
+        element: element,
+        lang: "es-ES",
+        firstDay: 1,
+        format: "DD/MM/YYYY",
+        singleMode: false,
+    });
 }

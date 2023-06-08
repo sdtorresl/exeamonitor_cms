@@ -10,6 +10,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "bootstrap-colorpicker": "^3.2.0",
         "del": "^7.0.0",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
@@ -17,8 +18,10 @@
         "gulp-rename": "^2.0.0",
         "gulp-sass": "^5.1.0",
         "gulp-uglify": "^3.0.2",
-        "sass": "^1.55.0",
-        "bootstrap-colorpicker": "^3.2.0",
-        "materialize-css": "^1.0.0"
+        "materialize-css": "^1.0.0",
+        "sass": "^1.55.0"
+    },
+    "dependencies": {
+        "litepicker": "^2.0.12"
     }
 }

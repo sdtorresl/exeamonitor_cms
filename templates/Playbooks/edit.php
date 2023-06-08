@@ -85,4 +85,5 @@ $this->loadHelper('Form', [
 <div id="playlist-values" data-value='<?= json_encode($playlistValues) ?>'></div>
 <div id="days-values" data-value='<?= json_encode($daysValues) ?>'></div>
 
+<?= $this->Html->script('libraries/litepicker.min.js', ['block' => true]); ?>
 <?= $this->Html->script('playbooks', ['block' => true]); ?>
