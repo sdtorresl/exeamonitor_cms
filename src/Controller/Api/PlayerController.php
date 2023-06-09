@@ -12,6 +12,7 @@ use Cake\Cache\Cache;
 use Cake\Log\Log;
 use Cake\Core\Configure;
 use Cake\I18n\FrozenTime;
+use DateTime;
 
 /**
  * Player Controller
@@ -205,15 +206,27 @@ class PlayerController extends AppController
         $flag_rule = FALSE;
         $rule = FALSE;
         if (isset($pos->playbook->rules) && !$ruleHour) {
-            foreach ($pos->playbook->rules as $key => &$rul) {
+            foreach ($pos->playbook->rules as $key => $rul) {
                 if ($rul->logic === 'date') {
                     if ($rul->days && $rul->start_hour && $rul->final_hour) {
                         $days = explode(',', $rul->days);
                         $start_hour = strtotime($rul->start_hour);
                         $final_hour = strtotime($rul->final_hour);
                         if (in_array($day, $days) && $start_hour <= $now && $final_hour >= $now) {
-                            $flag_rule = TRUE;
-                            $rule = $rul;
+                            $betewnDates = explode('-', str_replace(' ', '', $rul->calendar));
+                            if (!empty($betewnDates)) {
+                                $fechaInicio = DateTime::createFromFormat('d/m/Y', $betewnDates[0]);
+                                $fechaFin = DateTime::createFromFormat('d/m/Y', $betewnDates[1]);
+                                $fechaActual = new DateTime();
+                                if ($fechaActual >= $fechaInicio && $fechaActual <= $fechaFin) {
+                                    $flag_rule = TRUE;
+                                    $rule = $rul;
+                                }
+                            }
+                            else {
+                                $flag_rule = TRUE;
+                                $rule = $rul;
+                            }
                             break;
                         }
                     }
