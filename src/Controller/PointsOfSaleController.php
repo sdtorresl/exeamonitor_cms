@@ -28,7 +28,7 @@ class PointsOfSaleController extends AppController
         $this->Authorization->Authorize($this->PointsOfSale);
         if ($data && $data['name']) {
             $pointsOfSale = $this->paginate($this->PointsOfSale->find()
-                ->where(['PointsOfSale.name' => $data['name']])
+                ->where(['PointsOfSale.name LIKE' => "%{$data['name']}%"])
             );
         }
         else {

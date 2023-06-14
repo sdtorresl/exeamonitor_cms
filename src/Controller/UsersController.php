@@ -43,7 +43,7 @@ class UsersController extends AppController
         ];
         if ($data && $data['username']) {
             $users = $this->paginate($this->Users->find()
-                ->where(['Users.username' => $data['username']])
+                ->where(['Users.username LIKE' => "%{$data['name']}%"])
             );
         }
         else {

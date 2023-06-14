@@ -46,7 +46,7 @@ class PlaybooksController extends AppController
         $this->Authorization->authorize($this->Playbooks);
         if ($data && $data['name']) {
             $playbooks = $this->paginate($this->Playbooks->find()
-                ->where(['Playbooks.name' => $data['name']])
+                ->where(['Playbooks.name LIKE' => "%{$data['name']}%"])
             );
         }
         else {
